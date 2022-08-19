@@ -1,10 +1,7 @@
 package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.UhCore;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,6 +28,7 @@ public class endGameCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "[*] You've forcefully ended the game.");
                 for (Player players : Bukkit.getServer().getOnlinePlayers())  {
                     players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
+                    players.setGameMode(GameMode.SURVIVAL);
                     if(plugin.getConfig().getString("spawn.world") != null) {
                         World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));
                         double x = Double.parseDouble(plugin.getConfig().getString("spawn.x"));

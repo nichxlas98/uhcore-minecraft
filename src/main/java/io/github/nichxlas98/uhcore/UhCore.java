@@ -17,7 +17,7 @@ public final class UhCore extends JavaPlugin {
 
         ItemManager.init();
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
-        getServer().getPluginManager().registerEvents(new gameWinListener(), this);
+        getServer().getPluginManager().registerEvents(new gameWinListener(this), this);
         getServer().getPluginManager().registerEvents(new fastsListener(), this);
         this.getCommand("enablefasts").setExecutor(new enableFasts());
         this.getCommand("disablefasts").setExecutor(new disableFasts());

@@ -1,4 +1,5 @@
 io/github/nichxlas98/uhcore/commands/enableFasts.class
+io/github/nichxlas98/uhcore/listeners/gameWinListener$1.class
 io/github/nichxlas98/uhcore/commands/startGameCommand.class
 io/github/nichxlas98/uhcore/commands/borderCommand$1.class
 io/github/nichxlas98/uhcore/commands/borderCommand.class
