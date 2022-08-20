@@ -1,0 +1,31 @@
+name: UhCore
+version: '${project.version}'
+main: io.github.nichxlas98.uhcore.UhCore
+api-version: 1.19
+description: Ultra Hardcore Core
+commands:
+  createspawn:
+    description: Sets the server spawn location.
+    usage: /<command>
+    aliases: [setspawn, cspawn, cs]
+  gotospawn:
+    description: Teleports the player to spawn.
+    usage: /<command>
+  createborder:
+    description: Creates a server border.
+    usage: /<command> [size]
+    aliases: [cborder, cb, setborder]
+  enablefasts:
+    description: Enables Fast UHC.
+    usage: /<command>
+    aliases: [efasts, fastson, ef]
+  disablefasts:
+    description: Disables Fast UHC.
+    usage: /<command>
+    aliases: [dfasts, fastsoff, df]
+  startgame:
+    description: Starts the game.
+    usage: /<command>
+  endgame:
+    description: Forcefully ends the game.
+    usage: /<command>
