@@ -21,6 +21,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
+import java.util.Random;
 
 import static io.github.nichxlas98.uhcore.commands.startGameCommand.gameEnabled;
 
@@ -137,15 +138,16 @@ public class playerListener implements Listener {
         if(fastsListener.fastsEnabled) {
             Block b = e.getBlock();
             Player p = e.getPlayer();
+            Random rand = new Random();
+            int chance = rand.nextInt(3) % 2 + 1;
             if(b.getType() == Material.IRON_ORE) {
-                //TODO: TEST CHECK - REMOVE IF BROKEN!
                 Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
                 if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
                     e.setCancelled(true);
                     b.setType(Material.AIR);
-                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, 2));
+                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, chance));
                     return;
-                } //TODO: END OF TEST CHECK
+                }
 
                 e.setCancelled(true);
                 b.setType(Material.AIR);
@@ -153,6 +155,13 @@ public class playerListener implements Listener {
             }
 
             if(b.getType() == Material.GOLD_ORE){
+                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
+                    e.setCancelled(true);
+                    b.setType(Material.AIR);
+                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT, chance));
+                    return;
+                }
                 e.setCancelled(true);
                 b.setType(Material.AIR);
                 b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
