@@ -34,6 +34,7 @@ public class gotoSpawnCommand implements CommandExecutor {
                 player.teleport(new Location(w, x, y, z, yaw, pitch));
                 player.sendMessage(ChatColor.AQUA + "[*] " + "You've been teleported to the server spawn-point.");
             } else {
+                player.sendMessage(ChatColor.RED + "[*] There is no spawn point yet.");
                 System.out.println("There is no spawn point set.");
             }
 

@@ -13,9 +13,12 @@ public class enableFasts implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            fastsListener.fastsEnabled = true;
-
-            player.sendMessage(ChatColor.GREEN + "[*] FastUHC has been enabled!");
+            if (fastsListener.fastsEnabled) {
+                player.sendMessage(ChatColor.RED + "[*] FastUHC has already been enabled.");
+            } else {
+                fastsListener.fastsEnabled = true;
+                player.sendMessage(ChatColor.GREEN + "[*] FastUHC has been enabled!");
+            }
         }
 
         return true;

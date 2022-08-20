@@ -13,10 +13,14 @@ public class disableFasts implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            fastsListener.fastsEnabled = false;
 
+            if (!fastsListener.fastsEnabled) {
+                player.sendMessage(ChatColor.RED + "[*] FastUHC has already been disabled.");
+            } else {
+                fastsListener.fastsEnabled = false;
+                player.sendMessage(ChatColor.RED + "[*] FastUHC has been disabled!");
+            }
 
-            player.sendMessage(ChatColor.RED + "[*] FastUHC has been disabled!");
         }
 
         return true;

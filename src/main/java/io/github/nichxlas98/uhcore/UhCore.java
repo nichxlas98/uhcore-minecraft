@@ -5,13 +5,18 @@ import io.github.nichxlas98.uhcore.items.ItemManager;
 import io.github.nichxlas98.uhcore.listeners.fastsListener;
 import io.github.nichxlas98.uhcore.listeners.gameWinListener;
 import io.github.nichxlas98.uhcore.listeners.playerListener;
+import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 public final class UhCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -26,6 +31,17 @@ public final class UhCore extends JavaPlugin {
         getCommand("createspawn").setExecutor(new spawnCommand(this));
         getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
         getCommand("createborder").setExecutor(new borderCommand(this));
+
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        BukkitTask task3 = new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.dispatchCommand(console, "gamerule logAdminCommands false");
+                Bukkit.dispatchCommand(console, "scoreboard objectives add health health");
+            }
+        }.runTaskLater(this, 1200L /*<-- the delay */);
+
+
 
     }
 

@@ -2,10 +2,13 @@ package io.github.nichxlas98.uhcore.listeners;
 
 import io.github.nichxlas98.uhcore.UhCore;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -16,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Map;
 
 import static io.github.nichxlas98.uhcore.commands.startGameCommand.gameEnabled;
 
@@ -49,6 +54,7 @@ public class playerListener implements Listener {
     }
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onDeathEvent(PlayerRespawnEvent event){
         new BukkitRunnable() {
             @Override
@@ -80,7 +86,7 @@ public class playerListener implements Listener {
     }
 
     @EventHandler
-    public void playerKillEvent(PlayerDeathEvent event) {
+    public void killEffectsEvent(PlayerDeathEvent event) {
         Player killer = event.getEntity().getKiller();
         Player killed = event.getEntity().getPlayer();
         ItemStack skull = new ItemStack(Material.SKULL_ITEM);
@@ -96,7 +102,7 @@ public class playerListener implements Listener {
     }
 
     @EventHandler
-    public void playerConsumeEvent(PlayerItemConsumeEvent e) {
+    public void goldenHeadEvent(PlayerItemConsumeEvent e) {
         Player player = e.getPlayer();
         ItemStack item = player.getInventory().getItemInHand();
 
@@ -111,6 +117,51 @@ public class playerListener implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void godAppleEvent(PlayerItemConsumeEvent e) {
+        Player player = e.getPlayer();
+
+        if (e.getItem().getType() == Material.GOLDEN_APPLE) {
+            if (e.getItem().getDurability() == 1) {
+                e.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "[*] You cannot use this item, sorry!");
+            }
+        }
+    }
+
+
+    @EventHandler
+    private void onBlockBreak(BlockBreakEvent e){
+
+        if(fastsListener.fastsEnabled) {
+            Block b = e.getBlock();
+            Player p = e.getPlayer();
+            if(b.getType() == Material.IRON_ORE) {
+                //TODO: TEST CHECK - REMOVE IF BROKEN!
+                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
+                    e.setCancelled(true);
+                    b.setType(Material.AIR);
+                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, 2));
+                    return;
+                } //TODO: END OF TEST CHECK
+
+                e.setCancelled(true);
+                b.setType(Material.AIR);
+                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT));
+            }
+
+            if(b.getType() == Material.GOLD_ORE){
+                e.setCancelled(true);
+                b.setType(Material.AIR);
+                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
+            }
+        }
+    }
+
+
+
 
 }
 
