@@ -23,7 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Map;
 import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.commands.startGameCommand.gameEnabled;
+import static io.github.nichxlas98.uhcore.commands.gameCommand.gameEnabled;
 
 
 public class playerListener implements Listener {

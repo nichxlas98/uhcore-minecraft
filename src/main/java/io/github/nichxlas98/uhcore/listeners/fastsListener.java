@@ -29,7 +29,6 @@ public class fastsListener implements Listener {
 
         if (fastsEnabled) {
 
-
             if(player.getInventory().getItemInHand().equals(wPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             } if(player.getInventory().getItemInHand().equals(wAxe)) {
