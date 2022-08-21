@@ -24,12 +24,21 @@ public class settingsCommand implements CommandExecutor {
 
             ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
             ItemStack doubleSpeed = new ItemStack(Material.FEATHER);
+            ItemStack fastUHC = new ItemStack(Material.GOLD_NUGGET);
             ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE);
 
 
             ItemMeta emptyMeta = empty.getItemMeta();
             emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
             empty.setItemMeta(emptyMeta);
+
+
+            ItemMeta fastUHCMeta = fastUHC.getItemMeta();
+            fastUHCMeta.setDisplayName(ChatColor.GOLD + "FastUHC");
+            ArrayList<String> fastUHCLore = new ArrayList<>();
+            fastUHCLore.add(ChatColor.ITALIC + "Fast UHC Mode.");
+            fastUHCMeta.setLore(fastUHCLore);
+            fastUHC.setItemMeta(fastUHCMeta);
 
             ItemMeta doubleHealthMeta = doubleHealth.getItemMeta();
             doubleHealthMeta.setDisplayName(ChatColor.RED + "Double Health");
@@ -43,11 +52,11 @@ public class settingsCommand implements CommandExecutor {
             doubleSpeedMeta.setDisplayName(ChatColor.AQUA + "Double Speed");
             ArrayList<String> doubleSpeedLore = new ArrayList<>();
             doubleSpeedLore.add(ChatColor.ITALIC + "Doubles the Speed of all players during UHC.");
-            doubleSpeedMeta.setLore(doubleHealthLore);
-            doubleSpeed.setItemMeta(doubleHealthMeta);
+            doubleSpeedMeta.setLore(doubleSpeedLore);
+            doubleSpeed.setItemMeta(doubleSpeedMeta);
 
 
-            ItemStack[] menu_items = {empty, empty, empty, doubleHealth, empty, doubleSpeed, empty, empty, empty};
+            ItemStack[] menu_items = {empty, empty, doubleHealth, empty, fastUHC, empty, doubleSpeed, empty, empty};
             gui.setContents(menu_items);
             player.openInventory(gui);
 

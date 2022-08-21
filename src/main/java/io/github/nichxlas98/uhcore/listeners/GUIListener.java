@@ -11,6 +11,7 @@ public class GUIListener implements Listener {
 
     public static boolean doubleHP = false;
     public static boolean doubleSpeed = false;
+    public static boolean fastsEnabled = false;
 
     @EventHandler
     public void clickEvent(InventoryClickEvent e) {
@@ -28,7 +29,6 @@ public class GUIListener implements Listener {
                         doubleHP = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Double Health has been enabled.");
                     }
-                    player.closeInventory();
                     break;
                 case FEATHER:
                     if (doubleSpeed) {
@@ -39,6 +39,14 @@ public class GUIListener implements Listener {
                         player.sendMessage(ChatColor.GREEN + "[*] Double Speed has been enabled.");
                     }
                     break;
+                case GOLD_NUGGET:
+                    if (fastsEnabled) {
+                        fastsEnabled = false;
+                        player.sendMessage(ChatColor.GREEN + "[*] FastUHC has been disabled.");
+                    } else {
+                        fastsEnabled = true;
+                        player.sendMessage(ChatColor.RED + "[*] FastUHC has been enabled.");
+                    }
             }
 
             e.setCancelled(true);
