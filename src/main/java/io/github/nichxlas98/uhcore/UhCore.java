@@ -2,6 +2,7 @@ package io.github.nichxlas98.uhcore;
 
 import io.github.nichxlas98.uhcore.commands.*;
 import io.github.nichxlas98.uhcore.items.ItemManager;
+import io.github.nichxlas98.uhcore.listeners.GUIListener;
 import io.github.nichxlas98.uhcore.listeners.fastsListener;
 import io.github.nichxlas98.uhcore.listeners.gameWinListener;
 import io.github.nichxlas98.uhcore.listeners.playerListener;
@@ -23,6 +24,7 @@ public final class UhCore extends JavaPlugin {
         saveDefaultConfig();
 
         ItemManager.init();
+        getServer().getPluginManager().registerEvents(new GUIListener(), this);
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
         getServer().getPluginManager().registerEvents(new gameWinListener(this), this);
         getServer().getPluginManager().registerEvents(new fastsListener(), this);
