@@ -21,3 +21,4 @@ commands:
   game:
     description: Start or End the game.
     usage: /<command> <start/end>
+  settings:

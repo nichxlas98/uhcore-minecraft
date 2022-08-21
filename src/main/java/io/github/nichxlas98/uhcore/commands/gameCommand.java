@@ -7,8 +7,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+
+import static io.github.nichxlas98.uhcore.listeners.GUIListener.doubleHP;
+import static io.github.nichxlas98.uhcore.listeners.GUIListener.doubleSpeed;
 
 public class gameCommand implements CommandExecutor {
 
@@ -33,6 +38,17 @@ public class gameCommand implements CommandExecutor {
                         gameEnabled = true;
                         Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 2000 false @a");
                         for (Player players : Bukkit.getServer().getOnlinePlayers())  {
+
+                            if (doubleHP) {
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4, false, false));
+                                players.sendMessage(ChatColor.ITALIC + "[*] Double HP is enabled, all players were given double health.");
+                            }
+
+                            if (doubleSpeed) {
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, 1000000, false, false));
+                                players.sendMessage(ChatColor.ITALIC + "[*] Double Speed is enabled, all players were given Speed II.");
+                            }
+
                             players.setGameMode(GameMode.SURVIVAL);
                             players.sendMessage(ChatColor.GREEN + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.GREEN + " has started the game.");
                         }
