@@ -15,17 +15,9 @@ commands:
     description: Creates a server border.
     usage: /<command> [size]
     aliases: [cborder, cb, setborder]
-  enablefasts:
-    description: Enables Fast UHC.
-    usage: /<command>
-    aliases: [efasts, fastson, ef]
-  disablefasts:
-    description: Disables Fast UHC.
-    usage: /<command>
-    aliases: [dfasts, fastsoff, df]
-  startgame:
-    description: Starts the game.
-    usage: /<command>
-  endgame:
-    description: Forcefully ends the game.
-    usage: /<command>
+  fasts:
+    description: Enable or Disable FastUHC.
+    usage: /<command> <on/off>
+  game:
+    description: Start or End the game.
+    usage: /<command> <start/end>
