@@ -17,9 +17,7 @@ public final class UhCore extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-
-        //TODO: Clean up the startGame & endGame command - make it one command, and introduce args[0]
-        //TODO: Clean up the enableFasts & disableFasts command - make it one command, and introduce args[0]
+        
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -28,11 +26,11 @@ public final class UhCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
         getServer().getPluginManager().registerEvents(new gameWinListener(this), this);
         getServer().getPluginManager().registerEvents(new fastsListener(), this);
-        this.getCommand("fasts").setExecutor(new fastsCommand());
         getCommand("game").setExecutor(new gameCommand(this));
         getCommand("createspawn").setExecutor(new spawnCommand(this));
         getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
         getCommand("createborder").setExecutor(new borderCommand(this));
+        this.getCommand("settings").setExecutor(new settingsCommand());
 
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         BukkitTask task3 = new BukkitRunnable() {

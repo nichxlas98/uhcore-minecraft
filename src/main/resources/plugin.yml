@@ -15,10 +15,9 @@ commands:
     description: Creates a server border.
     usage: /<command> [size]
     aliases: [cborder, cb, setborder]
-  fasts:
-    description: Enable or Disable FastUHC.
-    usage: /<command> <on/off>
   game:
     description: Start or End the game.
     usage: /<command> <start/end>
   settings:
+    description: Opens up the settings menu.
+    usage: /<command>

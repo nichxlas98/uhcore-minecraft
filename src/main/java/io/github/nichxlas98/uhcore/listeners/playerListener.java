@@ -2,25 +2,23 @@ package io.github.nichxlas98.uhcore.listeners;
 
 import io.github.nichxlas98.uhcore.UhCore;
 import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Map;
 import java.util.Random;
 
 import static io.github.nichxlas98.uhcore.commands.gameCommand.gameEnabled;
@@ -91,14 +89,13 @@ public class playerListener implements Listener {
         Player killer = event.getEntity().getKiller();
         Player killed = event.getEntity().getPlayer();
         ItemStack skull = new ItemStack(Material.SKULL_ITEM);
+        killed.getWorld().dropItemNaturally(killed.getLocation(), skull);
+
         if (killer != null) {
-            killer.getInventory().addItem(skull);
             killer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 160, 1));
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
             killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
             killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
-        } else {
-            killed.getInventory().addItem(skull);
         }
     }
 
@@ -133,42 +130,14 @@ public class playerListener implements Listener {
 
 
     @EventHandler
-    private void onBlockBreak(BlockBreakEvent e){
+    public void playerShearEvent(PlayerShearEntityEvent event) {
 
-        if(fastsListener.fastsEnabled) {
-            Block b = e.getBlock();
-            Player p = e.getPlayer();
+        if (event.getEntity() instanceof Sheep) {
             Random rand = new Random();
-            int chance = rand.nextInt(3) % 2 + 1;
-            if(b.getType() == Material.IRON_ORE) {
-                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
-                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
-                    e.setCancelled(true);
-                    b.setType(Material.AIR);
-                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, chance));
-                    return;
-                }
-
-                e.setCancelled(true);
-                b.setType(Material.AIR);
-                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT));
-            }
-
-            if(b.getType() == Material.GOLD_ORE){
-                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
-                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
-                    e.setCancelled(true);
-                    b.setType(Material.AIR);
-                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT, chance));
-                    return;
-                }
-                e.setCancelled(true);
-                b.setType(Material.AIR);
-                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
-            }
+            int chance = rand.nextInt(4) % 2 + 1;
+            event.getEntity().getWorld().dropItem(event.getEntity().getLocation(), new ItemStack(Material.STRING, chance));
         }
     }
-
 
 
 

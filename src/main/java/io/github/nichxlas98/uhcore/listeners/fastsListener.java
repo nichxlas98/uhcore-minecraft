@@ -1,16 +1,87 @@
 package io.github.nichxlas98.uhcore.listeners;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Map;
+import java.util.Random;
+
+import static io.github.nichxlas98.uhcore.listeners.GUIListener.fastsEnabled;
+
 public class fastsListener implements Listener {
 
-    public static boolean fastsEnabled = false;
+
+    @EventHandler
+    public void playerKillEntity(EntityDeathEvent e) {
+        Random rand = new Random();
+        int chance = rand.nextInt(4) % 2 + 1;
+        if (fastsEnabled) {
+            if (e.getEntity().getKiller() != null) {
+                if (e.getEntity() instanceof Sheep || e.getEntity() instanceof Pig) {
+                    e.getDrops().clear();
+                    e.getDrops().add(new ItemStack(Material.COOKED_BEEF, chance));
+                }
+
+                if (e.getEntity() instanceof Cow) {
+                    e.getDrops().clear();
+                    e.getDrops().add(new ItemStack(Material.COOKED_BEEF, chance));
+                    e.getDrops().add(new ItemStack(Material.LEATHER, chance));
+                }
+
+                if (e.getEntity() instanceof Chicken) {
+                    e.getDrops().clear();
+                    e.getDrops().add(new ItemStack(Material.ARROW, chance));
+                }
+
+            }
+        }
+
+    }
+
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e){
+        if(fastsEnabled) {
+            Block b = e.getBlock();
+            Player p = e.getPlayer();
+            Random rand = new Random();
+            int chance = rand.nextInt(4) % 2 + 1;
+            if(b.getType() == Material.IRON_ORE) {
+                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
+                    e.setCancelled(true);
+                    b.setType(Material.AIR);
+                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, chance));
+                    return;
+                }
+
+                e.setCancelled(true);
+                b.setType(Material.AIR);
+                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT));
+            }
+
+            if(b.getType() == Material.GOLD_ORE){
+                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+                if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
+                    e.setCancelled(true);
+                    b.setType(Material.AIR);
+                    b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT, chance));
+                    return;
+                }
+                e.setCancelled(true);
+                b.setType(Material.AIR);
+                b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
+            }
+        }
+    }
 
     @EventHandler
     public void fastCrafts(PlayerItemHeldEvent e) {
