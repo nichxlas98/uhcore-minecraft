@@ -25,7 +25,7 @@ public class settingsCommand implements CommandExecutor {
             ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
             ItemStack doubleSpeed = new ItemStack(Material.FEATHER);
             ItemStack fastUHC = new ItemStack(Material.GOLD_NUGGET);
-            ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE);
+            ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
 
 
             ItemMeta emptyMeta = empty.getItemMeta();
