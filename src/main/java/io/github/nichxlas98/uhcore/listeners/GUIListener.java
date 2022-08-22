@@ -80,10 +80,12 @@ public class GUIListener implements Listener {
             String playerName = player.getName();
             if (workerKit.contains(playerName) || bowKit.contains(playerName) || goldMinerKit.contains(playerName) || fisherManKit.contains(playerName) || enchanterKit.contains(playerName)) {
                 player.sendMessage(ChatColor.RED + "[*] Unequipped classes.");
+                enchanterKit.remove(playerName);
                 goldMinerKit.remove(playerName);
                 fisherManKit.remove(playerName);
                 workerKit.remove(playerName);
                 bowKit.remove(playerName);
+                return;
             }
 
             switch(e.getCurrentItem().getType()){

@@ -22,8 +22,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Random;
 
 import static io.github.nichxlas98.uhcore.commands.gameCommand.gameEnabled;
-import static io.github.nichxlas98.uhcore.listeners.GUIListener.doubleHeads;
-import static io.github.nichxlas98.uhcore.listeners.GUIListener.goldRush;
+import static io.github.nichxlas98.uhcore.models.modelsClass.doubleHeads;
+import static io.github.nichxlas98.uhcore.models.modelsClass.goldRush;
 
 
 public class playerListener implements Listener {
