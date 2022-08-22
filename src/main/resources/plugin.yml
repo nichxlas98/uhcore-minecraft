@@ -21,3 +21,6 @@ commands:
   settings:
     description: Opens up the settings menu.
     usage: /<command>
+  kits:
+    description: Opens up the kits menu.
+    usage: /<command>

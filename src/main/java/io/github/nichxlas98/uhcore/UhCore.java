@@ -21,6 +21,12 @@ public final class UhCore extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+        //TODO: Code Cleanup Session;
+        //TODO: Possible (/duel) command?
+        //TODO: More modes (Add an "Ultimate" Mode - special effects on X input)
+        //TODO: Add more Kits; (Enchanter, gives you enchant books) - (Jeweler, gives 2 diamonds)
+
+
         ItemManager.init();
         getServer().getPluginManager().registerEvents(new GUIListener(), this);
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
@@ -30,6 +36,7 @@ public final class UhCore extends JavaPlugin {
         getCommand("createspawn").setExecutor(new spawnCommand(this));
         getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
         getCommand("createborder").setExecutor(new borderCommand(this));
+        this.getCommand("kits").setExecutor(new kitsCommand());
         this.getCommand("settings").setExecutor(new settingsCommand());
 
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();

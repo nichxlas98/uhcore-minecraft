@@ -28,11 +28,20 @@ public class settingsCommand implements CommandExecutor {
             ItemStack pearlUHC = new ItemStack(Material.ENDER_PEARL);
             ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
             ItemStack goldRush = new ItemStack(Material.GOLD_NUGGET);
+            ItemStack uhcKits = new ItemStack(Material.GOLDEN_CARROT);
 
 
             ItemMeta emptyMeta = empty.getItemMeta();
             emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
             empty.setItemMeta(emptyMeta);
+
+
+            ItemMeta uhcKitsMeta = uhcKits.getItemMeta();
+            uhcKitsMeta.setDisplayName(ChatColor.BLUE + "KitsUHC");
+            ArrayList<String> uhcKitsLore = new ArrayList<>();
+            uhcKitsLore.add(ChatColor.ITALIC + "Allows /kit usage during UHC.");
+            uhcKitsMeta.setLore(uhcKitsLore);
+            uhcKits.setItemMeta(uhcKitsMeta);
 
             ItemMeta goldRushMeta = goldRush.getItemMeta();
             goldRushMeta.setDisplayName(ChatColor.GOLD + "Gold Rush");
@@ -42,7 +51,7 @@ public class settingsCommand implements CommandExecutor {
             goldRush.setItemMeta(goldRushMeta);
 
             ItemMeta pearlUHCMeta = pearlUHC.getItemMeta();
-            pearlUHCMeta.setDisplayName(ChatColor.DARK_PURPLE + "Pearl UHC");
+            pearlUHCMeta.setDisplayName(ChatColor.DARK_PURPLE + "PearlUHC");
             ArrayList<String> pearlUHCLore = new ArrayList<>();
             pearlUHCLore.add(ChatColor.ITALIC + "All player spawn with 3 ender-pearls, and players drop an ender-pearl on death." );
             pearlUHCMeta.setLore(pearlUHCLore);
@@ -80,7 +89,7 @@ public class settingsCommand implements CommandExecutor {
 
             ItemStack[] menu_items = {
                     empty, doubleHealth, empty, fastUHC, empty, doubleSpeed, empty, doubleHeads, empty,
-                    empty, pearlUHC, empty, goldRush, empty, empty, empty, empty, empty}; // ROW 2 <<<
+                    empty, pearlUHC, empty, goldRush, empty, uhcKits, empty, empty, empty}; // ROW 2 <<<
             gui.setContents(menu_items);
             player.openInventory(gui);
 
