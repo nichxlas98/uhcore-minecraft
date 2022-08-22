@@ -22,6 +22,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Random;
 
 import static io.github.nichxlas98.uhcore.commands.gameCommand.gameEnabled;
+import static io.github.nichxlas98.uhcore.listeners.GUIListener.doubleHeads;
+import static io.github.nichxlas98.uhcore.listeners.GUIListener.goldRush;
 
 
 public class playerListener implements Listener {
@@ -89,14 +91,33 @@ public class playerListener implements Listener {
         Player killer = event.getEntity().getKiller();
         Player killed = event.getEntity().getPlayer();
         ItemStack skull = new ItemStack(Material.SKULL_ITEM);
-        killed.getWorld().dropItemNaturally(killed.getLocation(), skull);
+        Random rand = new Random();
+        int chance = rand.nextInt(4) % 2 + 1;
 
-        if (killer != null) {
-            killer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 160, 1));
-            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
-            killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
-            killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
+        if (gameEnabled) {
+            if (doubleHeads) {
+                killed.getWorld().dropItemNaturally(killed.getLocation(), new ItemStack(Material.SKULL_ITEM, 2));
+            } else {
+                killed.getWorld().dropItemNaturally(killed.getLocation(), skull);
+            }
+
+            if (goldRush) {
+                for (Player players : Bukkit.getServer().getOnlinePlayers())  {
+                    players.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, chance));
+                }
+            }
+
+            if (killer != null) {
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 160, 1));
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
+                killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
+                killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
+            }
+
         }
+
+
+
     }
 
     @EventHandler

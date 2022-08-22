@@ -19,19 +19,41 @@ public class settingsCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-
-            Inventory gui = Bukkit.createInventory(player, 9, ChatColor.AQUA + "Settings");
+            Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Settings");
 
             ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
             ItemStack doubleSpeed = new ItemStack(Material.FEATHER);
-            ItemStack fastUHC = new ItemStack(Material.GOLD_NUGGET);
+            ItemStack fastUHC = new ItemStack(Material.SUGAR);
+            ItemStack doubleHeads = new ItemStack(Material.SKULL_ITEM);
+            ItemStack pearlUHC = new ItemStack(Material.ENDER_PEARL);
             ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
+            ItemStack goldRush = new ItemStack(Material.GOLD_NUGGET);
 
 
             ItemMeta emptyMeta = empty.getItemMeta();
             emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
             empty.setItemMeta(emptyMeta);
 
+            ItemMeta goldRushMeta = goldRush.getItemMeta();
+            goldRushMeta.setDisplayName(ChatColor.GOLD + "Gold Rush");
+            ArrayList<String> goldRushLore = new ArrayList<>();
+            goldRushLore.add(ChatColor.ITALIC + "All players are given a Golden Ingot on a player's death.");
+            goldRushMeta.setLore(goldRushLore);
+            goldRush.setItemMeta(goldRushMeta);
+
+            ItemMeta pearlUHCMeta = pearlUHC.getItemMeta();
+            pearlUHCMeta.setDisplayName(ChatColor.DARK_PURPLE + "Pearl UHC");
+            ArrayList<String> pearlUHCLore = new ArrayList<>();
+            pearlUHCLore.add(ChatColor.ITALIC + "All player spawn with 3 ender-pearls, and players drop an ender-pearl on death." );
+            pearlUHCMeta.setLore(pearlUHCLore);
+            pearlUHC.setItemMeta(pearlUHCMeta);
+
+            ItemMeta doubleHeadsMeta = doubleHeads.getItemMeta();
+            doubleHeadsMeta.setDisplayName(ChatColor.GREEN + "Double Heads");
+            ArrayList<String> doubleHeadsLore = new ArrayList<>();
+            doubleHeadsLore.add(ChatColor.ITALIC + "Doubles the Head drops of all players during UHC. ");
+            doubleHeadsMeta.setLore(doubleHeadsLore);
+            doubleHeads.setItemMeta(doubleHeadsMeta);
 
             ItemMeta fastUHCMeta = fastUHC.getItemMeta();
             fastUHCMeta.setDisplayName(ChatColor.GOLD + "FastUHC");
@@ -56,7 +78,9 @@ public class settingsCommand implements CommandExecutor {
             doubleSpeed.setItemMeta(doubleSpeedMeta);
 
 
-            ItemStack[] menu_items = {empty, empty, doubleHealth, empty, fastUHC, empty, doubleSpeed, empty, empty};
+            ItemStack[] menu_items = {
+                    empty, doubleHealth, empty, fastUHC, empty, doubleSpeed, empty, doubleHeads, empty,
+                    empty, pearlUHC, empty, goldRush, empty, empty, empty, empty, empty}; // ROW 2 <<<
             gui.setContents(menu_items);
             player.openInventory(gui);
 
