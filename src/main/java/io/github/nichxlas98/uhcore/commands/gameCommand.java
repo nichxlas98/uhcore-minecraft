@@ -79,6 +79,13 @@ public class gameCommand implements CommandExecutor {
                                     player.sendMessage(ChatColor.AQUA + "[*] You're using the Fisherman kit!");
                                 }
 
+                                if (enchanterKit.contains(playerName)) {
+                                    player.getInventory().addItem(new ItemStack(Material.LAPIS_BLOCK, 18));
+                                    player.getInventory().addItem(new ItemStack(Material.BOOK, 4));
+                                    player.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE, 15));
+                                    player.sendMessage(ChatColor.AQUA + "[*] You're using the Magician kit!");
+                                }
+
                             }
 
 

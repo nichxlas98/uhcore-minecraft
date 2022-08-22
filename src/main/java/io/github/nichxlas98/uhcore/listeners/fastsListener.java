@@ -14,7 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Map;
 import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.listeners.GUIListener.fastsEnabled;
+import static io.github.nichxlas98.uhcore.models.modelsClass.fastsEnabled;
+
 
 public class fastsListener implements Listener {
 
