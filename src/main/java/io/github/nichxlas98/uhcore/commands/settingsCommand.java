@@ -6,8 +6,10 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -38,6 +40,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta uhcKitsMeta = uhcKits.getItemMeta();
             uhcKitsMeta.setDisplayName(ChatColor.BLUE + "KitsUHC");
+            uhcKitsMeta.addEnchant(Enchantment.LUCK, 1, true);
+            uhcKitsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> uhcKitsLore = new ArrayList<>();
             uhcKitsLore.add(ChatColor.ITALIC + "Allows /kit usage during UHC.");
             uhcKitsMeta.setLore(uhcKitsLore);
@@ -45,6 +49,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta goldRushMeta = goldRush.getItemMeta();
             goldRushMeta.setDisplayName(ChatColor.GOLD + "Gold Rush");
+            goldRushMeta.addEnchant(Enchantment.LUCK, 1, true);
+            goldRushMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> goldRushLore = new ArrayList<>();
             goldRushLore.add(ChatColor.ITALIC + "All players are given a Golden Ingot on a player's death.");
             goldRushMeta.setLore(goldRushLore);
@@ -52,6 +58,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta pearlUHCMeta = pearlUHC.getItemMeta();
             pearlUHCMeta.setDisplayName(ChatColor.DARK_PURPLE + "PearlUHC");
+            pearlUHCMeta.addEnchant(Enchantment.LUCK, 1, true);
+            pearlUHCMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> pearlUHCLore = new ArrayList<>();
             pearlUHCLore.add(ChatColor.ITALIC + "All player spawn with 3 ender-pearls, and players drop an ender-pearl on death." );
             pearlUHCMeta.setLore(pearlUHCLore);
@@ -59,6 +67,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta doubleHeadsMeta = doubleHeads.getItemMeta();
             doubleHeadsMeta.setDisplayName(ChatColor.GREEN + "Double Heads");
+            doubleHeadsMeta.addEnchant(Enchantment.LUCK, 1, true);
+            doubleHeadsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> doubleHeadsLore = new ArrayList<>();
             doubleHeadsLore.add(ChatColor.ITALIC + "Doubles the Head drops of all players during UHC. ");
             doubleHeadsMeta.setLore(doubleHeadsLore);
@@ -66,6 +76,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta fastUHCMeta = fastUHC.getItemMeta();
             fastUHCMeta.setDisplayName(ChatColor.GOLD + "FastUHC");
+            fastUHCMeta.addEnchant(Enchantment.LUCK, 1, true);
+            fastUHCMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> fastUHCLore = new ArrayList<>();
             fastUHCLore.add(ChatColor.ITALIC + "Fast UHC Mode.");
             fastUHCMeta.setLore(fastUHCLore);
@@ -73,6 +85,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta doubleHealthMeta = doubleHealth.getItemMeta();
             doubleHealthMeta.setDisplayName(ChatColor.RED + "Double Health");
+            doubleHealthMeta.addEnchant(Enchantment.LUCK, 1, true);
+            doubleHealthMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> doubleHealthLore = new ArrayList<>();
             doubleHealthLore.add(ChatColor.ITALIC + "Doubles the Health of all players during UHC.");
             doubleHealthMeta.setLore(doubleHealthLore);
@@ -81,6 +95,8 @@ public class settingsCommand implements CommandExecutor {
 
             ItemMeta doubleSpeedMeta = doubleSpeed.getItemMeta();
             doubleSpeedMeta.setDisplayName(ChatColor.AQUA + "Double Speed");
+            doubleSpeedMeta.addEnchant(Enchantment.LUCK, 1, true);
+            doubleSpeedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             ArrayList<String> doubleSpeedLore = new ArrayList<>();
             doubleSpeedLore.add(ChatColor.ITALIC + "Doubles the Speed of all players during UHC.");
             doubleSpeedMeta.setLore(doubleSpeedLore);
@@ -88,8 +104,8 @@ public class settingsCommand implements CommandExecutor {
 
 
             ItemStack[] menu_items = {
-                    empty, doubleHealth, empty, fastUHC, empty, doubleSpeed, empty, doubleHeads, empty,
-                    empty, pearlUHC, empty, goldRush, empty, uhcKits, empty, empty, empty}; // ROW 2 <<<
+                    doubleHealth, pearlUHC, fastUHC, uhcKits, doubleSpeed, goldRush, doubleHeads, empty, empty,
+                    empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
             gui.setContents(menu_items);
             player.openInventory(gui);
 
