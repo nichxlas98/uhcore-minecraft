@@ -21,8 +21,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.commands.gameCommand.gameEnabled;
 import static io.github.nichxlas98.uhcore.models.modelsClass.doubleHeads;
+import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
 import static io.github.nichxlas98.uhcore.models.modelsClass.goldRush;
 
 
