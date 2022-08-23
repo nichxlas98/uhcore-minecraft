@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class modelsClass {
 
 
+    public static boolean gameEnabled = false;
     public static boolean doubleHP = false;
     public static boolean doubleSpeed = false;
     public static boolean fastsEnabled = false;

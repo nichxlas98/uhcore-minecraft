@@ -19,8 +19,6 @@ import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 
 public class gameCommand implements CommandExecutor {
 
-    public static boolean gameEnabled = false;
-
     private final UhCore plugin;
 
     public gameCommand(UhCore plugin) {
