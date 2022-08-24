@@ -93,7 +93,7 @@ public class gameCommand implements CommandExecutor {
                             }
 
                             if (doubleSpeed) {
-                                players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, 1000000, false, false));
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
                                 players.sendMessage(ChatColor.ITALIC + "[*] Double Speed is enabled, all players were given Speed II.");
                             }
 
