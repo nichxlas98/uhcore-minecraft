@@ -70,7 +70,7 @@ public class playerListener implements Listener {
 
                 }
             }
-        }.runTaskLater(plugin, 10);
+        }.runTaskLater(plugin, 2);
     }
 
     @EventHandler

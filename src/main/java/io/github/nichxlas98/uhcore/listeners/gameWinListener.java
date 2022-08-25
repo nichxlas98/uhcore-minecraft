@@ -25,6 +25,8 @@ public class gameWinListener implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
         for (Player players : Bukkit.getServer().getOnlinePlayers())  {
+            //TODO: make a proper null check for if the killer equals null;
+            assert killer != null;
             if (killer.getGameMode().equals(GameMode.SURVIVAL)) {
                 if (players.getGameMode().equals(GameMode.SPECTATOR)) {
                     killer.sendMessage(ChatColor.GREEN + "[*] You win!");

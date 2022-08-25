@@ -22,13 +22,11 @@ public class borderCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (!(sender instanceof Player)) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             String theCommand = "worldborder add -100 60";
 
-            Bukkit.dispatchCommand(console, "worldborder set 5000");
-            player.sendMessage(ChatColor.AQUA + "[*] " + "Default border set." + ChatColor.GRAY + " (2500x2500)");
+            Bukkit.dispatchCommand(console, "worldborder set 2000");
 
             BukkitTask task = new BukkitRunnable() {
                 public void run() {
@@ -39,6 +37,8 @@ public class borderCommand implements CommandExecutor {
                 }
 
             }.runTaskTimer(plugin, 0L, 6000);
+        } else {
+            sender.sendMessage(ChatColor.RED + "[*] You cannot use this command.");
         }
 
         return true;
