@@ -1,5 +1,6 @@
 package io.github.nichxlas98.uhcore.listeners;
 
+import io.github.nichxlas98.uhcore.models.modelsClass;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -50,6 +51,17 @@ public class fastsListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
+        if (e.getBlock().getType() == Material.LEAVES || e.getBlock().getType() == Material.LEAVES_2) {
+            e.setCancelled(true);
+            e.getBlock().setType(Material.AIR);
+
+            if (modelsClass.getChance(25)) {
+                e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE));
+            } else {
+                e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.LEAVES));
+            }
+        }
+
         if(fastsEnabled) {
             Block b = e.getBlock();
             Player p = e.getPlayer();

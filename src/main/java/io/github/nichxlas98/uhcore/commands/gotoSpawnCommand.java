@@ -20,22 +20,23 @@ public class gotoSpawnCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.getGameMode().equals(GameMode.SPECTATOR)) {
-                //TODO: let the player TP to spawn (after permission implementation)
-            }
-            if(plugin.getConfig().getString("spawn.world") != null) {
-                World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));
-                double x = Double.parseDouble(plugin.getConfig().getString("spawn.x"));
-                double y = Double.parseDouble(plugin.getConfig().getString("spawn.y"));
-                double z = Double.parseDouble(plugin.getConfig().getString("spawn.z"));
-                float yaw = Float.parseFloat(plugin.getConfig().getString("spawn.yaw"));
-                float pitch = Float.parseFloat(plugin.getConfig().getString("spawn.pitch"));
+            if (player.hasPermission("UhCore.spawn")) {
+                if (plugin.getConfig().getString("spawn.world") != null) {
+                    World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));
+                    double x = Double.parseDouble(plugin.getConfig().getString("spawn.x"));
+                    double y = Double.parseDouble(plugin.getConfig().getString("spawn.y"));
+                    double z = Double.parseDouble(plugin.getConfig().getString("spawn.z"));
+                    float yaw = Float.parseFloat(plugin.getConfig().getString("spawn.yaw"));
+                    float pitch = Float.parseFloat(plugin.getConfig().getString("spawn.pitch"));
 
-                player.teleport(new Location(w, x, y, z, yaw, pitch));
-                player.sendMessage(ChatColor.AQUA + "[*] " + "You've been teleported to the server spawn-point.");
+                    player.teleport(new Location(w, x, y, z, yaw, pitch));
+                    player.sendMessage(ChatColor.AQUA + "[*] " + "You've been teleported to the server spawn-point.");
+                } else {
+                    player.sendMessage(ChatColor.RED + "[*] There is no spawn point yet.");
+                    System.out.println("There is no spawn point set.");
+                }
             } else {
-                player.sendMessage(ChatColor.RED + "[*] There is no spawn point yet.");
-                System.out.println("There is no spawn point set.");
+                player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
             }
 
         } else {
