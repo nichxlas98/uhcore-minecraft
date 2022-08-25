@@ -59,7 +59,7 @@ public class GUIListener implements Listener {
                         player.sendMessage(ChatColor.GREEN + "[*] Double Heads has been enabled.");
                     }
                     break;
-                case GOLD_INGOT:
+                case GOLD_NUGGET:
                     if (goldRush) {
                         goldRush = false;
                         player.sendMessage(ChatColor.RED + "[*] Gold Rush has been disabled.");
@@ -79,6 +79,15 @@ public class GUIListener implements Listener {
                         player.sendMessage(ChatColor.GREEN + "[*] Kits UHC has been enabled.");
                     }
                     break;
+                case ENDER_PEARL:
+                    if (pearlUHC) {
+                        pearlUHC = false;
+                        player.sendMessage(ChatColor.RED + "[*] Pearl UHC has been disabled.");
+                        break;
+                    } else {
+                        pearlUHC = true;
+                        player.sendMessage(ChatColor.GREEN + "[*] Pearl UHC has been enabled.");
+                    }
 
             }
 

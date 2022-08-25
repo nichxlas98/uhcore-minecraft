@@ -21,9 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.models.modelsClass.doubleHeads;
-import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
-import static io.github.nichxlas98.uhcore.models.modelsClass.goldRush;
+import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 
 
 public class playerListener implements Listener {
@@ -80,8 +78,9 @@ public class playerListener implements Listener {
                 Arrow arrow  = (Arrow) e.getDamager();
                 if (!(arrow.getShooter() instanceof Player)) return;
 
+
                 ((Player) arrow.getShooter()).playSound(((Player) arrow.getShooter()).getLocation(), Sound.NOTE_PLING, 1, 2);
-                ((Player) arrow.getShooter()).sendMessage(ChatColor.AQUA + "[*] " + e.getEntity().getName() + " is on " + ChatColor.RED + ((Player) e.getEntity()).getHealth() + " HP!");
+                ((Player) arrow.getShooter()).sendMessage(ChatColor.AQUA + "[*] " + e.getEntity().getName() + " is on " + ChatColor.RED + Math.floor(((Player) e.getEntity()).getHealth()) + " HP!");
             }
         }
     }
@@ -105,6 +104,10 @@ public class playerListener implements Listener {
                 for (Player players : Bukkit.getServer().getOnlinePlayers())  {
                     players.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, chance));
                 }
+            }
+
+            if (pearlUHC) {
+                killer.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, chance));
             }
 
             if (killer != null) {

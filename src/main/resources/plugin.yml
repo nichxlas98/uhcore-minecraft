@@ -8,19 +8,24 @@ commands:
     description: Sets the server spawn location.
     usage: /<command>
     aliases: [setspawn, cspawn, cs]
+    permission: UhCore.admin
   gotospawn:
     description: Teleports the player to spawn.
     usage: /<command>
+    permission: UhCore.spawn
   createborder:
     description: Creates a server border.
     usage: /<command> [size]
-    aliases: [cborder, cb, setborder]
+    aliases: [cb]
+    permission: UhCore.admin
   game:
     description: Start or End the game.
     usage: /<command> <start/end>
+    permission: UhCore.gamestarter
   settings:
     description: Opens up the settings menu.
     usage: /<command>
+    permission: UhCore.admin
   kits:
     description: Opens up the kits menu.
     usage: /<command>
