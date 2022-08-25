@@ -1,6 +1,8 @@
 package io.github.nichxlas98.uhcore.models;
 
 
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 
 public class modelsClass {

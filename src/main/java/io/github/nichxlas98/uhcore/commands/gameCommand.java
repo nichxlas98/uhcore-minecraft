@@ -31,57 +31,77 @@ public class gameCommand implements CommandExecutor {
         if (sender instanceof Player) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Player player = (Player) sender;
-            String playerName = player.getName();
 
             switch(args[0].toLowerCase()) {
                 case "start":
                     if (!gameEnabled) {
                         gameEnabled = true;
-                        Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 2000 false @a");
+                        Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
                         for (Player players : Bukkit.getServer().getOnlinePlayers())  {
 
                             if (uhcKits) {
-                                if (workerKit.contains(playerName)) {
-                                    player.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
-                                    player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                                    player.getInventory().addItem(new ItemStack(Material.IRON_SPADE));
-                                    player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 6000, 1));
-                                    player.sendMessage(ChatColor.GOLD + "[*] You're using the Worker kit!");
-                                }
-
-                                if (bowKit.contains(playerName)) {
-                                    player.getInventory().addItem(new ItemStack(Material.BOW));
-                                    player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
-                                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 1));
-                                    player.sendMessage(ChatColor.AQUA + "[*] You're using the Archer kit!");
+                                for (String p : workerKit) {
+                                    Player equipped = Bukkit.getPlayer(p);
+                                    if (equipped == null) {
+                                        continue;
+                                    }
+                                    equipped.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
+                                    equipped.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+                                    equipped.getInventory().addItem(new ItemStack(Material.IRON_SPADE));
+                                    equipped.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 6000, 1));
+                                    equipped.sendMessage(ChatColor.GOLD + "[*] You're using the Worker kit!");
                                 }
 
 
-                                if (goldMinerKit.contains(playerName)) {
-                                    player.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, 2));
-                                    player.getInventory().addItem(new ItemStack(Material.GOLD_NUGGET, 81));
-                                    player.sendMessage(ChatColor.GOLD + "[*] You're using the Gold Miner ki!");
+                                for (String p : bowKit) {
+                                    Player equipped = Bukkit.getPlayer(p);
+                                    if (equipped == null) {
+                                        continue;
+                                    }
+                                    equipped.getInventory().addItem(new ItemStack(Material.BOW));
+                                    equipped.getInventory().addItem(new ItemStack(Material.ARROW, 32));
+                                    equipped.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 1));
+                                    equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Archer kit!");
+                                }
+
+
+                                for (String p : goldMinerKit) {
+                                    Player equipped = Bukkit.getPlayer(p);
+                                    if (equipped == null) {
+                                        continue;
+                                    }
+                                    equipped.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, 2));
+                                    equipped.getInventory().addItem(new ItemStack(Material.GOLD_NUGGET, 81));
+                                    equipped.sendMessage(ChatColor.GOLD + "[*] You're using the Gold Miner ki!");
                                 }
 
 
 
-                                if (fisherManKit.contains(playerName)) {
+                                for (String p : fisherManKit) {
+                                    Player equipped = Bukkit.getPlayer(p);
+                                    if (equipped == null) {
+                                        continue;
+                                    }
                                     ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
                                     ItemMeta fishingRodMeta = fishingRod.getItemMeta();
                                     fishingRodMeta.addEnchant(Enchantment.DURABILITY, 3, true);
                                     fishingRod.setItemMeta(fishingRodMeta);
 
 
-                                    player.getInventory().addItem(fishingRod);
-                                    player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 60000, 2));
-                                    player.sendMessage(ChatColor.AQUA + "[*] You're using the Fisherman kit!");
+                                    equipped.getInventory().addItem(fishingRod);
+                                    equipped.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 60000, 2));
+                                    equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Fisherman kit!");
                                 }
 
-                                if (enchanterKit.contains(playerName)) {
-                                    player.getInventory().addItem(new ItemStack(Material.LAPIS_BLOCK, 18));
-                                    player.getInventory().addItem(new ItemStack(Material.BOOK, 4));
-                                    player.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE, 15));
-                                    player.sendMessage(ChatColor.AQUA + "[*] You're using the Magician kit!");
+                                for (String p : enchanterKit) {
+                                    Player equipped = Bukkit.getPlayer(p);
+                                    if (equipped == null) {
+                                        continue;
+                                    }
+                                    equipped.getInventory().addItem(new ItemStack(Material.LAPIS_BLOCK, 18));
+                                    equipped.getInventory().addItem(new ItemStack(Material.BOOK, 4));
+                                    equipped.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE, 15));
+                                    equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Magician kit!");
                                 }
 
                             }
@@ -89,6 +109,7 @@ public class gameCommand implements CommandExecutor {
 
                             if (doubleHP) {
                                 players.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4, false, false));
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 10));
                                 players.sendMessage(ChatColor.ITALIC + "[*] Double HP is enabled, all players were given double health.");
                             }
 
@@ -104,18 +125,19 @@ public class gameCommand implements CommandExecutor {
                         BukkitTask task3 = new BukkitRunnable() {
                             @Override
                             public void run() {
-                                for (Player players : Bukkit.getServer().getOnlinePlayers())  {
-                                    players.sendMessage(ChatColor.GOLD + "[*] The border will start shrinking in " + ChatColor.RED + "5 minutes!");
+                                if (gameEnabled) {
+                                    Bukkit.dispatchCommand(console, "cb");
                                 }
-                                Bukkit.dispatchCommand(console, "cb");
                             }
                         }.runTaskLater(plugin, 6000L /*<-- the delay */);
 
                         BukkitTask task2 = new BukkitRunnable() {
                             @Override
                             public void run() {
-                                for (Player players : Bukkit.getServer().getOnlinePlayers())  {
-                                    players.sendMessage(ChatColor.GOLD + "[*] An hour has passed, thus all players will be teleported to 0, 0 in " + ChatColor.RED + "5 minutes!");
+                                if (gameEnabled) {
+                                    for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                                        players.sendMessage(ChatColor.GOLD + "[*] An hour has passed, thus all players will be teleported to 0, 0 in " + ChatColor.RED + "5 minutes!");
+                                    }
                                 }
                             }
                         }.runTaskLater(plugin, 60000L /*<-- the delay */);
@@ -124,10 +146,12 @@ public class gameCommand implements CommandExecutor {
                         BukkitTask task = new BukkitRunnable() {
                             @Override
                             public void run() {
-                                Bukkit.dispatchCommand(console, "tp @a 0, ~, 0");
-                                for (Player players : Bukkit.getServer().getOnlinePlayers())  {
-                                    players.teleport(player.getWorld().getHighestBlockAt(player.getLocation()).getLocation().add(0, 1, 0));
-                                    players.sendMessage(ChatColor.GOLD + "[*] An hour has passed, thus all players will be teleported to 0, 0.");
+                                if (gameEnabled) {
+                                    Bukkit.dispatchCommand(console, "tp @a 0, ~, 0");
+                                    for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                                        players.teleport(player.getWorld().getHighestBlockAt(player.getLocation()).getLocation().add(0, 1, 0));
+                                        players.sendMessage(ChatColor.GOLD + "[*] An hour has passed, thus all players will be teleported to 0, 0.");
+                                    }
                                 }
                             }
                         }.runTaskLater(plugin, 72000L /*<-- the delay */);
@@ -142,6 +166,8 @@ public class gameCommand implements CommandExecutor {
                         for (Player players : Bukkit.getServer().getOnlinePlayers())  {
                             players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
                             players.setGameMode(GameMode.SURVIVAL);
+                            Bukkit.dispatchCommand(console, "clear @a");
+                            Bukkit.dispatchCommand(console, "effect @a clear");
 
                             if(plugin.getConfig().getString("spawn.world") != null){
                                 World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));

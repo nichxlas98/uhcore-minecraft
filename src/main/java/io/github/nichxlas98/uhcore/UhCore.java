@@ -25,7 +25,9 @@ public final class UhCore extends JavaPlugin {
         //TODO: Possible (/duel) command?
         //TODO: More modes (Add an "Ultimate" Mode - special effects on X input)
         //TODO: Add more Kits; (Enchanter, gives you enchant books) - (Jeweler, gives 2 diamonds)
-
+        //TODO: Fix Worker kit giving you 2 pairs of tools
+        //TODO: Fix Gold Miner not giving you anything
+        //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
 
         ItemManager.init();
         getServer().getPluginManager().registerEvents(new GUIListener(), this);
