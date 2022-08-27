@@ -93,10 +93,8 @@ public class kitsCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You can't use /kits while KitsUHC is disabled.");
             }
-
-
-
-
+        } else {
+            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
 
         return true;
