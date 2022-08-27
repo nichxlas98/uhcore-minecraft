@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +21,8 @@ public class gotoSpawnCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("UhCore.spawn")) {
+            int adminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            if (adminLevel >= 0) {
                 if (plugin.getConfig().getString("spawn.world") != null) {
                     World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));
                     double x = Double.parseDouble(plugin.getConfig().getString("spawn.x"));
@@ -40,7 +42,7 @@ public class gotoSpawnCommand implements CommandExecutor {
             }
 
         } else {
-            System.out.println("You cannot do this from the console..");
+            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
 
         return true;

@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,7 +32,7 @@ public class gameCommand implements CommandExecutor {
         if (sender instanceof Player) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Player player = (Player) sender;
-            if (player.hasPermission("UhCore.gamestarter")) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 0) {
 
                 switch (args[0].toLowerCase()) {
                     case "start":
@@ -166,6 +167,11 @@ public class gameCommand implements CommandExecutor {
                         if (gameEnabled) {
                             gameEnabled = false;
                             gracePeriod = false;
+
+                            WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
+                            wb.setCenter(0, 0);
+                            wb.setSize(5000);
+
                             player.sendMessage(ChatColor.RED + "[*] You've forcefully ended the game.");
                             for (Player players : Bukkit.getServer().getOnlinePlayers()) {
                                 players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
@@ -201,6 +207,8 @@ public class gameCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
             }
+        } else {
+            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
 
         return true;

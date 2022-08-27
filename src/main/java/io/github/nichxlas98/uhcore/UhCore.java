@@ -7,33 +7,48 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UhCore extends JavaPlugin {
 
+    private static UhCore plugin;
+    public static UhCore getPlugin() {
+        return plugin;
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
+        plugin = this;
         
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        //TODO: Code Cleanup Session;
         //TODO: Possible (/duel) command?
         //TODO: More modes (Add an "Ultimate" Mode - special effects on X input)
-        //TODO: Add more Kits; (Enchanter, gives you enchant books) - (Jeweler, gives 2 diamonds)
-        //TODO: Fix Worker kit giving you 2 pairs of tools
-        //TODO: Fix Gold Miner not giving you anything
+        //TODO: Add more Kits; - (Jeweler, gives 2 diamonds)
         //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
+        //TODO: Add a "blockpm" command that adds the player to a list, and if the player's in that list, send the sender an error;
 
         ItemManager.init();
-        getServer().getPluginManager().registerEvents(new GUIListener(), this);
+        this.getCommand("gethere").setExecutor(new gethereCommand());
+        this.getCommand("goto").setExecutor(new gotoCommand());
+        this.getCommand("slap").setExecutor(new slapCommand());
+        this.getCommand("pm").setExecutor(new messageCommand());
+        this.getCommand("heal").setExecutor(new healCommand());
+        this.getCommand("feed").setExecutor(new feedCommand());
+        this.getCommand("grant").setExecutor(new grantCommand());
+        this.getCommand("kits").setExecutor(new kitsCommand());
+        this.getCommand("settings").setExecutor(new settingsCommand());
+
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
         getServer().getPluginManager().registerEvents(new gameWinListener(this), this);
+        getServer().getPluginManager().registerEvents(new GUIListener(), this);
         getServer().getPluginManager().registerEvents(new fastsListener(), this);
+        getServer().getPluginManager().registerEvents(new chatListener(), this);
         getServer().getPluginManager().registerEvents(new graceListener(), this);
+        getServer().getPluginManager().registerEvents(new permissionListener(), this);
+
         getCommand("game").setExecutor(new gameCommand(this));
         getCommand("createspawn").setExecutor(new spawnCommand(this));
         getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
         getCommand("createborder").setExecutor(new borderCommand(this));
-        this.getCommand("kits").setExecutor(new kitsCommand());
-        this.getCommand("settings").setExecutor(new settingsCommand());
     }
 
 

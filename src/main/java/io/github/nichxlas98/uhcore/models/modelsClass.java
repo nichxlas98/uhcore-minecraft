@@ -1,6 +1,8 @@
 package io.github.nichxlas98.uhcore.models;
 
 
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,6 +23,8 @@ public class modelsClass {
     public static ArrayList<String> goldMinerKit = new ArrayList<>();
     public static ArrayList<String> fisherManKit = new ArrayList<>();
     public static ArrayList<String> enchanterKit = new ArrayList<>();
+
+    public static ArrayList<Player> adminChat = new ArrayList<>();
 
     public static boolean getChance(int minimalChance) {
         Random random = new Random();

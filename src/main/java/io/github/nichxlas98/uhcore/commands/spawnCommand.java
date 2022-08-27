@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -23,7 +24,7 @@ public class spawnCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("UhCore.admin")) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) == 4) {
                 Location location = player.getLocation();
                 FileConfiguration config = plugin.getConfig();
                 config.options().copyDefaults(true);

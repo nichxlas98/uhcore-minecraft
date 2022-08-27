@@ -4,28 +4,54 @@ main: io.github.nichxlas98.uhcore.UhCore
 api-version: 1.19
 description: Ultra Hardcore Core
 commands:
+  gethere:
+    description: Teleport a player to you!
+    usage: /<command> <player>
+  goto:
+    description: Teleport directly to a player!
+    usage: /<command> <player>
+  slap:
+    description: Slaps a player into the air!
+    usage: /<command> <player>
+  pm:
+    description: Private Message a player.
+    usage: /<command> <player>
+  heal:
+    description: Heals a specified player.
+    usage: /<command> [player]
+  feed:
+    description: Feeds a specified player.
+    usage: /<command> [player]
   createspawn:
     description: Sets the server spawn location.
     usage: /<command>
     aliases: [setspawn, cspawn, cs]
-    permission: UhCore.admin
   gotospawn:
     description: Teleports the player to spawn.
     usage: /<command>
-    permission: UhCore.spawn
   createborder:
     description: Creates a server border.
     usage: /<command> [size]
     aliases: [cb]
-    permission: UhCore.admin
   game:
     description: Start or End the game.
     usage: /<command> <start/end>
-    permission: UhCore.gamestarter
+    permission: UhCore.gameStarter
   settings:
     description: Opens up the settings menu.
     usage: /<command>
-    permission: UhCore.admin
   kits:
     description: Opens up the kits menu.
     usage: /<command>
+  grant:
+    description: Grants an Admin Level.
+    usage: /<command> <player> <adminLevel>
+    permission: UhCore.manager
+
+permissions:
+  UhCore.manager:
+    default: op
+    description: Management Permissions.
+  UhCore.gameStarter:
+    default: op
+    description: Permission to start games without being an admin.

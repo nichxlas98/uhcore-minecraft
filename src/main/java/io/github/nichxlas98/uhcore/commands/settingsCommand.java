@@ -1,5 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
+import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,7 +22,7 @@ public class settingsCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("UhCore.admin")) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 2) {
                 Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Settings");
 
                 ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
@@ -113,6 +114,8 @@ public class settingsCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
             }
+        } else {
+            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
 
         return true;
