@@ -55,7 +55,7 @@ public class fastsListener implements Listener {
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
 
-            if (modelsClass.getChance(25)) {
+            if (modelsClass.getChance(10)) {
                 e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE));
             } else {
                 e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.LEAVES));

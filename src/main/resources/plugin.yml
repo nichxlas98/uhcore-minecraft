@@ -4,6 +4,13 @@ main: io.github.nichxlas98.uhcore.UhCore
 api-version: 1.19
 description: Ultra Hardcore Core
 commands:
+  g:
+    description: Alter a players gamemode.
+    usage: /<command> <(s)pectator/(su)rvival/(c)reative>
+    aliases: [gamemode, gmode, gm]
+  maintenance:
+    description: Server Maintenance Mode.
+    usage: /<command> <true/false>
   gethere:
     description: Teleport a player to you!
     usage: /<command> <player>

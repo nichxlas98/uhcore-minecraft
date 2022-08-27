@@ -35,6 +35,8 @@ public final class UhCore extends JavaPlugin {
         this.getCommand("feed").setExecutor(new feedCommand());
         this.getCommand("grant").setExecutor(new grantCommand());
         this.getCommand("kits").setExecutor(new kitsCommand());
+        this.getCommand("maintenance").setExecutor(new maintenanceCommand());
+        this.getCommand("g").setExecutor(new gCommand());
         this.getCommand("settings").setExecutor(new settingsCommand());
 
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
