@@ -27,7 +27,7 @@ public class settingsCommand implements CommandExecutor {
 
                 ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
                 ItemStack doubleSpeed = new ItemStack(Material.FEATHER);
-                ItemStack fastUHC = new ItemStack(Material.SUGAR);
+                ItemStack cutClean = new ItemStack(Material.SUGAR);
                 ItemStack doubleHeads = new ItemStack(Material.SKULL_ITEM);
                 ItemStack pearlUHC = new ItemStack(Material.ENDER_PEARL);
                 ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
@@ -76,14 +76,14 @@ public class settingsCommand implements CommandExecutor {
                 doubleHeadsMeta.setLore(doubleHeadsLore);
                 doubleHeads.setItemMeta(doubleHeadsMeta);
 
-                ItemMeta fastUHCMeta = fastUHC.getItemMeta();
-                fastUHCMeta.setDisplayName(ChatColor.GOLD + "FastUHC");
+                ItemMeta fastUHCMeta = cutClean.getItemMeta();
+                fastUHCMeta.setDisplayName(ChatColor.GOLD + "CutClean");
                 fastUHCMeta.addEnchant(Enchantment.LUCK, 1, true);
                 fastUHCMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 ArrayList<String> fastUHCLore = new ArrayList<>();
-                fastUHCLore.add(ChatColor.ITALIC + "Fast UHC Mode.");
+                fastUHCLore.add(ChatColor.ITALIC + "CutClean UHC Mode.");
                 fastUHCMeta.setLore(fastUHCLore);
-                fastUHC.setItemMeta(fastUHCMeta);
+                cutClean.setItemMeta(fastUHCMeta);
 
                 ItemMeta doubleHealthMeta = doubleHealth.getItemMeta();
                 doubleHealthMeta.setDisplayName(ChatColor.RED + "Double Health");
@@ -106,7 +106,7 @@ public class settingsCommand implements CommandExecutor {
 
 
                 ItemStack[] menu_items = {
-                        doubleHealth, pearlUHC, fastUHC, uhcKits, doubleSpeed, goldRush, doubleHeads, empty, empty,
+                        doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, empty, empty,
                         empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
                 gui.setContents(menu_items);
                 player.openInventory(gui);

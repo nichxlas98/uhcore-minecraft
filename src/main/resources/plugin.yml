@@ -4,10 +4,10 @@ main: io.github.nichxlas98.uhcore.UhCore
 api-version: 1.19
 description: Ultra Hardcore Core
 commands:
-  g:
-    description: Alter a players gamemode.
-    usage: /<command> <(s)pectator/(su)rvival/(c)reative>
-    aliases: [gamemode, gmode, gm]
+  a:
+    description: Admin Super Commands.
+    usage: /<command> <gmc/gms/spec> | <heal/feed> (player) | <broadcast> <message>
+    aliases: [admin]
   maintenance:
     description: Server Maintenance Mode.
     usage: /<command> <true/false>
@@ -23,12 +23,6 @@ commands:
   pm:
     description: Private Message a player.
     usage: /<command> <player>
-  heal:
-    description: Heals a specified player.
-    usage: /<command> [player]
-  feed:
-    description: Feeds a specified player.
-    usage: /<command> [player]
   createspawn:
     description: Sets the server spawn location.
     usage: /<command>
