@@ -21,7 +21,6 @@ public class maintenanceCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) == 4) {
-
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "[*] You need to use /maintenance <true/false>");
                     return true;
@@ -60,8 +59,6 @@ public class maintenanceCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
             }
-        } else {
-            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
 
         return true;

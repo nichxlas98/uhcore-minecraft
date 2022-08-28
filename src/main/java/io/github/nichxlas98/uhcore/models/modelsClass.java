@@ -25,6 +25,7 @@ public class modelsClass {
     public static ArrayList<String> enchanterKit = new ArrayList<>();
 
     public static ArrayList<Player> adminChat = new ArrayList<>();
+    public static ArrayList<Player> pmsBlocked = new ArrayList<>();
 
     public static boolean getChance(int minimalChance) {
         Random random = new Random();

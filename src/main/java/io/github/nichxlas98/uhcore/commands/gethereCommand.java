@@ -42,8 +42,6 @@ public class gethereCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
             }
-        } else {
-            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
         return true;
     }

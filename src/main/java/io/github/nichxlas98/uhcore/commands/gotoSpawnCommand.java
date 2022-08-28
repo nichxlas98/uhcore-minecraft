@@ -40,11 +40,7 @@ public class gotoSpawnCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
             }
-
-        } else {
-            System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
-
         return true;
     }
 }

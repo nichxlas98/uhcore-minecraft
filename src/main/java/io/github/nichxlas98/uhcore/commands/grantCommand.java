@@ -36,12 +36,10 @@ public class grantCommand implements CommandExecutor {
                 }
 
                 Player target = Bukkit.getServer().getPlayer(args[0]);
-
                 if (target == null) {
-                    player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[1] + ChatColor.RED+  " is not a player!");
+                    player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[0] + ChatColor.RED+  " is not a player!");
                     return true;
                 }
-
 
                 try {
                     amount = Integer.parseInt(args[1]);
@@ -83,7 +81,6 @@ public class grantCommand implements CommandExecutor {
         } else {
             System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
-
         return true;
     }
 }

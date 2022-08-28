@@ -31,13 +31,11 @@ public final class UhCore extends JavaPlugin {
         this.getCommand("goto").setExecutor(new gotoCommand());
         this.getCommand("slap").setExecutor(new slapCommand());
         this.getCommand("pm").setExecutor(new messageCommand());
-        this.getCommand("heal").setExecutor(new healCommand());
-        this.getCommand("feed").setExecutor(new feedCommand());
         this.getCommand("grant").setExecutor(new grantCommand());
         this.getCommand("kits").setExecutor(new kitsCommand());
         this.getCommand("maintenance").setExecutor(new maintenanceCommand());
-        this.getCommand("g").setExecutor(new gCommand());
         this.getCommand("settings").setExecutor(new settingsCommand());
+        this.getCommand("a").setExecutor(new aCommand());
 
         getServer().getPluginManager().registerEvents(new playerListener(this), this);
         getServer().getPluginManager().registerEvents(new gameWinListener(this), this);
@@ -50,7 +48,6 @@ public final class UhCore extends JavaPlugin {
         getCommand("game").setExecutor(new gameCommand(this));
         getCommand("createspawn").setExecutor(new spawnCommand(this));
         getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
-        getCommand("createborder").setExecutor(new borderCommand(this));
     }
 
 
