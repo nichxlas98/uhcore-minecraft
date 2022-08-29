@@ -31,6 +31,8 @@ public class chatListener implements Listener {
                 }
                 adminChat.add(player);
                 return;
+            } else {
+                adminChat.remove(player);
             }
         }
 
@@ -41,27 +43,27 @@ public class chatListener implements Listener {
             }
             return;
         } if (adminLevel == 1) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             }
             return;
         } if (adminLevel == 2) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + ChatColor.ITALIC + e.getMessage());
+                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             }
             return;
         } if (adminLevel == 3) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + ChatColor.ITALIC + e.getMessage());
+                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             }
             return;
         } if (adminLevel == 4) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + ChatColor.ITALIC + e.getMessage());
+                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
             }
         }
 

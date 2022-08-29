@@ -19,7 +19,6 @@ public class messageCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length > 1){
-
                 if (args[0].equalsIgnoreCase("block")) {
                     if (pmsBlocked.contains(player)) {
                         pmsBlocked.remove(player);
@@ -62,8 +61,6 @@ public class messageCommand implements CommandExecutor {
         } else {
             System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
-
-
         return true;
     }
 }

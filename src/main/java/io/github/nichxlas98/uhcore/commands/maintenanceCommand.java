@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+import static io.github.nichxlas98.uhcore.models.modelsClass.maintenanceMode;
+
 public class maintenanceCommand implements CommandExecutor {
 
     public ArrayList<String> isNotAdmin = new ArrayList<>();
@@ -32,6 +34,7 @@ public class maintenanceCommand implements CommandExecutor {
                         return true;
                     }
 
+                    maintenanceMode = true;
                     player.sendMessage(ChatColor.GOLD + "[*] Maintenance mode has been enabled.");
                     Bukkit.getServer().setWhitelist(true);
                     for (Player online : Bukkit.getOnlinePlayers()) {
@@ -50,12 +53,11 @@ public class maintenanceCommand implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("false")) {
+                    maintenanceMode = false;
                     Bukkit.getServer().setWhitelist(false);
                     player.sendMessage(ChatColor.GREEN + "[*] Maintenance mode has been disabled.");
                     return true;
                 }
-
-
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
             }

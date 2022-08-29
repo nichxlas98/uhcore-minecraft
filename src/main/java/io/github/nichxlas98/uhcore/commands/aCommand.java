@@ -22,7 +22,10 @@ public class aCommand implements CommandExecutor {
             String error = RED + "[*] You do not have permission to do this!";
             if (adminLevel > 0) {
                 if (args.length == 0) {
-                    player.sendMessage(RED + "[*] You need to use: /a <gmc/gms/spec> | <heal/feed> (player)");
+                    player.sendMessage(RED + "[*] You can use:");
+                    player.sendMessage(RED + "[*] " + GOLD + "/a <heal/feed> (player)");
+                    player.sendMessage(RED + "[*] " + GOLD + "/a <gmc/gms/spec>");
+                    player.sendMessage(RED + "[*] " + GOLD + "/a <broadcast> <message>");
                     return true;
                 }
                 switch (args[0].toLowerCase()) {
@@ -108,10 +111,13 @@ public class aCommand implements CommandExecutor {
                         player.sendMessage(GOLD + "[*] Your gamemode has been altered. " + RED + "(SPECTATOR)");
                         break;
                     case "broadcast":
-                        String sm = "";
+                        StringBuilder sm = new StringBuilder();
                         for (int i = 1; i < args.length; i++){
                             String arg = (args[i] + " ");
-                            sm = (sm + arg);
+                            sm.append(arg);
+                        } if (args.length == 1) {
+                            player.sendMessage(RED + "[*] You need to use /a broadcast <message>");
+                            return true;
                         } for (Player online : Bukkit.getOnlinePlayers()) {
                             online.sendMessage(GRAY + "[" + GOLD + "UhCore98" + GRAY + "] " + RED + sm);
                         }
