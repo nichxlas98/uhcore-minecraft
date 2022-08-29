@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import static io.github.nichxlas98.uhcore.models.modelsClass.adminChat;
 import static org.bukkit.event.EventPriority.HIGHEST;
 
 public class permissionListener implements Listener {
@@ -16,6 +17,13 @@ public class permissionListener implements Listener {
     @EventHandler(priority = HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+
+        if (adminChat.contains(player)) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) < 1) {
+                adminChat.remove(player);
+            }
+        }
+
 
         if (!(AdminLevelUtil.hasAdminLevel(player.getUniqueId()))) {
             player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a Regular player.");
@@ -46,22 +54,6 @@ public class permissionListener implements Listener {
                 default:
                     player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
             }
-
-/*
-            if (adminLevel == 1) {
-                player.sendMessage(ChatColor.WHITE + "[*] You're signed in as a " + ChatColor.GOLD + "Junior Admin.");
-                return;
-            } if (adminLevel == 2) {
-                player.sendMessage(ChatColor.WHITE + "[*] You're signed in as a " + ChatColor.GOLD + "Administrator.");
-                return;
-            } if (adminLevel == 3) {
-                player.sendMessage(ChatColor.WHITE + "[*] You're signed in as a " + ChatColor.GOLD + "Senior Admin.");
-                return;
-            } if (adminLevel == 4) {
-                player.sendMessage(ChatColor.WHITE + "[*] You're signed in as a " + ChatColor.GOLD + "Manager.");
-            }
-
- */
         }
     }
 

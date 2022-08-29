@@ -18,6 +18,7 @@ public class modelsClass {
     public static boolean doubleHeads = false;
     public static boolean goldRush = false;
     public static boolean uhcKits = false;
+    public static boolean maintenanceMode = false;
     public static ArrayList<String> workerKit = new ArrayList<>();
     public static ArrayList<String> bowKit = new ArrayList<>();
     public static ArrayList<String> goldMinerKit = new ArrayList<>();
