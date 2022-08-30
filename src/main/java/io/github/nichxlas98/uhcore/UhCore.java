@@ -1,9 +1,7 @@
 package io.github.nichxlas98.uhcore;
 
-import io.github.nichxlas98.uhcore.commands.*;
 import io.github.nichxlas98.uhcore.items.ItemManager;
-import io.github.nichxlas98.uhcore.listeners.*;
-import org.bukkit.plugin.PluginManager;
+import io.github.nichxlas98.uhcore.utils.AutoRegisterUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UhCore extends JavaPlugin {
@@ -17,10 +15,12 @@ public final class UhCore extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
-        PluginManager manager = getServer().getPluginManager();
-        
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
+        ItemManager.init();
+        AutoRegisterUtil.registerCommands();
+        AutoRegisterUtil.registerEvents();
 
         //TODO: Possible (/duel) command?
         //TODO: More modes (Add an "Ultimate" Mode - special effects on X input)
@@ -29,29 +29,6 @@ public final class UhCore extends JavaPlugin {
         //TODO: Add a "blockpm" command that adds the player to a list, and if the player's in that list, send the sender an error;
         //TODO: Leaderboards System using config files.
 
-        ItemManager.init();
-        this.getCommand("gethere").setExecutor(new gethereCommand());
-        this.getCommand("goto").setExecutor(new gotoCommand());
-        this.getCommand("slap").setExecutor(new slapCommand());
-        this.getCommand("pm").setExecutor(new messageCommand());
-        this.getCommand("grant").setExecutor(new grantCommand());
-        this.getCommand("kits").setExecutor(new kitsCommand());
-        this.getCommand("maintenance").setExecutor(new maintenanceCommand());
-        this.getCommand("settings").setExecutor(new settingsCommand());
-        this.getCommand("a").setExecutor(new aCommand());
-
-        manager.registerEvents(new playerListener(this), this);
-        manager.registerEvents(new gameWinListener(this), this);
-        manager.registerEvents(new maintenanceListener(), this);
-        manager.registerEvents(new GUIListener(), this);
-        manager.registerEvents(new fastsListener(), this);
-        manager.registerEvents(new chatListener(), this);
-        manager.registerEvents(new graceListener(), this);
-        manager.registerEvents(new permissionListener(), this);
-
-        getCommand("game").setExecutor(new gameCommand(this));
-        getCommand("createspawn").setExecutor(new spawnCommand(this));
-        getCommand("gotospawn").setExecutor(new gotoSpawnCommand(this));
     }
 
 

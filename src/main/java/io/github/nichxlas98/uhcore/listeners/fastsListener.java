@@ -42,10 +42,8 @@ public class fastsListener implements Listener {
                     e.getDrops().clear();
                     e.getDrops().add(new ItemStack(Material.ARROW, chance));
                 }
-
             }
         }
-
     }
 
 
@@ -138,11 +136,6 @@ public class fastsListener implements Listener {
             } if(player.getInventory().getItemInHand().equals(iShovel)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }
-
-
-
         }
-
-
     }
 }

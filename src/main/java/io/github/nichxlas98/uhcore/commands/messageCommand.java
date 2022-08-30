@@ -32,7 +32,7 @@ public class messageCommand implements CommandExecutor {
 
                 //retrieve the first argument as a player
                 Player target = Bukkit.getServer().getPlayer(args[0]);
-                String sm = "";
+                String sm;
 
                 if (target == null) {
                     player.sendMessage(ChatColor.RED + "[*] We couldn't find that player.");
@@ -45,10 +45,12 @@ public class messageCommand implements CommandExecutor {
                 }
 
                 // combine the arguments the player typed
+                StringBuilder smBuilder = new StringBuilder();
                 for (int i = 1; i < args.length; i++){
                     String arg = (args[i] + " ");
-                    sm = (sm + arg);
+                    smBuilder.append(arg);
                 }
+                sm = smBuilder.toString();
 
                 //send the actual message
                 target.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 2);

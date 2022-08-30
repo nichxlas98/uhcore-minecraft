@@ -42,11 +42,11 @@ public class GUIListener implements Listener {
                 case SUGAR:
                     if (fastsEnabled) {
                         fastsEnabled = false;
-                        player.sendMessage(ChatColor.RED + "[*] FastUHC has been disabled.");
+                        player.sendMessage(ChatColor.RED + "[*] CutClean has been disabled.");
                         break;
                     } else {
                         fastsEnabled = true;
-                        player.sendMessage(ChatColor.GREEN + "[*] FastUHC has been enabled.");
+                        player.sendMessage(ChatColor.GREEN + "[*] CutClean has been enabled.");
                     }
                     break;
                 case SKULL_ITEM:

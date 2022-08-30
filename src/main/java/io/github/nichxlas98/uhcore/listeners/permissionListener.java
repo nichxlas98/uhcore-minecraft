@@ -8,21 +8,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.adminChat;
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
 import static org.bukkit.event.EventPriority.HIGHEST;
 
 public class permissionListener implements Listener {
 
-
-    //IDEA: Player commands depend on AdminLevel?
     @EventHandler(priority = HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
 
-        if (adminChat.contains(player)) {
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) < 1) {
-                adminChat.remove(player);
-            }
-        }
 
 
         if (!(AdminLevelUtil.hasAdminLevel(player.getUniqueId()))) {
@@ -31,14 +26,22 @@ public class permissionListener implements Listener {
             return;
         }
 
+        if (adminChat.contains(player)) {
+            if (playerAdminLevel < MIN_ADMIN_LEVEL) {
+                adminChat.remove(player);
+            }
+        } else {
+            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+                adminChat.add(player);
+            }
+        }
 
-        if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 0) {
-            int adminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
-            if (adminLevel > 0) {
-                player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + adminLevel + ".");
+        if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+            if (playerAdminLevel > 0) {
+                player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + playerAdminLevel + ".");
             }
 
-            switch (adminLevel) {
+            switch (playerAdminLevel) {
                 case 1:
                     player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + "Junior Admin.");
                     break;
@@ -56,5 +59,4 @@ public class permissionListener implements Listener {
             }
         }
     }
-
 }
