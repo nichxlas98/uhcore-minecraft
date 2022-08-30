@@ -25,8 +25,5 @@ public class maintenanceListener implements Listener {
         if (gameEnabled) {
             e.setMotd(ChatColor.RED + "[UhCore98] A game is currently in progress!");
         }
-
     }
-
-
 }

@@ -8,14 +8,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+
 public class gotoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 1) {
+            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
                 if (args.length > 0) {
                     //retrieve the first argument as a player
                     Player target = Bukkit.getServer().getPlayer(args[0]);

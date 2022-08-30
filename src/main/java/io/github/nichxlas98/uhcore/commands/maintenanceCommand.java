@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.maintenanceMode;
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MAX_ADMIN_LEVEL;
 
 public class maintenanceCommand implements CommandExecutor {
 
@@ -22,7 +23,7 @@ public class maintenanceCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) == 4) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) == MAX_ADMIN_LEVEL) {
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "[*] You need to use /maintenance <true/false>");
                     return true;

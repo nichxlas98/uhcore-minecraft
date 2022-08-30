@@ -43,12 +43,7 @@ public class gameWinListener implements Listener {
                         }
                     }.runTaskLater(plugin, 600);
                 }
-
             }
-
         }
-
-
     }
-
 }

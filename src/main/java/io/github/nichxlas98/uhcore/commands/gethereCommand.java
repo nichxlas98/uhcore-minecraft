@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+
 public class gethereCommand implements CommandExecutor {
 
     @Override
@@ -16,8 +18,8 @@ public class gethereCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 1) {
-
+            int playerAdminlevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            if (playerAdminlevel >= MIN_ADMIN_LEVEL) {
                 if (args.length > 0) {
                     //retrieve the first argument as a player
                     Player target = Bukkit.getServer().getPlayer(args[0]);

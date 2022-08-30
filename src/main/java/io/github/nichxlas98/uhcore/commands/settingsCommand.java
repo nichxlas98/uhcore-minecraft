@@ -16,13 +16,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+
 public class settingsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= 2) {
+            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= MIN_ADMIN_LEVEL) {
                 Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Settings");
 
                 ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);

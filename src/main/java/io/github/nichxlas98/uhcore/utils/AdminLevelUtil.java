@@ -7,7 +7,11 @@ import java.util.UUID;
 
 public class AdminLevelUtil {
 
-    // CRUD, Create, Read, U?, Delete
+    public static int MAX_ADMIN_LEVEL = 4;
+    public static int HIGH_ADMIN_LEVEL = 3;
+    public static int LOW_ADMIN_LEVEL = 2;
+
+    public static int MIN_ADMIN_LEVEL = 1;
 
     public static void setAdminLevel(UUID p, int adminLevel) {
         FileConfiguration config = UhCore.getPlugin().getConfig();

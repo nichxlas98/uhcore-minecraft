@@ -28,10 +28,12 @@ public class graceListener implements Listener {
     @EventHandler
     public void playerDamageEvent(EntityDamageEvent e) {
         if (e instanceof Player) {
-            if (gameEnabled)
+            if (gameEnabled) {
                 if (modelsClass.gracePeriod) {
                     e.setCancelled(true);
+
                 }
+            }
         }
     }
 }

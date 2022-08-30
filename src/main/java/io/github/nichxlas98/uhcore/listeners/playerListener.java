@@ -116,11 +116,7 @@ public class playerListener implements Listener {
                 killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
                 killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
             }
-
         }
-
-
-
     }
 
     @EventHandler
@@ -162,8 +158,5 @@ public class playerListener implements Listener {
             event.getEntity().getWorld().dropItem(event.getEntity().getLocation(), new ItemStack(Material.STRING, chance));
         }
     }
-
-
-
 }
 

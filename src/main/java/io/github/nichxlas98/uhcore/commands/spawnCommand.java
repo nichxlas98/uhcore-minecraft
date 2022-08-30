@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MAX_ADMIN_LEVEL;
+
 public class spawnCommand implements CommandExecutor {
 
     private final UhCore plugin;
@@ -24,7 +26,8 @@ public class spawnCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) == 4) {
+            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            if (playerAdminLevel == MAX_ADMIN_LEVEL) {
                 Location location = player.getLocation();
                 FileConfiguration config = plugin.getConfig();
                 config.options().copyDefaults(true);

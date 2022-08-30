@@ -6,8 +6,14 @@ description: Ultra Hardcore Core
 commands:
   a:
     description: Admin Super Commands.
-    usage: /<command> <gmc/gms/spec> | <heal/feed> (player) | <broadcast> <message>
+    usage: /<command> <gmc/gms/spec> | <heal/feed> [player] | <broadcast> <message>
     aliases: [admin]
+  feed:
+    description: Feeds the player specified.
+    usage: /<command> [player]
+  heal:
+    description: Heals the player specified.
+    usage: /<command> [player]
   maintenance:
     description: Server Maintenance Mode.
     usage: /<command> <true/false>
