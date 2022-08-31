@@ -32,8 +32,12 @@ public class uhcUtil {
             } if (pearlUHC) {
                 players.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, 3));
                 players.sendMessage(ChatColor.ITALIC + "[*] Pearl UHC is enabled, all players were given 3 pearls.");
+            } if (noSwords) {
+                players.sendMessage(ChatColor.ITALIC + "[*] No Swords is enabled, all players are denied from using swords!");
             }
-            players.setGameMode(GameMode.SURVIVAL);
+            if (AdminLevelUtil.getAdminLevel(players.getUniqueId()) == 0) {
+                players.setGameMode(GameMode.SURVIVAL);
+            }
             players.sendMessage(ChatColor.GREEN + "[*] " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has started the game.");
         }
     }

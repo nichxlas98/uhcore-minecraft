@@ -4,6 +4,12 @@ main: io.github.nichxlas98.uhcore.UhCore
 api-version: 1.19
 description: Ultra Hardcore Core
 commands:
+  rank:
+    description: Grants a player with a rank.
+    usage: /<command> <player> <supporter-true/supporter-false>
+  near:
+    description: Displays all nearby players (supporter only)
+    usage: /<command>
   a:
     description: Admin Super Commands.
     usage: /<command> <gmc/gms/spec> | <heal/feed> [player] | <broadcast> <message>
@@ -44,8 +50,8 @@ commands:
     description: Start or End the game.
     usage: /<command> <start/end>
     permission: UhCore.gameStarter
-  settings:
-    description: Opens up the settings menu.
+  modifiers:
+    description: Opens up the modifier menu.
     usage: /<command>
   kits:
     description: Opens up the kits menu.

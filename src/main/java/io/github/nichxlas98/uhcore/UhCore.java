@@ -28,6 +28,7 @@ public final class UhCore extends JavaPlugin {
         //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
         //TODO: Add a "blockpm" command that adds the player to a list, and if the player's in that list, send the sender an error;
         //TODO: Leaderboards System using config files.
+        //TODO: Custom Death Messages.
 
     }
 

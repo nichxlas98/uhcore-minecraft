@@ -13,7 +13,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import static io.github.nichxlas98.uhcore.models.modelsClass.adminChat;
 import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.*;
 
-public class chatListener implements Listener {
+public class customChatListener implements Listener {
 
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent e) {
@@ -39,39 +39,39 @@ public class chatListener implements Listener {
 
         if (playerAdminLevel == 0) {
             if (RankUtil.isSupporter(player.getUniqueId())) {
-                console.sendMessage(ChatColor.GRAY + "(" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                console.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                    online.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
                 }
                 return;
             }
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                online.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
             }
             return;
         } if (playerAdminLevel == MIN_ADMIN_LEVEL) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                online.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
             }
             return;
         } if (playerAdminLevel == LOW_ADMIN_LEVEL) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                online.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
             }
             return;
         } if (playerAdminLevel == HIGH_ADMIN_LEVEL) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                online.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
             }
             return;
         } if (playerAdminLevel == MAX_ADMIN_LEVEL) {
-            console.sendMessage(ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+            console.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + e.getMessage());
+                online.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
             }
         }
     }

@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
 
-public class settingsCommand implements CommandExecutor {
+public class modifiersCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= MIN_ADMIN_LEVEL) {
-                Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Settings");
+                Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Modifiers");
 
                 ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
                 ItemStack doubleSpeed = new ItemStack(Material.FEATHER);
@@ -35,11 +35,21 @@ public class settingsCommand implements CommandExecutor {
                 ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
                 ItemStack goldRush = new ItemStack(Material.GOLD_NUGGET);
                 ItemStack uhcKits = new ItemStack(Material.GOLDEN_CARROT);
+                ItemStack noSwords = new ItemStack(Material.IRON_SWORD);
 
 
                 ItemMeta emptyMeta = empty.getItemMeta();
                 emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
                 empty.setItemMeta(emptyMeta);
+
+                ItemMeta noSwordsMeta = noSwords.getItemMeta();
+                noSwordsMeta.setDisplayName(ChatColor.YELLOW + "No Swords");
+                noSwordsMeta.addEnchant(Enchantment.LUCK, 1, true);
+                noSwordsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                ArrayList<String> noSwordsLore = new ArrayList<>();
+                noSwordsLore.add(ChatColor.ITALIC + "Disallows all swords from being used.");
+                noSwordsMeta.setLore(noSwordsLore);
+                noSwords.setItemMeta(noSwordsMeta);
 
 
                 ItemMeta uhcKitsMeta = uhcKits.getItemMeta();
@@ -108,7 +118,7 @@ public class settingsCommand implements CommandExecutor {
 
 
                 ItemStack[] menu_items = {
-                        doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, empty, empty,
+                        doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, noSwords, empty,
                         empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
                 gui.setContents(menu_items);
                 player.openInventory(gui);

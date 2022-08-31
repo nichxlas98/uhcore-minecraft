@@ -11,10 +11,11 @@ public class modelsClass {
 
     public static boolean gameEnabled = false;
     public static boolean gracePeriod = false;
+    public static boolean noSwords = false;
     public static boolean pearlUHC = false;
     public static boolean doubleHP = false;
     public static boolean doubleSpeed = false;
-    public static boolean fastsEnabled = false;
+    public static boolean cutCleanEnabled = false;
     public static boolean doubleHeads = false;
     public static boolean goldRush = false;
     public static boolean uhcKits = false;
