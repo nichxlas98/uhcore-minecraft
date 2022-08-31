@@ -15,17 +15,17 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Map;
 import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.models.modelsClass.fastsEnabled;
+import static io.github.nichxlas98.uhcore.models.modelsClass.cutCleanEnabled;
 
 
-public class fastsListener implements Listener {
+public class customDropsListener implements Listener {
 
 
     @EventHandler
     public void playerKillEntity(EntityDeathEvent e) {
         Random rand = new Random();
         int chance = rand.nextInt(4) % 2 + 1;
-        if (fastsEnabled) {
+        if (cutCleanEnabled) {
             if (e.getEntity().getKiller() != null) {
                 if (e.getEntity() instanceof Sheep || e.getEntity() instanceof Pig) {
                     e.getDrops().clear();
@@ -60,7 +60,7 @@ public class fastsListener implements Listener {
             }
         }
 
-        if(fastsEnabled) {
+        if(cutCleanEnabled) {
             Block b = e.getBlock();
             Player p = e.getPlayer();
             Random rand = new Random();
@@ -109,7 +109,7 @@ public class fastsListener implements Listener {
         ItemStack iAxe = new ItemStack(Material.IRON_AXE);
         ItemStack iShovel = new ItemStack(Material.IRON_SPADE);
 
-        if (fastsEnabled) {
+        if (cutCleanEnabled) {
 
             if(player.getInventory().getItemInHand().equals(wPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);

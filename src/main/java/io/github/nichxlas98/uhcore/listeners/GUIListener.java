@@ -15,7 +15,7 @@ public class GUIListener implements Listener {
     public void clickEvent(InventoryClickEvent e) {
 
 
-        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Settings")){
+        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Modifiers")){
         Player player = (Player) e.getWhoClicked();
 
             switch(e.getCurrentItem().getType()){
@@ -40,12 +40,12 @@ public class GUIListener implements Listener {
                     }
                     break;
                 case SUGAR:
-                    if (fastsEnabled) {
-                        fastsEnabled = false;
+                    if (cutCleanEnabled) {
+                        cutCleanEnabled = false;
                         player.sendMessage(ChatColor.RED + "[*] CutClean has been disabled.");
                         break;
                     } else {
-                        fastsEnabled = true;
+                        cutCleanEnabled = true;
                         player.sendMessage(ChatColor.GREEN + "[*] CutClean has been enabled.");
                     }
                     break;
@@ -88,6 +88,15 @@ public class GUIListener implements Listener {
                         pearlUHC = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Pearl UHC has been enabled.");
                     }
+                case IRON_SWORD:
+                    if (noSwords) {
+                        noSwords = false;
+                        player.sendMessage(ChatColor.RED + "[*] No Swords has been disabled.");
+                    } else {
+                        noSwords = true;
+                        player.sendMessage(ChatColor.GREEN + "[*] No Swords has been enabled.");
+                    }
+                    break;
 
             }
 

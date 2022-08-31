@@ -1,7 +1,9 @@
 package io.github.nichxlas98.uhcore.utils;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -36,6 +38,31 @@ public class AdminLevelUtil {
 
         return adminLevel;
     }
+
+    public static String isManager(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + ChatColor.GOLD + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
+    public static String isSenior(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + ChatColor.RED + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
+    public static String isAdmin(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + ChatColor.YELLOW + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
+    public static String isJunior(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
+    public static String isCommunity(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
+    public static String isSupporter(Player player, String message) {
+        return ChatColor.GRAY + "(" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
+    }
+
 
 
 }

@@ -24,12 +24,12 @@ import java.util.Random;
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 
 
-public class playerListener implements Listener {
+public class playerStateListener implements Listener {
 
 
     private final UhCore plugin;
 
-    public playerListener(UhCore plugin) {
+    public playerStateListener(UhCore plugin) {
         this.plugin = plugin;
     }
 

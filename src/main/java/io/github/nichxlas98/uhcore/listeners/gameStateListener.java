@@ -9,12 +9,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class gameWinListener implements Listener {
+public class gameStateListener implements Listener {
 
 
     private final UhCore plugin;
 
-    public gameWinListener(UhCore plugin) {
+    public gameStateListener(UhCore plugin) {
         this.plugin = plugin;
     }
 
