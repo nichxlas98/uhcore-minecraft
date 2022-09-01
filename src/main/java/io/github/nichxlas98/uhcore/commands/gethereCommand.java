@@ -14,36 +14,33 @@ public class gethereCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) return true;
+        Player player = (Player) sender;
+        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+            if (args.length > 0) {
+                //retrieve the first argument as a player
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            int playerAdminlevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
-            if (playerAdminlevel >= MIN_ADMIN_LEVEL) {
-                if (args.length > 0) {
-                    //retrieve the first argument as a player
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
-
-                    if (target == null) {
-                        player.sendMessage(ChatColor.RED + "[*] We couldn't find that player.");
-                        return true;
-                    }
-
-                    if (target == player) {
-                        player.sendMessage(ChatColor.RED + "[*] You cannot teleport yourself, silly.");
-                        return true;
-                    }
-
-                    target.teleport(player);
-                    target.sendMessage(ChatColor.GOLD + "[*] " + player.getName() + " has teleported you to them.");
-                    player.sendMessage(ChatColor.GOLD + "[*] " + target.getName() + " has been teleported to you.");
-                } else {
-                    //if there are no arguments
-                    player.sendMessage(ChatColor.RED + "[*] You need to use: /gethere <player>");
+                if (target == null) {
+                    player.sendMessage(ChatColor.RED + "[*] We couldn't find that player.");
+                    return true;
                 }
+
+                if (target == player) {
+                    player.sendMessage(ChatColor.RED + "[*] You cannot teleport yourself, silly.");
+                    return true;
+                }
+
+                target.teleport(player);
+                target.sendMessage(ChatColor.GOLD + "[*] " + player.getName() + " has teleported you to them.");
+                player.sendMessage(ChatColor.GOLD + "[*] " + target.getName() + " has been teleported to you.");
             } else {
-                player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
+                //if there are no arguments
+                player.sendMessage(ChatColor.RED + "[*] You need to use: /gethere <player>");
             }
+        } else {
+            player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
         }
         return true;
     }

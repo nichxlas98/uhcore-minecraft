@@ -32,5 +32,4 @@ public class BorderUtil {
             }
         }.runTaskTimer(UhCore.getPlugin(), 0L, 6000);
     }
-
 }

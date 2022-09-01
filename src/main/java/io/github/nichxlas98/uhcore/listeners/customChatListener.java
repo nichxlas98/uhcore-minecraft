@@ -20,7 +20,7 @@ public class customChatListener implements Listener {
         e.setCancelled(true);
         Player player = e.getPlayer();
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-        int playerAdminLevel  = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
         if (e.getMessage().contains("#")) {
             if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
                 if (adminChat.contains(player)) {
@@ -37,42 +37,47 @@ public class customChatListener implements Listener {
             }
         }
 
-        if (playerAdminLevel == 0) {
-            if (RankUtil.isSupporter(player.getUniqueId())) {
-                console.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
-                for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
+        switch (playerAdminLevel) {
+            case 0:
+                if (RankUtil.isSupporter(player.getUniqueId())) {
+                    console.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        online.sendMessage(AdminLevelUtil.isSupporter(player, e.getMessage()));
+                    }
+                    return;
                 }
-                return;
-            }
-            console.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
-            }
-            return;
-        } if (playerAdminLevel == MIN_ADMIN_LEVEL) {
-            console.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
-            }
-            return;
-        } if (playerAdminLevel == LOW_ADMIN_LEVEL) {
-            console.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
-            }
-            return;
-        } if (playerAdminLevel == HIGH_ADMIN_LEVEL) {
-            console.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
-            }
-            return;
-        } if (playerAdminLevel == MAX_ADMIN_LEVEL) {
-            console.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
-            }
+
+                console.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.sendMessage(AdminLevelUtil.isCommunity(player, e.getMessage()));
+                }
+                break;
+            case 1:
+                console.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.sendMessage(AdminLevelUtil.isJunior(player, e.getMessage()));
+                }
+                break;
+            case 2:
+                console.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.sendMessage(AdminLevelUtil.isAdmin(player, e.getMessage()));
+                }
+                break;
+            case 3:
+                console.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.sendMessage(AdminLevelUtil.isSenior(player, e.getMessage()));
+                }
+                break;
+            case 4:
+                console.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.sendMessage(AdminLevelUtil.isManager(player, e.getMessage()));
+                }
+                break;
+            default:
+                //error message
         }
     }
 

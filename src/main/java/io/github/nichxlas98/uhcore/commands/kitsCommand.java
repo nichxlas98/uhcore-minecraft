@@ -31,11 +31,20 @@ public class kitsCommand implements CommandExecutor {
                 ItemStack empty = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
                 ItemStack fisherMan = new ItemStack(Material.RAW_FISH);
                 ItemStack enchanter = new ItemStack(Material.ENCHANTED_BOOK);
+                ItemStack jeweler = new ItemStack(Material.DIAMOND);
 
 
                 ItemMeta emptyMeta = empty.getItemMeta();
                 emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
                 empty.setItemMeta(emptyMeta);
+
+                ItemMeta jewelerMeta = jeweler.getItemMeta();
+                jewelerMeta.setDisplayName(ChatColor.AQUA + "Jeweler Kit");
+                jewelerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                ArrayList<String> jewelerLore = new ArrayList<>();
+                jewelerLore.add(ChatColor.WHITE + "This class gives you 2 diamonds, and Haste on startup.");
+                jewelerMeta.setLore(jewelerLore);
+                jeweler.setItemMeta(jewelerMeta);
 
 
                 ItemMeta enchanterMeta = enchanter.getItemMeta();
@@ -84,7 +93,7 @@ public class kitsCommand implements CommandExecutor {
                 ironTools.setItemMeta(ironToolsMeta);
 
                 ItemStack[] menu_items = {
-                        bow, ironTools, goldMiner, fisherMan, enchanter, empty, empty, empty, empty,
+                        bow, ironTools, goldMiner, fisherMan, enchanter, jeweler, empty, empty, empty,
                         empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
                 gui.setContents(menu_items);
                 player.openInventory(gui);

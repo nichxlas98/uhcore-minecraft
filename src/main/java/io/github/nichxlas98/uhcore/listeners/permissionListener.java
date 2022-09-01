@@ -30,10 +30,8 @@ public class permissionListener implements Listener {
             if (playerAdminLevel < MIN_ADMIN_LEVEL) {
                 adminChat.remove(player);
             }
-        } else {
-            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
-                adminChat.add(player);
-            }
+        } else if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+            adminChat.add(player);
         }
 
         if (playerAdminLevel >= MIN_ADMIN_LEVEL) {

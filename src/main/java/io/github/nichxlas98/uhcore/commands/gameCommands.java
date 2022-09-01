@@ -12,14 +12,18 @@ import org.bukkit.entity.Player;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+import static org.bukkit.Bukkit.getServer;
 
 public class gameCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) { sender.sendMessage(ChatColor.RED + "[*] You cannot do this from the console"); return true; }
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(ChatColor.RED + "[*] You cannot do this from the console");
+            return true;
+        }
 
-        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        ConsoleCommandSender console = getServer().getConsoleSender();
         Player player = (Player) sender;
         int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
 
@@ -35,6 +39,7 @@ public class gameCommands implements CommandExecutor {
                         gameEnabled = true;
                         gracePeriod = true;
                         Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
+                        uhcUtil.uhcScoreboard();
                         uhcUtil.uhcTasks(player);
                         uhcUtil.uhcKits();
                         uhcUtil.uhcModifiers(player);
@@ -46,13 +51,12 @@ public class gameCommands implements CommandExecutor {
                     if (gameEnabled) {
                         gameEnabled = false;
                         gracePeriod = false;
-
                         WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
                         wb.setCenter(0, 0);
                         wb.setSize(5000);
 
                         player.sendMessage(ChatColor.RED + "[*] You've forcefully ended the game.");
-                        for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                        for (Player players : getServer().getOnlinePlayers()) {
                             players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
                             players.setGameMode(GameMode.SURVIVAL);
                             Bukkit.dispatchCommand(console, "clear @a");

@@ -42,13 +42,15 @@ public class maintenanceCommand implements CommandExecutor {
                         if (!(AdminLevelUtil.getAdminLevel(online.getUniqueId()) >= 2)) {
                             isNotAdmin.add(online.getName());
                         }
-                    } for (String p : isNotAdmin) {
+                    }
+                    for (String p : isNotAdmin) {
                         p = p.replace("[]", "");
                         Player equipped = Bukkit.getServer().getPlayer(p);
                         if (equipped == null) {
                             player.sendMessage(ChatColor.RED + "[*] All players have been kicked from the server.");
                             return true;
-                        } equipped.kickPlayer(Color.RED + "This server's currently undergoing maintenance.");
+                        }
+                        equipped.kickPlayer(Color.RED + "This server's currently undergoing maintenance.");
                     }
                     return true;
                 }

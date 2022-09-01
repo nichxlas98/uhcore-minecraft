@@ -24,9 +24,4 @@ public class RankUtil {
     public static boolean isSupporter(UUID p) {
         return UhCore.getPlugin().getConfig().getString("stats." + p + ".supporter") != null;
     }
-
-
-
-
-
 }

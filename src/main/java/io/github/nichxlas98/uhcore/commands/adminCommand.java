@@ -51,13 +51,15 @@ public class adminCommand implements CommandExecutor {
                         break;
                     case "broadcast":
                         StringBuilder sm = new StringBuilder();
-                        for (int i = 1; i < args.length; i++){
+                        for (int i = 1; i < args.length; i++) {
                             String arg = (args[i] + " ");
                             sm.append(arg);
-                        } if (args.length == 1) {
+                        }
+                        if (args.length == 1) {
                             player.sendMessage(RED + "[*] You need to use /a broadcast <message>");
                             return true;
-                        } for (Player online : Bukkit.getOnlinePlayers()) {
+                        }
+                        for (Player online : Bukkit.getOnlinePlayers()) {
                             online.sendMessage(GRAY + "[" + GOLD + "UhCore98" + GRAY + "] " + RED + sm);
                         }
                         break;

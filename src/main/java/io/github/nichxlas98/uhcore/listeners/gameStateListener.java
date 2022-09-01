@@ -10,8 +10,6 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class gameStateListener implements Listener {
-
-
     private final UhCore plugin;
 
     public gameStateListener(UhCore plugin) {
@@ -24,26 +22,25 @@ public class gameStateListener implements Listener {
         Player killer = e.getPlayer().getKiller();
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
-        for (Player players : Bukkit.getServer().getOnlinePlayers())  {
+        for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             //TODO: make a proper null check for if the killer equals null;
             assert killer != null;
-            if (killer.getGameMode().equals(GameMode.SURVIVAL)) {
-                if (players.getGameMode().equals(GameMode.SPECTATOR)) {
-                    killer.sendMessage(ChatColor.GREEN + "[*] You win!");
-                    killer.sendTitle(ChatColor.GREEN + "You win!", "");
-                    players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
-                    players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
-                    players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
-                    players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
-                    players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            Bukkit.dispatchCommand(console, "endgame");
-                        }
-                    }.runTaskLater(plugin, 600);
+            if (!(killer.getGameMode().equals(GameMode.SURVIVAL))) return;
+            if (!(players.getGameMode().equals(GameMode.SPECTATOR))) return;
+
+            killer.sendMessage(ChatColor.GREEN + "[*] You win!");
+            killer.sendTitle(ChatColor.GREEN + "You win!", "");
+            players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
+            players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
+            players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
+            players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
+            players.sendMessage(ChatColor.RED + killer.getName() + " wins!");
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    Bukkit.dispatchCommand(console, "endgame");
                 }
-            }
+            }.runTaskLater(plugin, 600);
         }
     }
 }

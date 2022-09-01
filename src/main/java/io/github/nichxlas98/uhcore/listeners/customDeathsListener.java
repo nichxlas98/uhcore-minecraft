@@ -10,7 +10,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class customDeathsListener implements Listener {
 
-
     @EventHandler
     public void onDeathEvent(PlayerDeathEvent e) {
         Player killed = e.getEntity().getPlayer();
@@ -18,21 +17,20 @@ public class customDeathsListener implements Listener {
         DamageCause playerDeathCause = killed.getLastDamageCause().getCause();
 
         if (playerDeathCause == DamageCause.BLOCK_EXPLOSION) {
-
             if (modelsClass.getChance(50)) {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " pulled a kamikaze.");
             } else {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " somehow blew himself up.");
             }
-        } else if(playerDeathCause == DamageCause.CONTACT) {
+        } else if (playerDeathCause == DamageCause.CONTACT) {
             e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " pricked himself to death.");
-        } else if(playerDeathCause == DamageCause.DROWNING) {
+        } else if (playerDeathCause == DamageCause.DROWNING) {
             if (modelsClass.getChance(50)) {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " couldn't swim.");
             } else {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " ran out of breath & drowned.");
             }
-        } else if(playerDeathCause == DamageCause.ENTITY_ATTACK && e.getEntity().getKiller() != null) {
+        } else if (playerDeathCause == DamageCause.ENTITY_ATTACK && e.getEntity().getKiller() != null) {
             if (modelsClass.getChance(50)) {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " was out-matched in battle by " + ChatColor.RED + killer.getName() + ".");
             } else {
@@ -48,7 +46,7 @@ public class customDeathsListener implements Listener {
             }
         } else if (playerDeathCause == DamageCause.FIRE) {
             e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " played with fire.");
-        }  else if (playerDeathCause == DamageCause.LAVA) {
+        } else if (playerDeathCause == DamageCause.LAVA) {
             e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " tried to swim in lava.");
         } else if (playerDeathCause == DamageCause.PROJECTILE && e.getEntity().getKiller() != null) {
             if (modelsClass.getChance(50)) {

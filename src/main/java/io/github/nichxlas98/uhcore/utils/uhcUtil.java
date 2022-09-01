@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.utils;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.models.ScoreHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -20,19 +21,24 @@ import static io.github.nichxlas98.uhcore.models.modelsClass.enchanterKit;
 
 public class uhcUtil {
 
+    public static int graceTime = 10;
+
     public static void uhcModifiers(Player player) {
         for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             if (doubleHP) {
                 players.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4, false, false));
                 players.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 10));
                 players.sendMessage(ChatColor.ITALIC + "[*] Double HP is enabled, all players were given double health.");
-            } if (doubleSpeed) {
+            }
+            if (doubleSpeed) {
                 players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false));
                 players.sendMessage(ChatColor.ITALIC + "[*] Double Speed is enabled, all players were given Speed II.");
-            } if (pearlUHC) {
+            }
+            if (pearlUHC) {
                 players.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, 3));
                 players.sendMessage(ChatColor.ITALIC + "[*] Pearl UHC is enabled, all players were given 3 pearls.");
-            } if (noSwords) {
+            }
+            if (noSwords) {
                 players.sendMessage(ChatColor.ITALIC + "[*] No Swords is enabled, all players are denied from using swords!");
             }
             if (AdminLevelUtil.getAdminLevel(players.getUniqueId()) == 0) {
@@ -143,6 +149,62 @@ public class uhcUtil {
                 equipped.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE, 15));
                 equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Magician kit!");
             }
+            for (String p : jewelerKIt) {
+                p = p.replace("[]", "");
+                Player equipped = Bukkit.getServer().getPlayer(p);
+                if (equipped == null) {
+                    continue;
+                }
+                equipped.getInventory().addItem(new ItemStack(Material.DIAMOND, 2));
+                equipped.getInventory().addItem(new ItemStack(Material.DIAMOND_SPADE));
+                equipped.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 6000, 1));
+                equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Jeweler kit!");
+            }
         }
+    }
+
+    public static void uhcScoreboard() {
+        int ticks = 20 * 60;
+        BukkitTask task1 = new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (gameEnabled) {
+                        graceTime--;
+                        if (ScoreHelper.hasScore(players)) {
+                            ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                            helper.setTitle("    &6UhCore&cMC    ");
+                            helper.setSlot(5, "&7&m--------------");
+                            helper.setSlot(4, "&c» &fState: &6Running");
+                            helper.setSlot(3, "&c» &fGrace: &b" + graceTime + " mins");
+                            helper.setSlot(2, "");
+                            helper.setSlot(1, "&7&m--------------");
+                        }
+
+                        if (graceTime == 0) {
+                            if (ScoreHelper.hasScore(players)) {
+                                ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                                helper.setTitle("    &6UhCore&cMC    ");
+                                helper.setSlot(5, "&7&m--------------");
+                                helper.setSlot(4, "&c» &fState: &6Running");
+                                helper.setSlot(3, "&c» &fGrace: &bEnded");
+                                helper.setSlot(2, "");
+                                helper.setSlot(1, "&7&m--------------");
+                                this.cancel();
+                            }
+                        }
+                    } else {
+                        ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                        helper.setTitle("    &6UhCore&cMC    ");
+                        helper.setSlot(5, "&7&m--------------");
+                        helper.setSlot(4, "&c» &fState: &6Waiting");
+                        helper.setSlot(3, "&c» &fGrace: &bNone");
+                        helper.setSlot(2, "");
+                        helper.setSlot(1, "&7&m--------------");
+                        this.cancel();
+                    }
+                }
+            }
+        }.runTaskTimer(UhCore.getPlugin(), 0, ticks);
     }
 }

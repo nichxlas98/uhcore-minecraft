@@ -18,18 +18,7 @@ public class messageCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (args.length > 1){
-                if (args[0].equalsIgnoreCase("block")) {
-                    if (pmsBlocked.contains(player)) {
-                        pmsBlocked.remove(player);
-                        player.sendMessage(ChatColor.GREEN + "[*] Your PMs have been enabled.");
-                        return true;
-                    }
-                    player.sendMessage(ChatColor.RED + "[*] Your PMs have been disabled.");
-                    pmsBlocked.add(player);
-                    return true;
-                }
-
+            if (args.length > 1) {
                 //retrieve the first argument as a player
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 String sm;
@@ -46,7 +35,7 @@ public class messageCommand implements CommandExecutor {
 
                 // combine the arguments the player typed
                 StringBuilder smBuilder = new StringBuilder();
-                for (int i = 1; i < args.length; i++){
+                for (int i = 1; i < args.length; i++) {
                     String arg = (args[i] + " ");
                     smBuilder.append(arg);
                 }
