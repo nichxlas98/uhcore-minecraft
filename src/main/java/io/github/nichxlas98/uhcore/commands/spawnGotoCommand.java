@@ -10,18 +10,16 @@ import org.bukkit.entity.Player;
 
 import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
 
-public class gotoSpawnCommand implements CommandExecutor {
+public class spawnGotoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
-            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
-                SpawnUtil.spawnTeleport(player);
-            } else {
-                player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
-            }
+        if (!(sender instanceof Player)) return true;
+        Player player = (Player) sender;
+        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+            SpawnUtil.spawnTeleport(player);
+        } else {
+            player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
         }
         return true;
     }

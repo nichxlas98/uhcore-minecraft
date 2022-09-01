@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.listeners;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.utils.SpawnUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -37,33 +38,23 @@ public class playerStateListener implements Listener {
     @EventHandler
     public void playerJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-
+        e.setJoinMessage(null);
         if (!player.hasPlayedBefore()) {
-            if(plugin.getConfig().getString("spawn.world") != null) {
-                World w = Bukkit.getServer().getWorld(plugin.getConfig().getString("spawn.world"));
-                double x = Double.parseDouble(plugin.getConfig().getString("spawn.x"));
-                double y = Double.parseDouble(plugin.getConfig().getString("spawn.y"));
-                double z = Double.parseDouble(plugin.getConfig().getString("spawn.z"));
-                float yaw = Float.parseFloat(plugin.getConfig().getString("spawn.yaw"));
-                float pitch = Float.parseFloat(plugin.getConfig().getString("spawn.pitch"));
-
-                player.teleport(new Location(w, x, y, z, yaw, pitch));
-            }
+            SpawnUtil.spawnTeleport(player);
         }
     }
 
     @EventHandler
     @SuppressWarnings("deprecation")
-    public void onDeathEvent(PlayerRespawnEvent event){
+    public void onDeathEvent(PlayerRespawnEvent event) {
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (gameEnabled) {
                     Player p = event.getPlayer();
-
                     p.sendTitle("You died!", "");
                     p.setGameMode(GameMode.SPECTATOR);
-
+                    p.setSpectatorTarget(p.getKiller());
                     p.sendMessage(ChatColor.RED + "[*] You died & were sent to spectator. Better luck next time.");
 
                 }
@@ -75,7 +66,7 @@ public class playerStateListener implements Listener {
     public void onBow(EntityDamageByEntityEvent e) {
         if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
             if (e.getDamager() instanceof Arrow && e.getEntity() instanceof Player) {
-                Arrow arrow  = (Arrow) e.getDamager();
+                Arrow arrow = (Arrow) e.getDamager();
                 if (!(arrow.getShooter() instanceof Player)) return;
 
 
@@ -101,7 +92,7 @@ public class playerStateListener implements Listener {
             }
 
             if (goldRush) {
-                for (Player players : Bukkit.getServer().getOnlinePlayers())  {
+                for (Player players : Bukkit.getServer().getOnlinePlayers()) {
                     players.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, chance));
                 }
             }
@@ -123,11 +114,8 @@ public class playerStateListener implements Listener {
     public void goldenHeadEvent(PlayerItemConsumeEvent e) {
         Player player = e.getPlayer();
         ItemStack item = player.getInventory().getItemInHand();
-
-        //TODO: Fix this doing nothing!
         if (item.hasItemMeta()) {
             if (item.getItemMeta().getDisplayName().contains("Golden Head")) {
-
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 2));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120, 1));
@@ -139,7 +127,6 @@ public class playerStateListener implements Listener {
     @EventHandler
     public void godAppleEvent(PlayerItemConsumeEvent e) {
         Player player = e.getPlayer();
-
         if (e.getItem().getType() == Material.GOLDEN_APPLE) {
             if (e.getItem().getDurability() == 1) {
                 e.setCancelled(true);
@@ -151,7 +138,6 @@ public class playerStateListener implements Listener {
 
     @EventHandler
     public void playerShearEvent(PlayerShearEntityEvent event) {
-
         if (event.getEntity() instanceof Sheep) {
             Random rand = new Random();
             int chance = rand.nextInt(4) % 2 + 1;

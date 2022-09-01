@@ -15,7 +15,6 @@ public class grantCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int amount;
@@ -42,7 +41,7 @@ public class grantCommand implements CommandExecutor {
 
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 if (target == null) {
-                    player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[0] + ChatColor.RED+  " is not a player!");
+                    player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[0] + ChatColor.RED + " is not a player!");
                     return true;
                 }
 

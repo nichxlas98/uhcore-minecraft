@@ -15,10 +15,10 @@ public class GUIListener implements Listener {
     public void clickEvent(InventoryClickEvent e) {
 
 
-        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Modifiers")){
-        Player player = (Player) e.getWhoClicked();
+        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Modifiers")) {
+            Player player = (Player) e.getWhoClicked();
 
-            switch(e.getCurrentItem().getType()){
+            switch (e.getCurrentItem().getType()) {
                 case GOLDEN_APPLE:
                     if (doubleHP) {
                         doubleHP = false;
@@ -99,25 +99,25 @@ public class GUIListener implements Listener {
                     break;
 
             }
-
             e.setCancelled(true);
         }
 
-        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Kits")){
+        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Kits")) {
             Player player = (Player) e.getWhoClicked();
             String playerName = player.getName();
-            if (workerKit.contains(playerName) || bowKit.contains(playerName) || goldMinerKit.contains(playerName) || fisherManKit.contains(playerName) || enchanterKit.contains(playerName)) {
-                player.sendMessage(ChatColor.RED + "[*] Unequipped classes.");
+            if (workerKit.contains(playerName) || bowKit.contains(playerName) || goldMinerKit.contains(playerName) || fisherManKit.contains(playerName) || enchanterKit.contains(playerName) || jewelerKIt.contains(playerName)) {
+                player.sendMessage(ChatColor.RED + "[*] Unequipped all classes.");
                 enchanterKit.remove(playerName);
                 goldMinerKit.remove(playerName);
                 fisherManKit.remove(playerName);
                 workerKit.remove(playerName);
                 bowKit.remove(playerName);
+                jewelerKIt.remove(playerName);
                 e.setCancelled(true);
                 return;
             }
 
-            switch(e.getCurrentItem().getType()){
+            switch (e.getCurrentItem().getType()) {
                 case GOLD_PICKAXE:
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Worker Kit.");
                     workerKit.add(player.getName());
@@ -136,7 +136,10 @@ public class GUIListener implements Listener {
                     break;
                 case ENCHANTED_BOOK:
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Magician Kit.");
+                    enchanterKit.add(playerName);
                     break;
+                case DIAMOND:
+                    player.sendMessage(ChatColor.GREEN + "[*] Equipped the Jeweler Kit.");
             }
 
             e.setCancelled(true);

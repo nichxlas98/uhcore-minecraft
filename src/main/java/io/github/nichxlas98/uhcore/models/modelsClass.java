@@ -25,6 +25,7 @@ public class modelsClass {
     public static ArrayList<String> goldMinerKit = new ArrayList<>();
     public static ArrayList<String> fisherManKit = new ArrayList<>();
     public static ArrayList<String> enchanterKit = new ArrayList<>();
+    public static ArrayList<String> jewelerKIt = new ArrayList<>();
 
     public static ArrayList<Player> adminChat = new ArrayList<>();
     public static ArrayList<Player> pmsBlocked = new ArrayList<>();

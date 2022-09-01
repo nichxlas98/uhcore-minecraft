@@ -11,7 +11,9 @@ import org.bukkit.entity.Player;
 public class rankCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) { return true; }
+        if (!(sender instanceof Player)) {
+            return true;
+        }
         Player player = (Player) sender;
 
         if (args.length == 0) {
@@ -21,11 +23,11 @@ public class rankCommand implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null) {
-            player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[0] + ChatColor.RED+  " is not a player!");
+            player.sendMessage(ChatColor.RED + "[*] " + ChatColor.GOLD + args[0] + ChatColor.RED + " is not a player!");
             return true;
         }
 
-        if(args[1].equalsIgnoreCase("supporter-true")) {
+        if (args[1].equalsIgnoreCase("supporter-true")) {
             if (RankUtil.isSupporter(player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "[*] That player is already a Supporter.");
                 return true;
@@ -36,7 +38,7 @@ public class rankCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[1].equalsIgnoreCase("supporter-false")) {
+        if (args[1].equalsIgnoreCase("supporter-false")) {
             if (!(RankUtil.isSupporter(player.getUniqueId()))) {
                 player.sendMessage(ChatColor.RED + "[*] That player is not a Supporter.");
                 return true;

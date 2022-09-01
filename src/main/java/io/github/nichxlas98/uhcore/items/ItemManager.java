@@ -7,13 +7,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-
 public class ItemManager {
 
     public static ItemStack GoldenHead;
 
-    public static void init() { createGoldenHead(); }
+    public static void init() {
+        createGoldenHead();
+    }
 
     private static void createGoldenHead() {
         ItemStack item = new ItemStack(Material.GOLDEN_APPLE);

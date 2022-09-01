@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 
 public class SpawnUtil {
 
-    public static UhCore plugin() { return UhCore.getPlugin(); }
+    public static UhCore plugin() {
+        return UhCore.getPlugin();
+    }
 
     public static void spawnTeleport(Player player) {
         if (plugin().getConfig().getString("spawn.world") != null) {

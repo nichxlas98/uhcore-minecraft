@@ -13,32 +13,31 @@ import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
 public class gotoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
-            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
-                if (args.length > 0) {
-                    //retrieve the first argument as a player
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
-                    if (target == null) {
-                        player.sendMessage(ChatColor.RED + "[*] We couldn't find that player.");
-                        return true;
-                    }
-
-                    if (target == player) {
-                        player.sendMessage(ChatColor.RED + "[*] You cannot teleport to yourself, silly.");
-                        return true;
-                    }
-
-                    player.teleport(target);
-                    player.sendMessage(ChatColor.GOLD + "[*] You've teleported to " + target.getName());
-                } else {
-                    //if there are no arguments
-                    player.sendMessage(ChatColor.RED + "[*] You need to use: /goto <player>");
+        if (!(sender instanceof Player)) return true;
+        Player player = (Player) sender;
+        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+            if (args.length > 0) {
+                //retrieve the first argument as a player
+                Player target = Bukkit.getServer().getPlayer(args[0]);
+                if (target == null) {
+                    player.sendMessage(ChatColor.RED + "[*] We couldn't find that player.");
+                    return true;
                 }
+
+                if (target == player) {
+                    player.sendMessage(ChatColor.RED + "[*] You cannot teleport to yourself, silly.");
+                    return true;
+                }
+
+                player.teleport(target);
+                player.sendMessage(ChatColor.GOLD + "[*] You've teleported to " + target.getName());
             } else {
-                player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
+                //if there are no arguments
+                player.sendMessage(ChatColor.RED + "[*] You need to use: /goto <player>");
             }
+        } else {
+            player.sendMessage(ChatColor.RED + "[*] You do not have permission to do this!");
         }
         return true;
     }

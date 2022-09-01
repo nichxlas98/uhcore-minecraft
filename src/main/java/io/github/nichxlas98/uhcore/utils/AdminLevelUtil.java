@@ -12,7 +12,6 @@ public class AdminLevelUtil {
     public static int MAX_ADMIN_LEVEL = 4;
     public static int HIGH_ADMIN_LEVEL = 3;
     public static int LOW_ADMIN_LEVEL = 2;
-
     public static int MIN_ADMIN_LEVEL = 1;
 
     public static void setAdminLevel(UUID p, int adminLevel) {
@@ -32,10 +31,8 @@ public class AdminLevelUtil {
             adminLevel = Integer.parseInt(UhCore.getPlugin().getConfig().getString("stats." + p + ".adminLevel"));
             return adminLevel;
         } else {
-            System.out.println("That player does not have an adminLevel.");
-
+            System.out.println("[*] That player does not have an adminLevel.");
         }
-
         return adminLevel;
     }
 
@@ -62,7 +59,6 @@ public class AdminLevelUtil {
     public static String isSupporter(Player player, String message) {
         return ChatColor.GRAY + "(" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
     }
-
 
 
 }

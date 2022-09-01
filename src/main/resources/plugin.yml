@@ -60,6 +60,9 @@ commands:
     description: Grants an Admin Level.
     usage: /<command> <player> <adminLevel>
     permission: UhCore.manager
+  blockpm:
+    description: Blocks the player's private messages.
+    usage: /<command>
 
 permissions:
   UhCore.manager:

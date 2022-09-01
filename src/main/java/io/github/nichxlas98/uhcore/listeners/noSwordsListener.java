@@ -24,7 +24,8 @@ public class noSwordsListener implements Listener {
             ItemStack diamondSword = new ItemStack(Material.DIAMOND_SWORD);
             Player player = e.getPlayer();
 
-            if (player.getInventory().getItemInHand().getType().toString().endsWith("SWORD")) {                player.getInventory().remove(woodSword);
+            if (player.getInventory().getItemInHand().getType().toString().endsWith("SWORD")) {
+                player.getInventory().remove(woodSword);
                 player.getInventory().remove(stoneSword);
                 player.getInventory().remove(ironSword);
                 player.getInventory().remove(goldSword);
