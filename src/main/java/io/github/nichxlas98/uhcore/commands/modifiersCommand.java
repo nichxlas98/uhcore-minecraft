@@ -36,100 +36,54 @@ public class modifiersCommand implements CommandExecutor {
                 ItemStack goldRush = new ItemStack(Material.GOLD_NUGGET);
                 ItemStack uhcKits = new ItemStack(Material.GOLDEN_CARROT);
                 ItemStack noSwords = new ItemStack(Material.IRON_SWORD);
+                ItemStack lifeSteal = new ItemStack(Material.EYE_OF_ENDER);
 
 
                 ItemMeta emptyMeta = empty.getItemMeta();
                 emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
                 empty.setItemMeta(emptyMeta);
 
-                ItemMeta noSwordsMeta = noSwords.getItemMeta();
-                noSwordsMeta.setDisplayName(ChatColor.YELLOW + "No Swords");
-                noSwordsMeta.addEnchant(Enchantment.LUCK, 1, true);
-                noSwordsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> noSwordsLore = new ArrayList<>();
-                noSwordsLore.add(ChatColor.ITALIC + "Disallows all swords from being used.");
-                noSwordsMeta.setLore(noSwordsLore);
-                noSwords.setItemMeta(noSwordsMeta);
+                newItem(lifeSteal, ChatColor.DARK_RED, "LifeSteal", "During the game, on player-kill, the killer's given an extra heart.");
 
+                newItem(noSwords, ChatColor.YELLOW, "NoSwords", "Disallows all swords from being used.");
 
-                ItemMeta uhcKitsMeta = uhcKits.getItemMeta();
-                uhcKitsMeta.setDisplayName(ChatColor.BLUE + "KitsUHC");
-                uhcKitsMeta.addEnchant(Enchantment.LUCK, 1, true);
-                uhcKitsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> uhcKitsLore = new ArrayList<>();
-                uhcKitsLore.add(ChatColor.ITALIC + "Allows /kit usage during UHC.");
-                uhcKitsMeta.setLore(uhcKitsLore);
-                uhcKits.setItemMeta(uhcKitsMeta);
+                newItem(uhcKits, ChatColor.BLUE, "KitsUHC", "Allows /kit usage during UHC.");
 
-                ItemMeta goldRushMeta = goldRush.getItemMeta();
-                goldRushMeta.setDisplayName(ChatColor.GOLD + "Gold Rush");
-                goldRushMeta.addEnchant(Enchantment.LUCK, 1, true);
-                goldRushMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> goldRushLore = new ArrayList<>();
-                goldRushLore.add(ChatColor.ITALIC + "All players are given a Golden Ingot on a player's death.");
-                goldRushMeta.setLore(goldRushLore);
-                goldRush.setItemMeta(goldRushMeta);
+                newItem(goldRush, ChatColor.GOLD, "GoldRush", "All players are given a Golden Ingot on a player's death.");
 
-                ItemMeta pearlUHCMeta = pearlUHC.getItemMeta();
-                pearlUHCMeta.setDisplayName(ChatColor.DARK_PURPLE + "PearlUHC");
-                pearlUHCMeta.addEnchant(Enchantment.LUCK, 1, true);
-                pearlUHCMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> pearlUHCLore = new ArrayList<>();
-                pearlUHCLore.add(ChatColor.ITALIC + "All player spawn with 3 ender-pearls, and players drop an ender-pearl on death.");
-                pearlUHCMeta.setLore(pearlUHCLore);
-                pearlUHC.setItemMeta(pearlUHCMeta);
+                newItem(pearlUHC, ChatColor.DARK_PURPLE, "PearlUHC", "Players spawn with 3 EnderPearls, all players drop an EnderPearl on death.");
 
-                ItemMeta doubleHeadsMeta = doubleHeads.getItemMeta();
-                doubleHeadsMeta.setDisplayName(ChatColor.GREEN + "Double Heads");
-                doubleHeadsMeta.addEnchant(Enchantment.LUCK, 1, true);
-                doubleHeadsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> doubleHeadsLore = new ArrayList<>();
-                doubleHeadsLore.add(ChatColor.ITALIC + "Doubles the Head drops of all players during UHC. ");
-                doubleHeadsMeta.setLore(doubleHeadsLore);
-                doubleHeads.setItemMeta(doubleHeadsMeta);
+                newItem(doubleHeads, ChatColor.GREEN, "Double Heads", "Doubles the Head drops of all players during UHC. ");
 
-                ItemMeta fastUHCMeta = cutClean.getItemMeta();
-                fastUHCMeta.setDisplayName(ChatColor.GOLD + "CutClean");
-                fastUHCMeta.addEnchant(Enchantment.LUCK, 1, true);
-                fastUHCMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> fastUHCLore = new ArrayList<>();
-                fastUHCLore.add(ChatColor.ITALIC + "CutClean UHC Mode.");
-                fastUHCMeta.setLore(fastUHCLore);
-                cutClean.setItemMeta(fastUHCMeta);
+                newItem(cutClean, ChatColor.GOLD, "CutClean", "CutClean UHC Mode.");
 
-                ItemMeta doubleHealthMeta = doubleHealth.getItemMeta();
-                doubleHealthMeta.setDisplayName(ChatColor.RED + "Double Health");
-                doubleHealthMeta.addEnchant(Enchantment.LUCK, 1, true);
-                doubleHealthMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> doubleHealthLore = new ArrayList<>();
-                doubleHealthLore.add(ChatColor.ITALIC + "Doubles the Health of all players during UHC.");
-                doubleHealthMeta.setLore(doubleHealthLore);
-                doubleHealth.setItemMeta(doubleHealthMeta);
+                newItem(doubleHealth, ChatColor.RED, "Double Health", "Doubles the Health of all players during UHC.");
 
-
-                ItemMeta doubleSpeedMeta = doubleSpeed.getItemMeta();
-                doubleSpeedMeta.setDisplayName(ChatColor.AQUA + "Double Speed");
-                doubleSpeedMeta.addEnchant(Enchantment.LUCK, 1, true);
-                doubleSpeedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> doubleSpeedLore = new ArrayList<>();
-                doubleSpeedLore.add(ChatColor.ITALIC + "Doubles the Speed of all players during UHC.");
-                doubleSpeedMeta.setLore(doubleSpeedLore);
-                doubleSpeed.setItemMeta(doubleSpeedMeta);
+                newItem(doubleSpeed, ChatColor.AQUA, "Double Speed", "Doubles the Speed of all players during UHC.");
 
 
                 ItemStack[] menu_items = {
-                        doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, noSwords, empty,
+                        doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, noSwords, lifeSteal,
                         empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
                 gui.setContents(menu_items);
                 player.openInventory(gui);
-
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");
             }
         } else {
             System.out.println(ChatColor.RED + "[*] You cannot do this from the console.");
         }
-
         return true;
+    }
+
+    private static void newItem(ItemStack noSwords, ChatColor yellow, String displayName, String lore) {
+        ItemMeta noSwordsMeta = noSwords.getItemMeta();
+        noSwordsMeta.setDisplayName(yellow + displayName);
+        noSwordsMeta.addEnchant(Enchantment.LUCK, 1, true);
+        noSwordsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        ArrayList<String> noSwordsLore = new ArrayList<>();
+        noSwordsLore.add(ChatColor.GRAY + lore);
+        noSwordsMeta.setLore(noSwordsLore);
+        noSwords.setItemMeta(noSwordsMeta);
     }
 }

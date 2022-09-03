@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
 
-public class playerDamageListener implements Listener {
+public class serverGraceListener implements Listener {
 
     @EventHandler
     public void playerDamageByPlayer(EntityDamageByEntityEvent e) {

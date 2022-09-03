@@ -2,16 +2,18 @@ package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
 import io.github.nichxlas98.uhcore.utils.SpawnUtil;
-import io.github.nichxlas98.uhcore.utils.uhcUtil;
+import io.github.nichxlas98.uhcore.utils.GameManagerUtil;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.GameManagerUtil.graceTime;
 import static org.bukkit.Bukkit.getServer;
 
 public class gameCommands implements CommandExecutor {
@@ -38,11 +40,12 @@ public class gameCommands implements CommandExecutor {
                     if (!gameEnabled) {
                         gameEnabled = true;
                         gracePeriod = true;
+                        graceTime = 10;
                         Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
-                        uhcUtil.uhcScoreboard();
-                        uhcUtil.uhcTasks(player);
-                        uhcUtil.uhcKits();
-                        uhcUtil.uhcModifiers(player);
+                        GameManagerUtil.gameScoreboard();
+                        GameManagerUtil.gameTasks(player);
+                        GameManagerUtil.gameKits();
+                        GameManagerUtil.gameModifiers(player);
                     } else {
                         player.sendMessage(ChatColor.RED + "[*] The game is already started.");
                     }
@@ -59,8 +62,12 @@ public class gameCommands implements CommandExecutor {
                         for (Player players : getServer().getOnlinePlayers()) {
                             players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
                             players.setGameMode(GameMode.SURVIVAL);
-                            Bukkit.dispatchCommand(console, "clear @a");
-                            Bukkit.dispatchCommand(console, "effect @a clear");
+                            players.getInventory().clear();
+
+                            for (PotionEffect effect : player.getActivePotionEffects()) {
+                                player.removePotionEffect(effect.getType());
+                            }
+
                             SpawnUtil.spawnTeleport(players);
                             return true;
                         }

@@ -9,12 +9,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 
 public class GUIListener implements Listener {
-
-
+    
     @EventHandler
     public void clickEvent(InventoryClickEvent e) {
-
-
         if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Modifiers")) {
             Player player = (Player) e.getWhoClicked();
 
@@ -95,6 +92,15 @@ public class GUIListener implements Listener {
                     } else {
                         noSwords = true;
                         player.sendMessage(ChatColor.GREEN + "[*] No Swords has been enabled.");
+                    }
+                    break;
+                case EYE_OF_ENDER:
+                    if (lifeStealMode) {
+                        lifeStealMode = false;
+                        player.sendMessage(ChatColor.RED + "[*] LifeSteal has been disabled.");
+                    } else {
+                        lifeStealMode = true;
+                        player.sendMessage(ChatColor.GREEN + "[*] LifeSteal has been enabled.");
                     }
                     break;
 
