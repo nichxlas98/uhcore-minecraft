@@ -14,13 +14,6 @@ import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MAX_ADMIN_LEVEL;
 
 public class spawnCommand implements CommandExecutor {
 
-    private final UhCore plugin;
-
-    public spawnCommand(UhCore plugin) {
-        this.plugin = plugin;
-    }
-
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -29,7 +22,7 @@ public class spawnCommand implements CommandExecutor {
             int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
             if (playerAdminLevel == MAX_ADMIN_LEVEL) {
                 Location location = player.getLocation();
-                FileConfiguration config = plugin.getConfig();
+                FileConfiguration config = UhCore.getPlugin().getConfig();
                 config.options().copyDefaults(true);
                 config.set("spawn.world", location.getWorld().getName());
                 config.set("spawn.x", String.valueOf(location.getX()));
@@ -37,7 +30,7 @@ public class spawnCommand implements CommandExecutor {
                 config.set("spawn.z", String.valueOf(location.getZ()));
                 config.set("spawn.yaw", String.valueOf(location.getYaw()));
                 config.set("spawn.pitch", String.valueOf(location.getPitch()));
-                plugin.saveConfig();
+                UhCore.getPlugin().saveConfig();
                 player.sendMessage(ChatColor.AQUA + "[*] " + "Server spawn location has been saved.");
             } else {
                 player.sendMessage(ChatColor.RED + "[*] You do not have permission to use this command.");

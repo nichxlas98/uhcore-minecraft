@@ -34,37 +34,38 @@ public class permissionListener implements Listener {
             adminChat.add(player);
         }
 
-        if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
-            if (playerAdminLevel > 0) {
-                player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + playerAdminLevel + ".");
-            }
+        if (!(playerAdminLevel >= MIN_ADMIN_LEVEL)) return;
 
-            switch (playerAdminLevel) {
-                case 1:
-                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ") " + playerName);
-                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + "Junior Admin.");
-                    break;
-                case 2:
-                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ") " + playerName);
-                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + "Administrator.");
-                    break;
-                case 3:
-                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ") " + playerName);
-                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + "Senior Admin.");
-                    break;
-                case 4:
-                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.RED + "Manager" + ChatColor.GRAY + ") " + playerName);
-                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + "Manager.");
-                    break;
-                default:
-                    if (RankUtil.isSupporter(player.getUniqueId())) {
-                        player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + playerName);
-                        player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
-                        return;
-                    }
-                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + playerName);
-                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
-            }
+        if (playerAdminLevel > 0) {
+            player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + playerAdminLevel + ".");
         }
+
+        switch (playerAdminLevel) {
+            case 1:
+                playerRank(player, ChatColor.GOLD, "Junior", player.getName());
+                break;
+            case 2:
+                playerRank(player, ChatColor.AQUA, "Administrator", player.getName());
+                break;
+            case 3:
+                playerRank(player, ChatColor.DARK_AQUA, "Senior", player.getName());
+                break;
+            case 4:
+                playerRank(player, ChatColor.RED, "Manager", player.getName());
+                break;
+            default:
+                if (RankUtil.isSupporter(player.getUniqueId())) {
+                    player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + playerName);
+                    player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
+                    return;
+                }
+                player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + playerName);
+                player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
+        }
+    }
+
+    private static void playerRank(Player player, ChatColor color, String rankName, String playerName) {
+        player.setPlayerListName(ChatColor.GRAY + " (" + color + rankName + ChatColor.GRAY + ") " + playerName);
+        player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.GOLD + rankName + " Admin.");
     }
 }

@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,11 +18,11 @@ import org.bukkit.scheduler.BukkitTask;
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 import static io.github.nichxlas98.uhcore.models.modelsClass.enchanterKit;
 
-public class uhcUtil {
+public class GameManagerUtil {
 
     public static int graceTime = 10;
 
-    public static void uhcModifiers(Player player) {
+    public static void gameModifiers(Player player) {
         for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             if (doubleHP) {
                 players.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4, false, false));
@@ -35,7 +34,7 @@ public class uhcUtil {
                 players.sendMessage(ChatColor.ITALIC + "[*] Double Speed is enabled, all players were given Speed II.");
             }
             if (pearlUHC) {
-                players.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, 3));
+                addItem(players, Material.ENDER_PEARL, 3);
                 players.sendMessage(ChatColor.ITALIC + "[*] Pearl UHC is enabled, all players were given 3 pearls.");
             }
             if (noSwords) {
@@ -48,8 +47,7 @@ public class uhcUtil {
         }
     }
 
-    public static void uhcTasks(Player player) {
-        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+    public static void gameTasks(Player player) {
         // after 5 minutes, create the border;
         BukkitTask task3 = new BukkitRunnable() {
             @Override
@@ -78,9 +76,8 @@ public class uhcUtil {
             @Override
             public void run() {
                 if (gameEnabled) {
-                    Bukkit.dispatchCommand(console, "tp @a 0, ~, 0");
                     for (Player players : Bukkit.getServer().getOnlinePlayers()) {
-                        players.teleport(player.getWorld().getHighestBlockAt(player.getLocation()).getLocation().add(0, 1, 0));
+                        players.teleport(Bukkit.getWorld("world").getHighestBlockAt(player.getLocation()).getLocation().add(0, 1, 0));
                         players.sendMessage(ChatColor.GOLD + "[*] 35 minutes has passed, thus all players have been teleported to 0, 0.");
                     }
                 }
@@ -88,7 +85,7 @@ public class uhcUtil {
         }.runTaskLater(UhCore.getPlugin(), 42000L /*<-- the delay */);
     }
 
-    public static void uhcKits() {
+    public static void gameKits() {
         if (uhcKits) {
             for (String p : workerKit) {
                 p = p.replace("[]", "");
@@ -96,9 +93,9 @@ public class uhcUtil {
                 if (equipped == null) {
                     continue;
                 }
-                equipped.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
-                equipped.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                equipped.getInventory().addItem(new ItemStack(Material.IRON_SPADE));
+                addItem(equipped, Material.IRON_PICKAXE, 1);
+                addItem(equipped, Material.IRON_AXE, 1);
+                addItem(equipped, Material.IRON_SPADE, 1);
                 equipped.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 6000, 1));
                 equipped.sendMessage(ChatColor.GOLD + "[*] You're using the Worker kit!");
             }
@@ -108,8 +105,8 @@ public class uhcUtil {
                 if (equipped == null) {
                     continue;
                 }
-                equipped.getInventory().addItem(new ItemStack(Material.BOW));
-                equipped.getInventory().addItem(new ItemStack(Material.ARROW, 32));
+                addItem(equipped, Material.BOW, 1);
+                addItem(equipped, Material.ARROW, 32);
                 equipped.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 1));
                 equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Archer kit!");
             }
@@ -119,8 +116,9 @@ public class uhcUtil {
                 if (equipped == null) {
                     continue;
                 }
-                equipped.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, 2));
-                equipped.getInventory().addItem(new ItemStack(Material.GOLD_NUGGET, 81));
+
+                addItem(equipped, Material.GOLDEN_APPLE, 2);
+                addItem(equipped, Material.GOLD_NUGGET, 81);
                 equipped.sendMessage(ChatColor.GOLD + "[*] You're using the Gold Miner ki!");
             }
             for (String p : fisherManKit) {
@@ -144,9 +142,10 @@ public class uhcUtil {
                 if (equipped == null) {
                     continue;
                 }
-                equipped.getInventory().addItem(new ItemStack(Material.LAPIS_BLOCK, 18));
-                equipped.getInventory().addItem(new ItemStack(Material.BOOK, 4));
-                equipped.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE, 15));
+
+                addItem(equipped, Material.LAPIS_BLOCK, 18);
+                addItem(equipped, Material.BOOK, 4);
+                addItem(equipped, Material.EXP_BOTTLE, 15);
                 equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Magician kit!");
             }
             for (String p : jewelerKIt) {
@@ -155,15 +154,20 @@ public class uhcUtil {
                 if (equipped == null) {
                     continue;
                 }
-                equipped.getInventory().addItem(new ItemStack(Material.DIAMOND, 2));
-                equipped.getInventory().addItem(new ItemStack(Material.DIAMOND_SPADE));
+
+                addItem(equipped, Material.DIAMOND, 2);
+                addItem(equipped, Material.DIAMOND_SPADE, 1);
                 equipped.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 6000, 1));
                 equipped.sendMessage(ChatColor.AQUA + "[*] You're using the Jeweler kit!");
             }
         }
     }
 
-    public static void uhcScoreboard() {
+    private static void addItem(Player player, Material material, int amount) {
+        player.getInventory().addItem(new ItemStack(material, amount));
+    }
+
+    public static void gameScoreboard() {
         int ticks = 20 * 60;
         BukkitTask task1 = new BukkitRunnable() {
             @Override

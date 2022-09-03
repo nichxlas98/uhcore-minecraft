@@ -10,11 +10,6 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class gameStateListener implements Listener {
-    private final UhCore plugin;
-
-    public gameStateListener(UhCore plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void deathEvent(PlayerRespawnEvent e) {
@@ -24,7 +19,9 @@ public class gameStateListener implements Listener {
 
         for (Player players : Bukkit.getServer().getOnlinePlayers()) {
             //TODO: make a proper null check for if the killer equals null;
-            assert killer != null;
+            //Check for nearby players, if it finds one, send that player a "you win" thing.
+
+            if (killer == null) return;
             if (!(killer.getGameMode().equals(GameMode.SURVIVAL))) return;
             if (!(players.getGameMode().equals(GameMode.SPECTATOR))) return;
 
@@ -38,9 +35,9 @@ public class gameStateListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Bukkit.dispatchCommand(console, "endgame");
+                    Bukkit.dispatchCommand(console, "game end");
                 }
-            }.runTaskLater(plugin, 600);
+            }.runTaskLater(UhCore.getPlugin(), 600);
         }
     }
 }

@@ -1,4 +1,4 @@
-package io.github.nichxlas98.uhcore.listeners;
+package io.github.nichxlas98.uhcore.listeners.modifiers;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

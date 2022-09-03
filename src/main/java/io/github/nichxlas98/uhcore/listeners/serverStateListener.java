@@ -15,7 +15,7 @@ public class serverStateListener implements Listener {
 
         if (maintenanceMode) {
             e.setMotd(ChatColor.GOLD + "UhCoreMC " + ChatColor.GRAY + "[1.8.9]" + ChatColor.AQUA + " - v1.1.0-R1" + ChatColor.RED + "\nThe server is currently undergoing " + ChatColor.AQUA + "maintenance." + ChatColor.RED);
-            e.setMaxPlayers(20);
+            e.setMaxPlayers(24);
             return;
         } else {
             e.setMotd(ChatColor.GOLD + "UhCoreMC " + ChatColor.GRAY + "[1.8.9]" + ChatColor.AQUA + " - v1.1.0-R1" + ChatColor.WHITE + "\nMinecraft " + ChatColor.GOLD + "UHC" + ChatColor.WHITE + " at its finest.");

@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-public class customDeathsListener implements Listener {
+public class deathMessagesListener implements Listener {
 
     @EventHandler
     public void onDeathEvent(PlayerDeathEvent e) {
@@ -16,6 +16,10 @@ public class customDeathsListener implements Listener {
         Player killer = e.getEntity().getKiller();
         DamageCause playerDeathCause = killed.getLastDamageCause().getCause();
 
+        playerDeathMessages(e, killed, killer, playerDeathCause);
+    }
+
+    private static void playerDeathMessages(PlayerDeathEvent e, Player killed, Player killer, DamageCause playerDeathCause) {
         if (playerDeathCause == DamageCause.BLOCK_EXPLOSION) {
             if (modelsClass.getChance(50)) {
                 e.setDeathMessage(ChatColor.RED + "[*] " + killed.getName() + ChatColor.YELLOW + " pulled a kamikaze.");

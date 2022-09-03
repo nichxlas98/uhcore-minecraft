@@ -11,10 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerShearEntityEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -28,12 +25,6 @@ import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 public class playerStateListener implements Listener {
 
 
-    private final UhCore plugin;
-
-    public playerStateListener(UhCore plugin) {
-        this.plugin = plugin;
-    }
-
 
     @EventHandler
     public void playerJoinEvent(PlayerJoinEvent e) {
@@ -42,6 +33,11 @@ public class playerStateListener implements Listener {
         if (!player.hasPlayedBefore()) {
             SpawnUtil.spawnTeleport(player);
         }
+    }
+
+    @EventHandler
+    public void playerQuitEvent(PlayerQuitEvent e) {
+        e.setQuitMessage(null);
     }
 
     @EventHandler
@@ -59,7 +55,7 @@ public class playerStateListener implements Listener {
 
                 }
             }
-        }.runTaskLater(plugin, 2);
+        }.runTaskLater(UhCore.getPlugin(), 2);
     }
 
     @EventHandler

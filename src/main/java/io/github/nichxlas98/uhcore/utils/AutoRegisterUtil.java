@@ -4,6 +4,8 @@ import io.github.nichxlas98.uhcore.UhCore;
 import io.github.nichxlas98.uhcore.commands.*;
 import io.github.nichxlas98.uhcore.commands.supporter.nearCommand;
 import io.github.nichxlas98.uhcore.listeners.*;
+import io.github.nichxlas98.uhcore.listeners.modifiers.lifestealDeathsListener;
+import io.github.nichxlas98.uhcore.listeners.modifiers.noSwordsListener;
 import org.bukkit.plugin.PluginManager;
 
 import static org.bukkit.Bukkit.getServer;
@@ -31,21 +33,22 @@ public class AutoRegisterUtil {
         plugin().getCommand("near").setExecutor(new nearCommand());
         plugin().getCommand("rank").setExecutor(new rankCommand());
         plugin().getCommand("game").setExecutor(new gameCommands());
-        plugin().getCommand("createspawn").setExecutor(new spawnCommand(plugin()));
+        plugin().getCommand("createspawn").setExecutor(new spawnCommand());
     }
 
     public static void registerEvents() {
         PluginManager manager = getServer().getPluginManager();
-        manager.registerEvents(new playerStateListener(plugin()), plugin());
+        manager.registerEvents(new lifestealDeathsListener(), plugin());
+        manager.registerEvents(new playerStateListener(), plugin());
         manager.registerEvents(new noSwordsListener(), plugin());
         manager.registerEvents(new scoreboardListener(), plugin());
-        manager.registerEvents(new gameStateListener(plugin()), plugin());
+        manager.registerEvents(new gameStateListener(), plugin());
         manager.registerEvents(new serverStateListener(), plugin());
-        manager.registerEvents(new customDeathsListener(), plugin());
+        manager.registerEvents(new deathMessagesListener(), plugin());
         manager.registerEvents(new GUIListener(), plugin());
         manager.registerEvents(new customDropsListener(), plugin());
         manager.registerEvents(new customChatListener(), plugin());
-        manager.registerEvents(new playerDamageListener(), plugin());
+        manager.registerEvents(new serverGraceListener(), plugin());
         manager.registerEvents(new permissionListener(), plugin());
     }
 }
