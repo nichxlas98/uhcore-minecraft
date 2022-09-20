@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -8,8 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.LOW_ADMIN_LEVEL;
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.LOW_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.MIN_ADMIN_LEVEL;
 import static org.bukkit.ChatColor.*;
 
 public class adminCommand implements CommandExecutor {
@@ -18,7 +18,7 @@ public class adminCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            int playerAdminLevel = adminLevelUtil.getAdminLevel(player.getUniqueId());
             String permsError = RED + "[*] You do not have permission to do this!";
             if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
                 if (args.length == 0) {

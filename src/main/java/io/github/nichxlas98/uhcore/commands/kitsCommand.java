@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -38,59 +37,12 @@ public class kitsCommand implements CommandExecutor {
                 emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
                 empty.setItemMeta(emptyMeta);
 
-                ItemMeta jewelerMeta = jeweler.getItemMeta();
-                jewelerMeta.setDisplayName(ChatColor.AQUA + "Jeweler Kit");
-                jewelerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> jewelerLore = new ArrayList<>();
-                jewelerLore.add(ChatColor.WHITE + "This class gives you 2 diamonds, and Haste on startup.");
-                jewelerMeta.setLore(jewelerLore);
-                jeweler.setItemMeta(jewelerMeta);
-
-
-                ItemMeta enchanterMeta = enchanter.getItemMeta();
-                enchanterMeta.setDisplayName(ChatColor.RED + "Magician Kit");
-                enchanterMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> enchanterLore = new ArrayList<>();
-                enchanterLore.add(ChatColor.WHITE + "This class gives you 4 books, 15 XP bottles and 18 lapis on startup.");
-                enchanterMeta.setLore(enchanterLore);
-                enchanter.setItemMeta(enchanterMeta);
-
-                ItemMeta fisherManMeta = fisherMan.getItemMeta();
-                fisherManMeta.setDisplayName(ChatColor.AQUA + "Fisherman Kit");
-                fisherManMeta.addEnchant(Enchantment.LUCK, 1, true);
-                fisherManMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> fisherManLore = new ArrayList<>();
-                fisherManLore.add(ChatColor.WHITE + "This class gives you a Fishing Rod and a single Golden Apple on startup.");
-                fisherManMeta.setLore(fisherManLore);
-                fisherMan.setItemMeta(fisherManMeta);
-
-
-                ItemMeta goldMinerMeta = goldMiner.getItemMeta();
-                goldMinerMeta.setDisplayName(ChatColor.GOLD + "Gold Miner Kit");
-                goldMinerMeta.addEnchant(Enchantment.LUCK, 1, true);
-                goldMinerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> goldMinerLore = new ArrayList<>();
-                goldMinerLore.add(ChatColor.WHITE + "This class gives you 2 Golden Apples and a stack of Golden Nuggets on startup.");
-                goldMinerMeta.setLore(goldMinerLore);
-                goldMiner.setItemMeta(goldMinerMeta);
-
-                ItemMeta bowMeta = bow.getItemMeta();
-                bowMeta.setDisplayName(ChatColor.AQUA + "Archery Kit");
-                bowMeta.addEnchant(Enchantment.LUCK, 1, true);
-                bowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> bowLore = new ArrayList<>();
-                bowLore.add(ChatColor.WHITE + "This class gives you 32 arrows, and a bow on startup!");
-                bowMeta.setLore(bowLore);
-                bow.setItemMeta(bowMeta);
-
-                ItemMeta ironToolsMeta = ironTools.getItemMeta();
-                ironToolsMeta.setDisplayName(ChatColor.GOLD + "Worker Kit");
-                ironToolsMeta.addEnchant(Enchantment.LUCK, 1, true);
-                ironToolsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                ArrayList<String> ironToolsLore = new ArrayList<>();
-                ironToolsLore.add(ChatColor.WHITE + "This class gives you a full set of iron-tools on startup!");
-                ironToolsMeta.setLore(ironToolsLore);
-                ironTools.setItemMeta(ironToolsMeta);
+                newItem(jeweler, ChatColor.AQUA, "Jeweler Kit", "This class gives you 2 diamonds, and Haste on startup.");
+                newItem(enchanter, ChatColor.RED, "Magician Kit", "This class gives you 4 books, 15 XP bottles and 18 lapis on startup.");
+                newItem(fisherMan, ChatColor.AQUA, "Fisherman Kit", "This class gives you a Fishing Rod and a single Golden Apple on startup.");
+                newItem(goldMiner, ChatColor.GOLD, "Gold Miner Kit", "This class gives you 2 Golden Apples and a stack of Golden Nuggets on startup.");
+                newItem(bow, ChatColor.AQUA, "Archery Kit.", "This class gives you 32 arrows, and a bow on startup.");
+                newItem(ironTools, ChatColor.GOLD, "Worker Kit", "This class gives you a full set of iron-tools on startup!");
 
                 ItemStack[] menu_items = {
                         bow, ironTools, goldMiner, fisherMan, enchanter, jeweler, empty, empty, empty,
@@ -102,5 +54,15 @@ public class kitsCommand implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    private static void newItem(ItemStack item, ChatColor color, String displayName, String lore) {
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(color + displayName);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        ArrayList<String> itemLore = new ArrayList<>();
+        itemLore.add(ChatColor.WHITE + lore);
+        itemMeta.setLore(itemLore);
+        item.setItemMeta(itemMeta);
     }
 }

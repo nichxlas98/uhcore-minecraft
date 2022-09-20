@@ -7,8 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-public class SpawnUtil {
-
+public class spawnUtil {
     public static UhCore plugin() {
         return UhCore.getPlugin();
     }

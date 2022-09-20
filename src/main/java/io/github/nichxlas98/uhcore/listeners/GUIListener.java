@@ -20,7 +20,6 @@ public class GUIListener implements Listener {
                     if (doubleHP) {
                         doubleHP = false;
                         player.sendMessage(ChatColor.RED + "[*] Double Health has been disabled.");
-                        break;
                     } else {
                         doubleHP = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Double Health has been enabled.");
@@ -30,7 +29,6 @@ public class GUIListener implements Listener {
                     if (doubleSpeed) {
                         doubleSpeed = false;
                         player.sendMessage(ChatColor.RED + "[*] Double Speed has been disabled.");
-                        break;
                     } else {
                         doubleSpeed = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Double Speed has been enabled.");
@@ -40,7 +38,6 @@ public class GUIListener implements Listener {
                     if (cutCleanEnabled) {
                         cutCleanEnabled = false;
                         player.sendMessage(ChatColor.RED + "[*] CutClean has been disabled.");
-                        break;
                     } else {
                         cutCleanEnabled = true;
                         player.sendMessage(ChatColor.GREEN + "[*] CutClean has been enabled.");
@@ -50,7 +47,6 @@ public class GUIListener implements Listener {
                     if (doubleHeads) {
                         doubleHeads = false;
                         player.sendMessage(ChatColor.RED + "[*] Double Heads has been disabled.");
-                        break;
                     } else {
                         doubleHeads = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Double Heads has been enabled.");
@@ -60,7 +56,7 @@ public class GUIListener implements Listener {
                     if (goldRush) {
                         goldRush = false;
                         player.sendMessage(ChatColor.RED + "[*] Gold Rush has been disabled.");
-                        break;
+
                     } else {
                         goldRush = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Gold Rush has been enabled.");
@@ -70,7 +66,6 @@ public class GUIListener implements Listener {
                     if (uhcKits) {
                         uhcKits = false;
                         player.sendMessage(ChatColor.RED + "[*] Kits UHC has been disabled.");
-                        break;
                     } else {
                         uhcKits = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Kits UHC has been enabled.");
@@ -80,11 +75,11 @@ public class GUIListener implements Listener {
                     if (pearlUHC) {
                         pearlUHC = false;
                         player.sendMessage(ChatColor.RED + "[*] Pearl UHC has been disabled.");
-                        break;
                     } else {
                         pearlUHC = true;
                         player.sendMessage(ChatColor.GREEN + "[*] Pearl UHC has been enabled.");
                     }
+                    break;
                 case IRON_SWORD:
                     if (noSwords) {
                         noSwords = false;
@@ -103,7 +98,24 @@ public class GUIListener implements Listener {
                         player.sendMessage(ChatColor.GREEN + "[*] LifeSteal has been enabled.");
                     }
                     break;
-
+                case MAGMA_CREAM:
+                    if (spectatorMode) {
+                        spectatorMode = false;
+                        player.sendMessage(ChatColor.RED + "[*] Spectator Mode has been disabled.");
+                    } else {
+                        spectatorMode = true;
+                        player.sendMessage(ChatColor.GREEN + "[*] Spectator Mode has been enabled.");
+                    }
+                    break;
+                case LEATHER:
+                    if (noClean) {
+                        noClean = false;
+                        player.sendMessage(ChatColor.RED + "[*] NoClean has been disabled.");
+                    } else {
+                        noClean = true;
+                        player.sendMessage(ChatColor.GREEN + "[*] NoClean has been enabled.");
+                    }
+                    break;
             }
             e.setCancelled(true);
         }
@@ -136,7 +148,7 @@ public class GUIListener implements Listener {
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Gold Miner Kit.");
                     goldMinerKit.add(playerName);
                     break;
-                case FISHING_ROD:
+                case RAW_FISH:
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Fisherman Kit.");
                     fisherManKit.add(playerName);
                     break;
@@ -146,6 +158,7 @@ public class GUIListener implements Listener {
                     break;
                 case DIAMOND:
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Jeweler Kit.");
+                    break;
             }
 
             e.setCancelled(true);

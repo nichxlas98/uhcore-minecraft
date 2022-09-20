@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
 
-public class BorderUtil {
+public class borderUtil {
 
     public static void startBorder(int size) {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
@@ -28,6 +28,8 @@ public class BorderUtil {
                     Bukkit.dispatchCommand(console, theCommand);
                     Bukkit.broadcastMessage(ChatColor.RED + "[*] The border has begun to shrink!");
                     Bukkit.broadcastMessage(ChatColor.GRAY + "[*] The border will continue to shrink every 5 minutes...");
+                } else {
+                    this.cancel();
                 }
             }
         }.runTaskTimer(UhCore.getPlugin(), 0L, 6000);

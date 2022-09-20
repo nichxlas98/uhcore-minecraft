@@ -1,5 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
+import io.github.nichxlas98.uhcore.utils.playerManagerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,11 +22,12 @@ public class blockMsgCommand implements CommandExecutor {
         if (pmsBlocked.contains(player)) {
             pmsBlocked.remove(player);
             player.sendMessage(ChatColor.GREEN + "[*] Your PMs have been enabled.");
-            return true;
+            playerManagerUtil.unblockMessages(player.getUniqueId());
+        } else {
+            player.sendMessage(ChatColor.RED + "[*] Your PMs have been disabled.");
+            pmsBlocked.add(player);
+            playerManagerUtil.blockMessages(player.getUniqueId());
         }
-
-        player.sendMessage(ChatColor.RED + "[*] Your PMs have been disabled.");
-        pmsBlocked.add(player);
         return true;
     }
 }

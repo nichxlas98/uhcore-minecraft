@@ -14,7 +14,7 @@ public class serverGraceListener implements Listener {
 
     @EventHandler
     public void playerDamageByPlayer(EntityDamageByEntityEvent e) {
-        if (!(e instanceof Player)) return;
+        if (!(e.getDamager() instanceof Player)) return;
         if (!gameEnabled) return;
         Player attacker = (Player) e.getDamager();
         if (modelsClass.gracePeriod) {

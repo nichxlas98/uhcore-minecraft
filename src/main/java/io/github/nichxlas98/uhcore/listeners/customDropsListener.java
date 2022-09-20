@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.cutCleanEnabled;
+import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
 
 
 public class customDropsListener implements Listener {
@@ -47,6 +48,7 @@ public class customDropsListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
+        if (!gameEnabled) return;
         if (e.getBlock().getType() == Material.LEAVES || e.getBlock().getType() == Material.LEAVES_2) {
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
@@ -108,7 +110,6 @@ public class customDropsListener implements Listener {
         ItemStack iShovel = new ItemStack(Material.IRON_SPADE);
 
         if (cutCleanEnabled) {
-
             if (player.getInventory().getItemInHand().equals(wPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }
@@ -118,8 +119,6 @@ public class customDropsListener implements Listener {
             if (player.getInventory().getItemInHand().equals(wShovel)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }
-
-
             if (player.getInventory().getItemInHand().equals(sPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }
@@ -129,8 +128,6 @@ public class customDropsListener implements Listener {
             if (player.getInventory().getItemInHand().equals(sShovel)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }
-
-
             if (player.getInventory().getItemInHand().equals(iPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }

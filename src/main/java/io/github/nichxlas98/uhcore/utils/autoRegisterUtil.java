@@ -5,12 +5,13 @@ import io.github.nichxlas98.uhcore.commands.*;
 import io.github.nichxlas98.uhcore.commands.supporter.nearCommand;
 import io.github.nichxlas98.uhcore.listeners.*;
 import io.github.nichxlas98.uhcore.listeners.modifiers.lifestealDeathsListener;
+import io.github.nichxlas98.uhcore.listeners.modifiers.noCleanListener;
 import io.github.nichxlas98.uhcore.listeners.modifiers.noSwordsListener;
 import org.bukkit.plugin.PluginManager;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class AutoRegisterUtil {
+public class autoRegisterUtil {
 
     static UhCore plugin() {
         return UhCore.getPlugin();
@@ -39,16 +40,19 @@ public class AutoRegisterUtil {
     public static void registerEvents() {
         PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new lifestealDeathsListener(), plugin());
-        manager.registerEvents(new playerStateListener(), plugin());
+        manager.registerEvents(new noCleanListener(), plugin());
         manager.registerEvents(new noSwordsListener(), plugin());
-        manager.registerEvents(new scoreboardListener(), plugin());
-        manager.registerEvents(new gameStateListener(), plugin());
-        manager.registerEvents(new serverStateListener(), plugin());
-        manager.registerEvents(new deathMessagesListener(), plugin());
-        manager.registerEvents(new GUIListener(), plugin());
-        manager.registerEvents(new customDropsListener(), plugin());
+
         manager.registerEvents(new customChatListener(), plugin());
-        manager.registerEvents(new serverGraceListener(), plugin());
+        manager.registerEvents(new customDropsListener(), plugin());
+        manager.registerEvents(new deathMessagesListener(), plugin());
+        manager.registerEvents(new gameStateListener(), plugin());
+        manager.registerEvents(new GUIListener(), plugin());
         manager.registerEvents(new permissionListener(), plugin());
+        manager.registerEvents(new playerStateListener(), plugin());
+        manager.registerEvents(new scoreboardListener(), plugin());
+        manager.registerEvents(new serverGraceListener(), plugin());
+        manager.registerEvents(new serverMeetupListener(), plugin());
+        manager.registerEvents(new serverStateListener(), plugin());
     }
 }

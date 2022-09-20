@@ -1,7 +1,7 @@
 package io.github.nichxlas98.uhcore.utils;
 
 import io.github.nichxlas98.uhcore.UhCore;
-import io.github.nichxlas98.uhcore.models.ScoreHelper;
+import io.github.nichxlas98.uhcore.models.scoreHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitTask;
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
 import static io.github.nichxlas98.uhcore.models.modelsClass.enchanterKit;
 
-public class GameManagerUtil {
+public class gameManagerUtil {
 
     public static int graceTime = 10;
 
@@ -40,7 +40,7 @@ public class GameManagerUtil {
             if (noSwords) {
                 players.sendMessage(ChatColor.ITALIC + "[*] No Swords is enabled, all players are denied from using swords!");
             }
-            if (AdminLevelUtil.getAdminLevel(players.getUniqueId()) == 0) {
+            if (adminLevelUtil.getAdminLevel(players.getUniqueId()) == 0) {
                 players.setGameMode(GameMode.SURVIVAL);
             }
             players.sendMessage(ChatColor.GREEN + "[*] " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has started the game.");
@@ -53,8 +53,10 @@ public class GameManagerUtil {
             @Override
             public void run() {
                 if (gameEnabled) {
-                    BorderUtil.startBorder(2000);
+                    borderUtil.startBorder(2000);
                     gracePeriod = false;
+                } else {
+                    this.cancel();
                 }
             }
         }.runTaskLater(UhCore.getPlugin(), 6000L /*<-- the delay */);
@@ -67,6 +69,8 @@ public class GameManagerUtil {
                     for (Player players : Bukkit.getServer().getOnlinePlayers()) {
                         players.sendMessage(ChatColor.GOLD + "[*] 30 minutes has passed, thus all players will be teleported to 0, 0 in " + ChatColor.RED + "5 minutes!");
                     }
+                } else {
+                    this.cancel();
                 }
             }
         }.runTaskLater(UhCore.getPlugin(), 36000L /*<-- the delay */);
@@ -77,9 +81,13 @@ public class GameManagerUtil {
             public void run() {
                 if (gameEnabled) {
                     for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                        gameMeetup = true;
                         players.teleport(Bukkit.getWorld("world").getHighestBlockAt(player.getLocation()).getLocation().add(0, 1, 0));
                         players.sendMessage(ChatColor.GOLD + "[*] 35 minutes has passed, thus all players have been teleported to 0, 0.");
                     }
+                } else {
+                    gameMeetup = false;
+                    this.cancel();
                 }
             }
         }.runTaskLater(UhCore.getPlugin(), 42000L /*<-- the delay */);
@@ -175,8 +183,8 @@ public class GameManagerUtil {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (gameEnabled) {
                         graceTime--;
-                        if (ScoreHelper.hasScore(players)) {
-                            ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                        if (scoreHelper.hasScore(players)) {
+                            scoreHelper helper = scoreHelper.getByPlayer(players);
                             helper.setTitle("    &6UhCore&cMC    ");
                             helper.setSlot(5, "&7&m--------------");
                             helper.setSlot(4, "&c» &fState: &6Running");
@@ -186,8 +194,8 @@ public class GameManagerUtil {
                         }
 
                         if (graceTime == 0) {
-                            if (ScoreHelper.hasScore(players)) {
-                                ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                            if (scoreHelper.hasScore(players)) {
+                                scoreHelper helper = scoreHelper.getByPlayer(players);
                                 helper.setTitle("    &6UhCore&cMC    ");
                                 helper.setSlot(5, "&7&m--------------");
                                 helper.setSlot(4, "&c» &fState: &6Running");
@@ -198,7 +206,7 @@ public class GameManagerUtil {
                             }
                         }
                     } else {
-                        ScoreHelper helper = ScoreHelper.getByPlayer(players);
+                        scoreHelper helper = scoreHelper.getByPlayer(players);
                         helper.setTitle("    &6UhCore&cMC    ");
                         helper.setSlot(5, "&7&m--------------");
                         helper.setSlot(4, "&c» &fState: &6Waiting");
