@@ -1,8 +1,8 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
-import io.github.nichxlas98.uhcore.utils.SpawnUtil;
-import io.github.nichxlas98.uhcore.utils.GameManagerUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.spawnUtil;
+import io.github.nichxlas98.uhcore.utils.gameManagerUtil;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 import static io.github.nichxlas98.uhcore.models.modelsClass.*;
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
-import static io.github.nichxlas98.uhcore.utils.GameManagerUtil.graceTime;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.gameManagerUtil.graceTime;
 import static org.bukkit.Bukkit.getServer;
 
 public class gameCommands implements CommandExecutor {
@@ -27,7 +27,7 @@ public class gameCommands implements CommandExecutor {
 
         ConsoleCommandSender console = getServer().getConsoleSender();
         Player player = (Player) sender;
-        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        int playerAdminLevel = adminLevelUtil.getAdminLevel(player.getUniqueId());
 
         if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
             if (args.length == 0) {
@@ -42,10 +42,10 @@ public class gameCommands implements CommandExecutor {
                         gracePeriod = true;
                         graceTime = 10;
                         Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
-                        GameManagerUtil.gameScoreboard();
-                        GameManagerUtil.gameTasks(player);
-                        GameManagerUtil.gameKits();
-                        GameManagerUtil.gameModifiers(player);
+                        gameManagerUtil.gameScoreboard();
+                        gameManagerUtil.gameTasks(player);
+                        gameManagerUtil.gameKits();
+                        gameManagerUtil.gameModifiers(player);
                     } else {
                         player.sendMessage(ChatColor.RED + "[*] The game is already started.");
                     }
@@ -54,6 +54,7 @@ public class gameCommands implements CommandExecutor {
                     if (gameEnabled) {
                         gameEnabled = false;
                         gracePeriod = false;
+                        gameMeetup = false;
                         WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
                         wb.setCenter(0, 0);
                         wb.setSize(5000);
@@ -63,12 +64,11 @@ public class gameCommands implements CommandExecutor {
                             players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
                             players.setGameMode(GameMode.SURVIVAL);
                             players.getInventory().clear();
-
                             for (PotionEffect effect : player.getActivePotionEffects()) {
                                 player.removePotionEffect(effect.getType());
                             }
 
-                            SpawnUtil.spawnTeleport(players);
+                            spawnUtil.spawnTeleport(players);
                             return true;
                         }
                     } else {

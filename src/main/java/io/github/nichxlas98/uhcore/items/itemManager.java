@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemManager {
+public class itemManager {
 
     public static ItemStack GoldenHead;
 

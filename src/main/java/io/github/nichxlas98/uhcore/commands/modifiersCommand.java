@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,7 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.MIN_ADMIN_LEVEL;
 
 public class modifiersCommand implements CommandExecutor {
     @Override
@@ -24,7 +24,7 @@ public class modifiersCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (AdminLevelUtil.getAdminLevel(player.getUniqueId()) >= MIN_ADMIN_LEVEL) {
+            if (adminLevelUtil.getAdminLevel(player.getUniqueId()) >= MIN_ADMIN_LEVEL) {
                 Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Modifiers");
 
                 ItemStack doubleHealth = new ItemStack(Material.GOLDEN_APPLE);
@@ -37,34 +37,28 @@ public class modifiersCommand implements CommandExecutor {
                 ItemStack uhcKits = new ItemStack(Material.GOLDEN_CARROT);
                 ItemStack noSwords = new ItemStack(Material.IRON_SWORD);
                 ItemStack lifeSteal = new ItemStack(Material.EYE_OF_ENDER);
-
+                ItemStack spectatorMode = new ItemStack(Material.MAGMA_CREAM);
+                ItemStack noClean = new ItemStack(Material.LEATHER);
 
                 ItemMeta emptyMeta = empty.getItemMeta();
                 emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
                 empty.setItemMeta(emptyMeta);
 
+                newItem(noClean, ChatColor.AQUA, "NoClean", "After a player obtains a kill, that player is invincible for 60 seconds.");
+                newItem(spectatorMode, ChatColor.LIGHT_PURPLE, "Spectator Mode", "Allows players to spectate games after death.");
                 newItem(lifeSteal, ChatColor.DARK_RED, "LifeSteal", "During the game, on player-kill, the killer's given an extra heart.");
-
                 newItem(noSwords, ChatColor.YELLOW, "NoSwords", "Disallows all swords from being used.");
-
                 newItem(uhcKits, ChatColor.BLUE, "KitsUHC", "Allows /kit usage during UHC.");
-
                 newItem(goldRush, ChatColor.GOLD, "GoldRush", "All players are given a Golden Ingot on a player's death.");
-
                 newItem(pearlUHC, ChatColor.DARK_PURPLE, "PearlUHC", "Players spawn with 3 EnderPearls, all players drop an EnderPearl on death.");
-
                 newItem(doubleHeads, ChatColor.GREEN, "Double Heads", "Doubles the Head drops of all players during UHC. ");
-
                 newItem(cutClean, ChatColor.GOLD, "CutClean", "CutClean UHC Mode.");
-
                 newItem(doubleHealth, ChatColor.RED, "Double Health", "Doubles the Health of all players during UHC.");
-
                 newItem(doubleSpeed, ChatColor.AQUA, "Double Speed", "Doubles the Speed of all players during UHC.");
-
 
                 ItemStack[] menu_items = {
                         doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, noSwords, lifeSteal,
-                        empty, empty, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
+                        spectatorMode, noClean, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
                 gui.setContents(menu_items);
                 player.openInventory(gui);
             } else {
@@ -76,14 +70,14 @@ public class modifiersCommand implements CommandExecutor {
         return true;
     }
 
-    private static void newItem(ItemStack noSwords, ChatColor yellow, String displayName, String lore) {
-        ItemMeta noSwordsMeta = noSwords.getItemMeta();
-        noSwordsMeta.setDisplayName(yellow + displayName);
-        noSwordsMeta.addEnchant(Enchantment.LUCK, 1, true);
-        noSwordsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        ArrayList<String> noSwordsLore = new ArrayList<>();
-        noSwordsLore.add(ChatColor.GRAY + lore);
-        noSwordsMeta.setLore(noSwordsLore);
-        noSwords.setItemMeta(noSwordsMeta);
+    private static void newItem(ItemStack item, ChatColor color, String displayName, String lore) {
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(color + displayName);
+        itemMeta.addEnchant(Enchantment.LUCK, 1, true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        ArrayList<String> itemLore = new ArrayList<>();
+        itemLore.add(ChatColor.GRAY + lore);
+        itemMeta.setLore(itemLore);
+        item.setItemMeta(itemMeta);
     }
 }

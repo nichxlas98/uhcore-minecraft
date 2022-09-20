@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.MIN_ADMIN_LEVEL;
 
 public class slapCommand implements CommandExecutor {
     @Override
@@ -17,7 +17,7 @@ public class slapCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            int playerAdminLevel = adminLevelUtil.getAdminLevel(player.getUniqueId());
             if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
 
                 if (args.length > 0) {

@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.MAX_ADMIN_LEVEL;
 
 public class grantCommand implements CommandExecutor {
 
@@ -18,12 +18,11 @@ public class grantCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             int amount;
-            int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+            int playerAdminLevel = adminLevelUtil.getAdminLevel(player.getUniqueId());
             if (playerAdminLevel == MAX_ADMIN_LEVEL || player.hasPermission("UhCore.manager")) {
 
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "[*] You can use: /grant <player> <adminLevel>");
-                    player.sendMessage(ChatColor.RED + "[*] You can also use: /grant <player> <supporter-true/supporter-false>");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 1 = " + ChatColor.GOLD + "Junior Admin.");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 2 = " + ChatColor.AQUA + "Administrator.");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 3 = " + ChatColor.DARK_AQUA + "Senior Admin.");
@@ -32,7 +31,6 @@ public class grantCommand implements CommandExecutor {
 
                 if (args.length >= 3) {
                     player.sendMessage(ChatColor.RED + "[*] You can use: /grant <player> <adminLevel>");
-                    player.sendMessage(ChatColor.RED + "[*] You can also use: /grant <player> <supporter-true/supporter-false>");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 1 = " + ChatColor.GOLD + "Junior Admin.");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 2 = " + ChatColor.AQUA + "Administrator.");
                     player.sendMessage(ChatColor.RED + "[*] AdminLevel 3 = " + ChatColor.DARK_AQUA + "Senior Admin.");
@@ -55,7 +53,7 @@ public class grantCommand implements CommandExecutor {
                     return true;
                 }
 
-                AdminLevelUtil.setAdminLevel(target.getUniqueId(), amount);
+                adminLevelUtil.setAdminLevel(target.getUniqueId(), amount);
                 player.sendMessage(ChatColor.GREEN + "[*] You've granted " + target.getName() + " with an admin level of " + ChatColor.GOLD + amount + ".");
                 switch (amount) {
                     case 1:

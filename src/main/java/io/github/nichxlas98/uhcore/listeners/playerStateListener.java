@@ -1,7 +1,8 @@
 package io.github.nichxlas98.uhcore.listeners;
 
 import io.github.nichxlas98.uhcore.UhCore;
-import io.github.nichxlas98.uhcore.utils.SpawnUtil;
+import io.github.nichxlas98.uhcore.utils.playerManagerUtil;
+import io.github.nichxlas98.uhcore.utils.spawnUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -31,8 +32,14 @@ public class playerStateListener implements Listener {
         Player player = e.getPlayer();
         e.setJoinMessage(null);
         if (!player.hasPlayedBefore()) {
-            SpawnUtil.spawnTeleport(player);
+            spawnUtil.spawnTeleport(player);
         }
+
+        if (playerManagerUtil.getMessageStatus(player.getUniqueId())) {
+            pmsBlocked.add(player);
+            player.sendMessage(ChatColor.AQUA + "[*] Your message status is: " + ChatColor.RED + "blocked.");
+        }
+
     }
 
     @EventHandler
@@ -48,11 +55,18 @@ public class playerStateListener implements Listener {
             public void run() {
                 if (gameEnabled) {
                     Player p = event.getPlayer();
-                    p.sendTitle("You died!", "");
-                    p.setGameMode(GameMode.SPECTATOR);
-                    p.setSpectatorTarget(p.getKiller());
-                    p.sendMessage(ChatColor.RED + "[*] You died & were sent to spectator. Better luck next time.");
-
+                    if (spectatorMode) {
+                        p.sendTitle("You died!", "");
+                        p.setGameMode(GameMode.SPECTATOR);
+                        p.setSpectatorTarget(p.getKiller());
+                        p.sendMessage(ChatColor.RED + "[*] You died & were sent to spectator. Better luck next time.");
+                    } else {
+                        spawnUtil.spawnTeleport(p);
+                        p.sendTitle("You died!", "");
+                        p.sendMessage(ChatColor.RED + "[*] You died & were sent to spawn. Better luck next time.");
+                    }
+                } else {
+                    this.cancel();
                 }
             }
         }.runTaskLater(UhCore.getPlugin(), 2);

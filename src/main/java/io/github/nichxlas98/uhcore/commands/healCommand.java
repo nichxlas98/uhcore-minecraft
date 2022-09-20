@@ -1,13 +1,13 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static io.github.nichxlas98.uhcore.utils.AdminLevelUtil.LOW_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.adminLevelUtil.LOW_ADMIN_LEVEL;
 import static org.bukkit.ChatColor.*;
 import static org.bukkit.ChatColor.GREEN;
 
@@ -16,7 +16,7 @@ public class healCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
-        int playerAdminLevel = AdminLevelUtil.getAdminLevel(player.getUniqueId());
+        int playerAdminLevel = adminLevelUtil.getAdminLevel(player.getUniqueId());
         String permsError = RED + "[*] You do not have permission to do this!";
         if (playerAdminLevel >= LOW_ADMIN_LEVEL) {
             if (args.length == 0) {
