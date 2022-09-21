@@ -9,6 +9,8 @@ import java.util.Random;
 public class modelsClass {
 
 
+    public static boolean motd = true;
+    public static boolean scoreboard = true;
     public static boolean maintenanceMode = false;
     public static boolean gameEnabled = false;
     public static boolean gameMeetup = false;

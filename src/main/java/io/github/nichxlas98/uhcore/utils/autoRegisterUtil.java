@@ -35,6 +35,8 @@ public class autoRegisterUtil {
         plugin().getCommand("rank").setExecutor(new rankCommand());
         plugin().getCommand("game").setExecutor(new gameCommands());
         plugin().getCommand("createspawn").setExecutor(new spawnCommand());
+        plugin().getCommand("scoreboard").setExecutor(new scoreboardCommand());
+        plugin().getCommand("motd").setExecutor(new motdCommand());
     }
 
     public static void registerEvents() {
