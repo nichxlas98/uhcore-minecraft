@@ -1,16 +1,12 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.models.scoreHelper;
 import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
-import org.bukkit.Bukkit;
+import io.github.nichxlas98.uhcore.utils.serverManagerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static io.github.nichxlas98.uhcore.models.modelsClass.motd;
-import static io.github.nichxlas98.uhcore.models.modelsClass.scoreboard;
 
 public class motdCommand implements CommandExecutor {
 
@@ -27,14 +23,13 @@ public class motdCommand implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("toggle")) {
-                    if (motd) {
-                        player.sendMessage(ChatColor.RED + "[*] UhCoreMC Scoreboard has been disabled.");
-                        motd = false;
+                    if (serverManagerUtil.checkMotd()) {
+                        player.sendMessage(ChatColor.RED + "[*] UhCoreMC MOTD has been disabled.");
+                        serverManagerUtil.motdDisable();
                     } else {
-                        player.sendMessage(ChatColor.AQUA + "[*] UhCoreMC Scoreboard has been enabled.");
-                        motd = true;
+                        player.sendMessage(ChatColor.AQUA + "[*] UhCoreMC MOTD has been enabled.");
+                        serverManagerUtil.motdEnable();
                     }
-
                 }
 
             } else {

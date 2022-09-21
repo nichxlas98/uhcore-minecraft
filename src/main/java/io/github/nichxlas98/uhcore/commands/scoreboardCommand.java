@@ -2,14 +2,13 @@ package io.github.nichxlas98.uhcore.commands;
 
 import io.github.nichxlas98.uhcore.models.scoreHelper;
 import io.github.nichxlas98.uhcore.utils.adminLevelUtil;
+import io.github.nichxlas98.uhcore.utils.serverManagerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static io.github.nichxlas98.uhcore.models.modelsClass.scoreboard;
 
 public class scoreboardCommand implements CommandExecutor {
     @Override
@@ -25,15 +24,16 @@ public class scoreboardCommand implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("toggle")) {
-                    if (scoreboard) {
+                    if (serverManagerUtil.checkScoreboard()) {
                         player.sendMessage(ChatColor.RED + "[*] UhCoreMC Scoreboard has been disabled.");
-                        scoreboard = false;
+                        serverManagerUtil.scoreboardDisable();
+                        scoreHelper.removeScore(player);
                         for (Player players : Bukkit.getOnlinePlayers()) {
                             scoreHelper.removeScore(players);
                         }
                     } else {
                         player.sendMessage(ChatColor.AQUA + "[*] UhCoreMC Scoreboard has been enabled.");
-                        scoreboard = true;
+                        serverManagerUtil.scoreboardEnable();
                         for (Player players : Bukkit.getOnlinePlayers()) {
                             scoreHelper helper = scoreHelper.createScore(players);
                             helper.setTitle("    &6UhCore&cMC    ");

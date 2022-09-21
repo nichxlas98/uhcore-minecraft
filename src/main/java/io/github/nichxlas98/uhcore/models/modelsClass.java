@@ -8,15 +8,10 @@ import java.util.Random;
 
 public class modelsClass {
 
-
-    public static boolean motd = true;
-    public static boolean scoreboard = true;
     public static boolean maintenanceMode = false;
     public static boolean gameEnabled = false;
     public static boolean gameMeetup = false;
     public static boolean gracePeriod = false;
-
-
     public static boolean spectatorMode = false;
     public static boolean noSwords = false;
     public static boolean pearlUHC = false;

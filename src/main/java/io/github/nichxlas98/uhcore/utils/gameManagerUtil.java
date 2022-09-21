@@ -180,7 +180,7 @@ public class gameManagerUtil {
         BukkitTask task1 = new BukkitRunnable() {
             @Override
             public void run() {
-                if (scoreboard) {
+                if (serverManagerUtil.checkScoreboard()) {
                     for (Player players : Bukkit.getOnlinePlayers()) {
                         if (gameEnabled) {
                             graceTime--;
