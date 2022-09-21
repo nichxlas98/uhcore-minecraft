@@ -4,6 +4,14 @@ main: io.github.nichxlas98.uhcore.UhCore
 api-version: 1.19
 description: Ultra Hardcore Core
 commands:
+  motd:
+    description: Manage the UhCoreMC MOTD.
+    usage: /<command> <toggle>
+  scoreboard:
+    description: Manage the UhCoreMC Scoreboard.
+    usage: /<command> <toggle>
+    aliases:
+      - sb
   rank:
     description: Grants a player with a rank.
     usage: /<command> <player> <supporter-true/supporter-false>
@@ -42,10 +50,6 @@ commands:
   gotospawn:
     description: Teleports the player to spawn.
     usage: /<command>
-  createborder:
-    description: Creates a server border.
-    usage: /<command> [size]
-    aliases: [cb]
   game:
     description: Start or End the game.
     usage: /<command> <start/end>

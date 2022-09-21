@@ -180,43 +180,47 @@ public class gameManagerUtil {
         BukkitTask task1 = new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player players : Bukkit.getOnlinePlayers()) {
-                    if (gameEnabled) {
-                        graceTime--;
-                        if (scoreHelper.hasScore(players)) {
-                            scoreHelper helper = scoreHelper.getByPlayer(players);
-                            helper.setTitle("    &6UhCore&cMC    ");
-                            helper.setSlot(5, "&7&m--------------");
-                            helper.setSlot(4, "&c» &fState: &6Running");
-                            helper.setSlot(3, "&c» &fGrace: &b" + graceTime + " mins");
-                            helper.setSlot(2, "");
-                            helper.setSlot(1, "&7&m--------------");
-                        }
-
-                        if (graceTime == 0) {
+                if (scoreboard) {
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        if (gameEnabled) {
+                            graceTime--;
                             if (scoreHelper.hasScore(players)) {
                                 scoreHelper helper = scoreHelper.getByPlayer(players);
                                 helper.setTitle("    &6UhCore&cMC    ");
                                 helper.setSlot(5, "&7&m--------------");
                                 helper.setSlot(4, "&c» &fState: &6Running");
-                                helper.setSlot(3, "&c» &fGrace: &bEnded");
+                                helper.setSlot(3, "&c» &fGrace: &b" + graceTime + " mins");
                                 helper.setSlot(2, "");
                                 helper.setSlot(1, "&7&m--------------");
-                                this.cancel();
                             }
+
+                            if (graceTime == 0) {
+                                if (scoreHelper.hasScore(players)) {
+                                    scoreHelper helper = scoreHelper.getByPlayer(players);
+                                    helper.setTitle("    &6UhCore&cMC    ");
+                                    helper.setSlot(5, "&7&m--------------");
+                                    helper.setSlot(4, "&c» &fState: &6Running");
+                                    helper.setSlot(3, "&c» &fGrace: &bEnded");
+                                    helper.setSlot(2, "");
+                                    helper.setSlot(1, "&7&m--------------");
+                                    this.cancel();
+                                }
+                            }
+                        } else {
+                            scoreHelper helper = scoreHelper.getByPlayer(players);
+                            helper.setTitle("    &6UhCore&cMC    ");
+                            helper.setSlot(5, "&7&m--------------");
+                            helper.setSlot(4, "&c» &fState: &6Waiting");
+                            helper.setSlot(3, "&c» &fGrace: &bNone");
+                            helper.setSlot(2, "");
+                            helper.setSlot(1, "&7&m--------------");
+                            this.cancel();
                         }
-                    } else {
-                        scoreHelper helper = scoreHelper.getByPlayer(players);
-                        helper.setTitle("    &6UhCore&cMC    ");
-                        helper.setSlot(5, "&7&m--------------");
-                        helper.setSlot(4, "&c» &fState: &6Waiting");
-                        helper.setSlot(3, "&c» &fGrace: &bNone");
-                        helper.setSlot(2, "");
-                        helper.setSlot(1, "&7&m--------------");
-                        this.cancel();
                     }
+                } else {
+                    this.cancel();
                 }
             }
-        }.runTaskTimer(UhCore.getPlugin(), 0, ticks);
+        }.runTaskTimer(UhCore.getPlugin(), 0,ticks);
     }
 }
