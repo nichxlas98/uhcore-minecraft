@@ -1,6 +1,3 @@
 # uhc-core-plugin
 
-UHC Core is a Minecraft Plugin written by nichxlas98 in Java using the SpigotMC API.
-
-
-This project is still in BETA & will continue recieving updates.
+A Minecraft core built off the SpigotMC API featuring a fully developed UHC gamemode with Modifiers, Kits, Scoreboard, Admin Commands and much more!
