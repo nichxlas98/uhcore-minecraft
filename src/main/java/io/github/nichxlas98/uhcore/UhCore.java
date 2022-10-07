@@ -1,14 +1,12 @@
 package io.github.nichxlas98.uhcore;
 
-import io.github.nichxlas98.uhcore.items.itemManager;
-import io.github.nichxlas98.uhcore.utils.autoRegisterUtil;
-import io.github.nichxlas98.uhcore.utils.databaseUtil;
+import io.github.nichxlas98.uhcore.items.ItemManager;
+import io.github.nichxlas98.uhcore.utils.RegistrationUtil;
+import io.github.nichxlas98.uhcore.utils.DatabaseUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static io.github.nichxlas98.uhcore.models.modelsClass.gameEnabled;
-import static io.github.nichxlas98.uhcore.models.modelsClass.maintenanceMode;
-import static io.github.nichxlas98.uhcore.utils.databaseUtil.config;
-import static io.github.nichxlas98.uhcore.utils.databaseUtil.yml;
+import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.config;
+import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.yml;
 
 
 public final class UhCore extends JavaPlugin {
@@ -26,11 +24,11 @@ public final class UhCore extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        databaseUtil.saveCustomData(config, yml);
+        DatabaseUtil.saveCustomData(config, yml);
 
-        itemManager.init();
-        autoRegisterUtil.registerCommands();
-        autoRegisterUtil.registerEvents();
+        ItemManager.init();
+        RegistrationUtil.registerCommands();
+        RegistrationUtil.registerEvents();
 
         //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
         //TODO: Leaderboards System using config files.
@@ -41,8 +39,6 @@ public final class UhCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        maintenanceMode = false;
-        gameEnabled = false;
-        databaseUtil.saveCustomData(config, yml);
+        DatabaseUtil.saveCustomData(config, yml);
     }
 }
