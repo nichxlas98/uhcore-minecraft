@@ -16,14 +16,15 @@ import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isUhcKits;
 
 public class KitsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
-        if (UHC_KITS) {
+        if (isUhcKits()) {
             Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Kits");
             if (!(kitSelected.containsKey(player.getUniqueId()))) {
                 kitSelected.put(player.getUniqueId(), NONE_SELECTED);

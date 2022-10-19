@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.PERMS_ERROR;
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
-import static io.github.nichxlas98.uhcore.models.ModelsClass.MAINTENANCE_MODE;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.setMaintenanceMode;
 
 public class MaintenanceCommand implements CommandExecutor {
 
@@ -24,7 +24,7 @@ public class MaintenanceCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
         if (disabled) {
@@ -48,7 +48,7 @@ public class MaintenanceCommand implements CommandExecutor {
                 return true;
             }
 
-            MAINTENANCE_MODE = true;
+            setMaintenanceMode(true);
             player.sendMessage(ChatColor.GOLD + "[*] Maintenance mode has been enabled.");
             Bukkit.getServer().setWhitelist(true);
             for (Player online : Bukkit.getOnlinePlayers()) {
@@ -69,7 +69,7 @@ public class MaintenanceCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("false")) {
-            MAINTENANCE_MODE = false;
+            setMaintenanceMode(false);
             Bukkit.getServer().setWhitelist(false);
             player.sendMessage(ChatColor.GREEN + "[*] Maintenance mode has been disabled.");
             return true;

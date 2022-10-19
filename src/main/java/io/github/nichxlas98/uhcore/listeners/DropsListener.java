@@ -13,60 +13,64 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
-import java.util.Random;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.CUT_CLEAN;
-import static io.github.nichxlas98.uhcore.models.ModelsClass.GAME_ENABLED;
+import static io.github.nichxlas98.uhcore.models.ModelsClass.RANDOM;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isCutClean;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isGameEnabled;
 
 
 public class DropsListener implements Listener {
     @EventHandler
     public void playerKillEntity(EntityDeathEvent e) {
-        Random rand = new Random();
-        int chance = rand.nextInt(4) % 2 + 1;
-        if (CUT_CLEAN) {
-            if (e.getEntity().getKiller() == null) return;
+        if (!(isCutClean())) return;
+        if (e.getEntity().getKiller() == null) return;
+        int chance = RANDOM.nextInt(4) % 2 + 1;
 
-            if (e.getEntity() instanceof Sheep || e.getEntity() instanceof Pig) {
+        switch (e.getEntity().getType()) {
+
+            case SHEEP:
+            case PIG:
                 e.getDrops().clear();
                 e.getDrops().add(new ItemStack(Material.COOKED_BEEF, chance));
-            }
-
-            if (e.getEntity() instanceof Cow) {
+                break;
+            case COW:
                 e.getDrops().clear();
                 e.getDrops().add(new ItemStack(Material.COOKED_BEEF, chance));
                 e.getDrops().add(new ItemStack(Material.LEATHER, chance));
-            }
-
-            if (e.getEntity() instanceof Chicken) {
+                break;
+            case CHICKEN:
                 e.getDrops().clear();
                 e.getDrops().add(new ItemStack(Material.ARROW, chance));
-            }
+                break;
+            default:
+                //
         }
     }
 
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if (!GAME_ENABLED) return;
+        if (!isGameEnabled()) return;
         if (e.getBlock().getType() == Material.LEAVES || e.getBlock().getType() == Material.LEAVES_2) {
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
 
-            if (ModelsClass.getChance(85)) {
-                e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE));
-            } else {
+            if (!(ModelsClass.getChance(85))) {
                 e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.LEAVES));
+                return;
             }
+            e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE));
         }
 
-        if (CUT_CLEAN) {
-            Block b = e.getBlock();
-            Player p = e.getPlayer();
-            Random rand = new Random();
-            int chance = rand.nextInt(4) % 2 + 1;
-            if (b.getType() == Material.IRON_ORE) {
-                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+        if (!(isCutClean())) return;
+        Block b = e.getBlock();
+        Player p = e.getPlayer();
+        Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+        int chance = RANDOM.nextInt(4) % 2 + 1;
+
+        switch (b.getType()) {
+
+            case IRON_ORE:
                 if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
                     e.setCancelled(true);
                     b.setType(Material.AIR);
@@ -77,10 +81,8 @@ public class DropsListener implements Listener {
                 e.setCancelled(true);
                 b.setType(Material.AIR);
                 b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT));
-            }
-
-            if (b.getType() == Material.GOLD_ORE) {
-                Map<Enchantment, Integer> enchantmentMap = p.getItemInHand().getEnchantments();
+                break;
+            case GOLD_ORE:
                 if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
                     e.setCancelled(true);
                     b.setType(Material.AIR);
@@ -90,7 +92,9 @@ public class DropsListener implements Listener {
                 e.setCancelled(true);
                 b.setType(Material.AIR);
                 b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
-            }
+                break;
+            default:
+                //
         }
     }
 
@@ -109,7 +113,7 @@ public class DropsListener implements Listener {
         ItemStack iAxe = new ItemStack(Material.IRON_AXE);
         ItemStack iShovel = new ItemStack(Material.IRON_SPADE);
 
-        if (CUT_CLEAN) {
+        if (isCutClean()) {
             if (player.getInventory().getItemInHand().equals(wPickaxe)) {
                 player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
             }

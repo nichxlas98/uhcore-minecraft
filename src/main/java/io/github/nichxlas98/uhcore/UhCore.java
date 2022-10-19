@@ -13,6 +13,10 @@ public final class UhCore extends JavaPlugin {
 
     private static UhCore plugin;
 
+    private static void setPlugin(JavaPlugin javaPlugin) {
+        plugin = (UhCore) javaPlugin;
+    }
+
     public static UhCore getPlugin() {
         return plugin;
     }
@@ -20,7 +24,7 @@ public final class UhCore extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        plugin = this;
+        setPlugin(this);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 

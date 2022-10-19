@@ -11,21 +11,7 @@ import java.util.UUID;
 
 public class ModelsClass {
 
-    public static boolean MAINTENANCE_MODE = false;
-    public static boolean GAME_ENABLED = false;
-    public static boolean GAME_MEETUP = false;
-    public static boolean GRACE_PERIOD = false;
-    public static boolean SPECTATOR_MODE = false;
-    public static boolean NO_SWORDS = false;
-    public static boolean PEARL_UHC = false;
-    public static boolean DOUBLE_HP = false;
-    public static boolean DOUBLE_SPEED = false;
-    public static boolean CUT_CLEAN = false;
-    public static boolean DOUBLE_HEADS = false;
-    public static boolean GOLD_RUSH = false;
-    public static boolean UHC_KITS = false;
-    public static boolean LIFE_STEAL = false;
-    public static boolean NO_CLEAN = false;
+    public static final Random RANDOM = new Random();
 
     public static final HashMap<UUID, Integer> kitSelected = new HashMap<>();
     public static final int NONE_SELECTED = 0;
@@ -41,13 +27,10 @@ public class ModelsClass {
 
 
     public static boolean getChance(int minimalChance) {
-        Random random = new Random();
-        return random.nextInt(99) + 1 >= minimalChance;
+        return RANDOM.nextInt(99) + 1 >= minimalChance;
     }
 
     public static int playerAdminLevel(Player player) {
         return AdminlevelUtil.getAdminLevel(player.getUniqueId());
     }
-
-
 }

@@ -10,13 +10,13 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.NO_SWORDS;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isNoSwords;
 
 public class NoSwordsModifier implements Listener {
 
     @EventHandler
     public void heldItemEvent(PlayerItemHeldEvent e) {
-        if (!NO_SWORDS) return;
+        if (!isNoSwords()) return;
         ItemStack woodSword = new ItemStack(Material.WOOD_SWORD);
         ItemStack stoneSword = new ItemStack(Material.STONE_SWORD);
         ItemStack ironSword = new ItemStack(Material.IRON_SWORD);
@@ -36,7 +36,7 @@ public class NoSwordsModifier implements Listener {
 
     @EventHandler
     public void inventoryClickEvent(InventoryClickEvent e) {
-        if (!NO_SWORDS) return;
+        if (!isNoSwords()) return;
         ItemStack woodSword = new ItemStack(Material.WOOD_SWORD);
         ItemStack stoneSword = new ItemStack(Material.STONE_SWORD);
         ItemStack ironSword = new ItemStack(Material.IRON_SWORD);

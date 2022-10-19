@@ -7,7 +7,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.GAME_ENABLED;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isGameEnabled;
 
 public class BorderUtil {
 
@@ -23,13 +23,14 @@ public class BorderUtil {
 
         new BukkitRunnable() {
             public void run() {
-                if (GAME_ENABLED) {
-                    Bukkit.dispatchCommand(console, theCommand);
-                    Bukkit.broadcastMessage(ChatColor.RED + "[*] The border has begun to shrink!");
-                    Bukkit.broadcastMessage(ChatColor.GRAY + "[*] The border will continue to shrink every 5 minutes...");
-                } else {
+                if (!(isGameEnabled())) {
                     this.cancel();
+                    return;
                 }
+
+                Bukkit.dispatchCommand(console, theCommand);
+                Bukkit.broadcastMessage(ChatColor.RED + "[*] The border has begun to shrink!");
+                Bukkit.broadcastMessage(ChatColor.GRAY + "[*] The border will continue to shrink every 5 minutes...");
             }
         }.runTaskTimer(UhCore.getPlugin(), 0L, 6000);
     }

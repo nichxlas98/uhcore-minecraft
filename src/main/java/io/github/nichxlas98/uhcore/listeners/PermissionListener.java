@@ -34,18 +34,16 @@ public class PermissionListener implements Listener {
         }
 
         int playerAdminLevel = AdminlevelUtil.getAdminLevel(playerUUID);
-        if (adminChat.contains(player)) {
-            if (playerAdminLevel < MIN_ADMIN_LEVEL) {
-                adminChat.remove(player);
-            }
-        } else if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
+        if (!(adminChat.contains(player)) && playerAdminLevel >= MIN_ADMIN_LEVEL) {
             adminChat.add(player);
+        }
+
+        if (playerAdminLevel < MIN_ADMIN_LEVEL) {
+                adminChat.remove(player);
         }
 
         if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
             player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + playerAdminLevel + ".");
-        } else {
-            return;
         }
 
         switch (playerAdminLevel) {

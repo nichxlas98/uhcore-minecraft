@@ -18,13 +18,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Random;
-
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 
 
 public class PlayerStateListener implements Listener {
-
 
 
     @EventHandler
@@ -53,9 +51,9 @@ public class PlayerStateListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (GAME_ENABLED) {
+                if (isGameEnabled()) {
                     Player p = event.getPlayer();
-                    if (SPECTATOR_MODE) {
+                    if (isSpectatorMode()) {
                         p.sendTitle("You died!", "");
                         p.setGameMode(GameMode.SPECTATOR);
                         p.setSpectatorTarget(p.getKiller());
@@ -88,35 +86,33 @@ public class PlayerStateListener implements Listener {
 
     @EventHandler
     public void killEffectsEvent(PlayerDeathEvent event) {
+        if (!(isGameEnabled())) return;
         Player killer = event.getEntity().getKiller();
         Player killed = event.getEntity().getPlayer();
         ItemStack skull = new ItemStack(Material.SKULL_ITEM);
-        Random rand = new Random();
-        int chance = rand.nextInt(4) % 2 + 1;
+        int chance = RANDOM.nextInt(4) % 2 + 1;
 
-        if (GAME_ENABLED) {
-            if (DOUBLE_HEADS) {
-                killed.getWorld().dropItemNaturally(killed.getLocation(), new ItemStack(Material.SKULL_ITEM, 2));
-            } else {
-                killed.getWorld().dropItemNaturally(killed.getLocation(), skull);
-            }
+        if (isDoubleHeads()) {
+            killed.getWorld().dropItemNaturally(killed.getLocation(), new ItemStack(Material.SKULL_ITEM, 2));
+        } else {
+            killed.getWorld().dropItemNaturally(killed.getLocation(), skull);
+        }
 
-            if (GOLD_RUSH) {
-                for (Player players : Bukkit.getServer().getOnlinePlayers()) {
-                    players.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, chance));
-                }
+        if (isGoldRush()) {
+            for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                players.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, chance));
             }
+        }
 
-            if (PEARL_UHC) {
-                killer.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, chance));
-            }
+        if (isPearlUhc()) {
+            killer.getInventory().addItem(new ItemStack(Material.ENDER_PEARL, chance));
+        }
 
-            if (killer != null) {
-                killer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 160, 1));
-                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
-                killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
-                killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
-            }
+        if (killer != null) {
+            killer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 160, 1));
+            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
+            killer.sendMessage(ChatColor.GOLD + "[*] You've been given " + killed.getDisplayName() + "'s skull.");
+            killer.sendMessage(ChatColor.GRAY + "[*] You've been given " + ChatColor.AQUA + "Speed " + ChatColor.GRAY + "& " + ChatColor.LIGHT_PURPLE + "Regeneration " + ChatColor.GRAY + "for your kill on " + ChatColor.RED + killed.getDisplayName() + ".");
         }
     }
 
@@ -124,35 +120,33 @@ public class PlayerStateListener implements Listener {
     public void goldenHeadEvent(PlayerItemConsumeEvent e) {
         Player player = e.getPlayer();
         ItemStack item = player.getInventory().getItemInHand();
-        if (item.hasItemMeta()) {
-            if (item.getItemMeta().getDisplayName().contains("Golden Head")) {
-                player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 2));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120, 1));
-                player.sendMessage(ChatColor.GRAY + "[*] You've eaten a " + ChatColor.GOLD + "Golden Head.");
-            }
-        }
+        if (!(item.hasItemMeta())) return;
+        if (!(item.getItemMeta().getDisplayName().contains("Golden Head"))) return;
+
+        player.removePotionEffect(PotionEffectType.REGENERATION);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120, 1));
+        player.sendMessage(ChatColor.GRAY + "[*] You've eaten a " + ChatColor.GOLD + "Golden Head.");
     }
 
     @EventHandler
     public void godAppleEvent(PlayerItemConsumeEvent e) {
+        if (e.getItem().getType() != Material.GOLDEN_APPLE) return;
+        if (e.getItem().getDurability() != 1) return;
+
         Player player = e.getPlayer();
-        if (e.getItem().getType() == Material.GOLDEN_APPLE) {
-            if (e.getItem().getDurability() == 1) {
-                e.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "[*] You cannot use this item, sorry!");
-            }
-        }
+        e.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "[*] You cannot use this item, sorry!");
+
+
     }
 
 
     @EventHandler
     public void playerShearEvent(PlayerShearEntityEvent event) {
-        if (event.getEntity() instanceof Sheep) {
-            Random rand = new Random();
-            int chance = rand.nextInt(4) % 2 + 1;
-            event.getEntity().getWorld().dropItem(event.getEntity().getLocation(), new ItemStack(Material.STRING, chance));
-        }
+        if (!(event.getEntity() instanceof Sheep)) return;
+        int chance = RANDOM.nextInt(4) % 2 + 1;
+        event.getEntity().getWorld().dropItem(event.getEntity().getLocation(), new ItemStack(Material.STRING, chance));
     }
 }
 

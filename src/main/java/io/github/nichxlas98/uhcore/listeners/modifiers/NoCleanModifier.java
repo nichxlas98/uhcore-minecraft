@@ -11,14 +11,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.NO_CLEAN;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isNoClean;
 
 public class NoCleanModifier implements Listener {
     ArrayList<Player> isSafe = new ArrayList<>();
 
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent e) {
-        if (!NO_CLEAN) return;
+        if (!isNoClean()) return;
         Player killer = e.getEntity().getKiller();
         killer.sendMessage(ChatColor.RED + "[*] You're invincible for the next 60 seconds.");
         isSafe.add(killer);
@@ -36,8 +36,10 @@ public class NoCleanModifier implements Listener {
     public void playerDamageEvent(EntityDamageByEntityEvent e) {
         Player player = (Player) e.getEntity();
         Player attacker = (Player) e.getDamager();
-        if (!NO_CLEAN) return;
+
+        if (!isNoClean()) return;
         if (!(isSafe.contains(player))) return;
+
         e.setCancelled(true);
         attacker.sendMessage(ChatColor.RED + "[*] You cannot attack this person for 60 seconds!");
     }

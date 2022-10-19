@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 
 public class GUIListener implements Listener {
     
@@ -17,102 +18,102 @@ public class GUIListener implements Listener {
 
             switch (e.getCurrentItem().getType()) {
                 case GOLDEN_APPLE:
-                    if (DOUBLE_HP) {
-                        DOUBLE_HP = false;
+                    if (isDoubleHp()) {
+                        setDoubleHp(false);
                         player.sendMessage(ChatColor.RED + "[*] Double Health has been disabled.");
                     } else {
-                        DOUBLE_HP = true;
+                        setDoubleHp(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Double Health has been enabled.");
                     }
                     break;
                 case FEATHER:
-                    if (DOUBLE_SPEED) {
-                        DOUBLE_SPEED = false;
+                    if (isDoubleSpeed()) {
+                        setDoubleSpeed(false);
                         player.sendMessage(ChatColor.RED + "[*] Double Speed has been disabled.");
                     } else {
-                        DOUBLE_SPEED = true;
+                        setDoubleSpeed(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Double Speed has been enabled.");
                     }
                     break;
                 case SUGAR:
-                    if (CUT_CLEAN) {
-                        CUT_CLEAN = false;
+                    if (isCutClean()) {
+                        setCutClean(false);
                         player.sendMessage(ChatColor.RED + "[*] CutClean has been disabled.");
                     } else {
-                        CUT_CLEAN = true;
+                        setCutClean(true);
                         player.sendMessage(ChatColor.GREEN + "[*] CutClean has been enabled.");
                     }
                     break;
                 case SKULL_ITEM:
-                    if (DOUBLE_HEADS) {
-                        DOUBLE_HEADS = false;
+                    if (isDoubleHeads()) {
+                        setDoubleHeads(false);
                         player.sendMessage(ChatColor.RED + "[*] Double Heads has been disabled.");
                     } else {
-                        DOUBLE_HEADS = true;
+                        setDoubleHeads(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Double Heads has been enabled.");
                     }
                     break;
                 case GOLD_NUGGET:
-                    if (GOLD_RUSH) {
-                        GOLD_RUSH = false;
+                    if (isGoldRush()) {
+                        setGoldRush(false);
                         player.sendMessage(ChatColor.RED + "[*] Gold Rush has been disabled.");
 
                     } else {
-                        GOLD_RUSH = true;
+                        setGoldRush(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Gold Rush has been enabled.");
                     }
                     break;
                 case GOLDEN_CARROT:
-                    if (UHC_KITS) {
-                        UHC_KITS = false;
+                    if (isUhcKits()) {
+                        setUhcKits(false);
                         player.sendMessage(ChatColor.RED + "[*] Kits UHC has been disabled.");
                     } else {
-                        UHC_KITS = true;
+                        setUhcKits(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Kits UHC has been enabled.");
                     }
                     break;
                 case ENDER_PEARL:
-                    if (PEARL_UHC) {
-                        PEARL_UHC = false;
+                    if (isPearlUhc()) {
+                        setPearlUhc(false);
                         player.sendMessage(ChatColor.RED + "[*] Pearl UHC has been disabled.");
                     } else {
-                        PEARL_UHC = true;
+                        setPearlUhc(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Pearl UHC has been enabled.");
                     }
                     break;
                 case IRON_SWORD:
-                    if (NO_SWORDS) {
-                        NO_SWORDS = false;
+                    if (isNoSwords()) {
+                        setNoSwords(false);
                         player.sendMessage(ChatColor.RED + "[*] No Swords has been disabled.");
                     } else {
-                        NO_SWORDS = true;
+                        setNoSwords(true);
                         player.sendMessage(ChatColor.GREEN + "[*] No Swords has been enabled.");
                     }
                     break;
                 case EYE_OF_ENDER:
-                    if (LIFE_STEAL) {
-                        LIFE_STEAL = false;
+                    if (isLifeSteal()) {
+                        setLifeSteal(false);
                         player.sendMessage(ChatColor.RED + "[*] LifeSteal has been disabled.");
                     } else {
-                        LIFE_STEAL = true;
+                        setLifeSteal(true);
                         player.sendMessage(ChatColor.GREEN + "[*] LifeSteal has been enabled.");
                     }
                     break;
                 case MAGMA_CREAM:
-                    if (SPECTATOR_MODE) {
-                        SPECTATOR_MODE = false;
+                    if (isSpectatorMode()) {
+                        setSpectatorMode(false);
                         player.sendMessage(ChatColor.RED + "[*] Spectator Mode has been disabled.");
                     } else {
-                        SPECTATOR_MODE = true;
+                        setSpectatorMode(true);
                         player.sendMessage(ChatColor.GREEN + "[*] Spectator Mode has been enabled.");
                     }
                     break;
                 case LEATHER:
-                    if (NO_CLEAN) {
-                        NO_CLEAN = false;
+                    if (isNoClean()) {
+                        setNoClean(false);
                         player.sendMessage(ChatColor.RED + "[*] NoClean has been disabled.");
                     } else {
-                        NO_CLEAN = true;
+                        setNoClean(true);
                         player.sendMessage(ChatColor.GREEN + "[*] NoClean has been enabled.");
                     }
                     break;
@@ -157,6 +158,8 @@ public class GUIListener implements Listener {
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Jeweler Kit.");
                     kitSelected.replace(player.getUniqueId(), JEWELER_KIT);
                     break;
+                default:
+                    //
             }
             e.setCancelled(true);
         }
