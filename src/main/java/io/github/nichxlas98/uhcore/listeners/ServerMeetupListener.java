@@ -6,17 +6,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.GAME_MEETUP;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isGameMeetup;
 
 public class ServerMeetupListener implements Listener {
 
     @EventHandler
     public void blockBreakEvent(BlockBreakEvent e) {
+        if (!(isGameMeetup())) return;
         Player player = e.getPlayer();
-        if (GAME_MEETUP) {
-            player.sendMessage(ChatColor.RED + "[*] You cannot do this while UHC Meetup is ongoing.");
-            e.setCancelled(true);
-        }
+        player.sendMessage(ChatColor.RED + "[*] You cannot do this while UHC Meetup is ongoing.");
+        e.setCancelled(true);
     }
 
 

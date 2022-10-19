@@ -14,8 +14,7 @@ public class BlockMsgCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
-
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
         if (pmsBlocked.contains(player)) {

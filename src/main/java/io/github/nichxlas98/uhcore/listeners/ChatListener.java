@@ -22,19 +22,21 @@ public class ChatListener implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         int playerAdminLevel = AdminlevelUtil.getAdminLevel(player.getUniqueId());
         if (e.getMessage().contains("#")) {
-            if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
-                if (adminChat.contains(player)) {
-                    console.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage());
-                    for (Player achat : adminChat) {
-                        achat.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage().replace("#", ""));
-                    }
-                    return;
-                }
+            if (!(playerAdminLevel >= MIN_ADMIN_LEVEL)) {
+                adminChat.remove(player);
+                return;
+            }
+
+            if (!(adminChat.contains(player))) {
                 adminChat.add(player);
                 return;
-            } else {
-                adminChat.remove(player);
             }
+
+            console.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage());
+            for (Player achat : adminChat) {
+                achat.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage().replace("#", ""));
+            }
+            return;
         }
 
         switch (playerAdminLevel) {

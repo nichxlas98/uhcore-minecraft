@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 
-import static io.github.nichxlas98.uhcore.models.ModelsClass.LIFE_STEAL;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.isLifeSteal;
 
 public class LifeStealModifier implements Listener {
 
@@ -18,7 +18,7 @@ public class LifeStealModifier implements Listener {
 
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent e) {
-        if (LIFE_STEAL) {
+        if (isLifeSteal()) {
             Player player = e.getEntity().getPlayer();
             Player killer = player.getKiller();
             if (player.getKiller() == null) return;

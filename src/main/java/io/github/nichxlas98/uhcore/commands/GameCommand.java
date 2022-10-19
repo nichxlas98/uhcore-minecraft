@@ -13,15 +13,14 @@ import org.bukkit.potion.PotionEffect;
 import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
-import static io.github.nichxlas98.uhcore.utils.GameManagerUtil.graceTime;
+import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 import static org.bukkit.Bukkit.getServer;
 
 public class GameCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
-
+        if (senderConsoleError(sender)) return true;
         ConsoleCommandSender console = getServer().getConsoleSender();
         Player player = (Player) sender;
 
@@ -37,10 +36,10 @@ public class GameCommand implements CommandExecutor {
 
         switch (args[0].toLowerCase()) {
             case "start":
-                if (!GAME_ENABLED) {
-                    GAME_ENABLED = true;
-                    GRACE_PERIOD = true;
-                    graceTime = 10;
+                if (!isGameEnabled()) {
+                    setGameEnabled(true);
+                    setGracePeriod(true);
+                    resetGraceTime();
                     Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
                     GameManagerUtil.gameScoreboard();
                     GameManagerUtil.gameTasks(player);
@@ -51,10 +50,10 @@ public class GameCommand implements CommandExecutor {
                 }
                 break;
             case "end":
-                if (GAME_ENABLED) {
-                    GAME_ENABLED = false;
-                    GRACE_PERIOD = false;
-                    GAME_MEETUP = false;
+                if (isGameEnabled()) {
+                    setGameEnabled(false);
+                    setGracePeriod(false);
+                    setGameMeetup(false);
                     WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
                     wb.setCenter(0, 0);
                     wb.setSize(5000);

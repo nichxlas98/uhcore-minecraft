@@ -13,25 +13,21 @@ public class ScoreboardListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        if (ServerManagerUtil.checkScoreboard()) {
-            ScoreHelper helper = ScoreHelper.createScore(player);
-            helper.setTitle("    &6UhCore&cMC    ");
-            helper.setSlot(5, "&7&m--------------");
-            helper.setSlot(4, "&c» &fState: &6Waiting");
-            helper.setSlot(3, "&c» &fGrace: &bNone");
-            helper.setSlot(2, "");
-            helper.setSlot(1, "&7&m--------------");
-        }
+        if (!(ServerManagerUtil.checkScoreboard())) return;
+        ScoreHelper helper = ScoreHelper.createScore(player);
+        helper.setTitle("    &6UhCore&cMC    ");
+        helper.setSlot(5, "&7&m--------------");
+        helper.setSlot(4, "&c» &fState: &6Waiting");
+        helper.setSlot(3, "&c» &fGrace: &bNone");
+        helper.setSlot(2, "");
+        helper.setSlot(1, "&7&m--------------");
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        if (ServerManagerUtil.checkScoreboard()) {
-            if (ScoreHelper.hasScore(player)) {
-                ScoreHelper.removeScore(player);
-            }
-        }
+        if (!(ServerManagerUtil.checkScoreboard())) return;
+        if (!(ScoreHelper.hasScore(player))) return;
+        ScoreHelper.removeScore(player);
     }
-
 }

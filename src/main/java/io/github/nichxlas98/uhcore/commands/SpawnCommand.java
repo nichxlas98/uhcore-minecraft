@@ -17,7 +17,7 @@ public class SpawnCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
         if (!(playerAdminLevel(player) == MAX_ADMIN_LEVEL)) {

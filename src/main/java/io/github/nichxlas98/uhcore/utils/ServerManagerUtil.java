@@ -41,6 +41,4 @@ public class ServerManagerUtil {
     public static boolean checkScoreboard() {
         return UhCore.getPlugin().getConfig().getString("scoreboard") != null;
     }
-
-
 }
