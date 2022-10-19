@@ -15,7 +15,7 @@ import static io.github.nichxlas98.uhcore.models.ModelsClass.pmsBlocked;
 public class MessageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
         if (args.length > 1) {

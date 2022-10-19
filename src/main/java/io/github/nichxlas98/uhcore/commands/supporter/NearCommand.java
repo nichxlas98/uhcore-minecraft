@@ -15,7 +15,7 @@ import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleErro
 public class NearCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        senderConsoleError(sender);
+        if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
         if (!(PlayerManagerUtil.isSupporter(player.getUniqueId()))) {
@@ -27,15 +27,12 @@ public class NearCommand implements CommandExecutor {
         if (near.isEmpty()) {
             player.sendMessage(ChatColor.RED + "[*] We could not find any players nearby.");
             return true;
-        } else {
-            player.sendMessage(ChatColor.GREEN + "[*] We've found the following players nearby:");
-            for (Entity entity : near) {
-                if (entity instanceof Player) {
-                    player.sendMessage(ChatColor.AQUA + "[*] " + near.size() + ".");
-                } else {
-                    player.sendMessage(ChatColor.AQUA + "[*] 0.");
-                }
-            }
+        }
+
+        player.sendMessage(ChatColor.GREEN + "[*] We've found the following players nearby:");
+        for (Entity entity : near) {
+            if (!(entity instanceof Player)) return true;
+            player.sendMessage(ChatColor.AQUA + "[*] " + near.size() + ".");
         }
         return true;
     }
