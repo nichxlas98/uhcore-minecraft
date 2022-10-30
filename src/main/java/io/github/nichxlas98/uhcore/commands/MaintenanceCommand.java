@@ -56,6 +56,7 @@ public class MaintenanceCommand implements CommandExecutor {
                     isNotAdmin.add(online.getName());
                 }
             }
+
             for (String p : isNotAdmin) {
                 p = p.replace("[]", "");
                 Player equipped = Bukkit.getServer().getPlayer(p);

@@ -25,18 +25,17 @@ public class MotdCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "[*] Please use: /motd <toggle>.");
+            player.sendMessage(ChatColor.RED + "[*] Please use: /motd <toggle>");
             return true;
         }
 
-        if (args[0].equalsIgnoreCase("toggle")) {
-            if (ServerManagerUtil.checkMotd()) {
-                player.sendMessage(ChatColor.RED + "[*] UhCoreMC MOTD has been disabled.");
-                ServerManagerUtil.motdDisable();
-            } else {
-                player.sendMessage(ChatColor.AQUA + "[*] UhCoreMC MOTD has been enabled.");
-                ServerManagerUtil.motdEnable();
-            }
+        if (!(args[0].equalsIgnoreCase("toggle"))) return true;
+        if (ServerManagerUtil.checkMotd()) {
+            player.sendMessage(ChatColor.RED + "[*] SERVER MOTD has been disabled.");
+            ServerManagerUtil.motdDisable();
+        } else {
+            player.sendMessage(ChatColor.AQUA + "[*] SERVER MOTD has been enabled.");
+            ServerManagerUtil.motdEnable();
         }
         return true;
     }
