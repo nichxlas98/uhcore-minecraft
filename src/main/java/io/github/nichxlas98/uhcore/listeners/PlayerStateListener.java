@@ -37,7 +37,6 @@ public class PlayerStateListener implements Listener {
             pmsBlocked.add(player);
             player.sendMessage(ChatColor.AQUA + "[*] Your message status is: " + ChatColor.RED + "blocked.");
         }
-
     }
 
     @EventHandler
@@ -51,20 +50,21 @@ public class PlayerStateListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (isGameEnabled()) {
-                    Player p = event.getPlayer();
-                    if (isSpectatorMode()) {
-                        p.sendTitle("You died!", "");
-                        p.setGameMode(GameMode.SPECTATOR);
-                        p.setSpectatorTarget(p.getKiller());
-                        p.sendMessage(ChatColor.RED + "[*] You died & were sent to spectator. Better luck next time.");
-                    } else {
-                        SpawnUtil.spawnTeleport(p);
-                        p.sendTitle("You died!", "");
-                        p.sendMessage(ChatColor.RED + "[*] You died & were sent to spawn. Better luck next time.");
-                    }
-                } else {
+                if (!(isGameEnabled())) {
                     this.cancel();
+                    return;
+                }
+
+                Player p = event.getPlayer();
+                if (isSpectatorMode()) {
+                    p.sendTitle("You died!", "");
+                    p.setGameMode(GameMode.SPECTATOR);
+                    p.setSpectatorTarget(p.getKiller());
+                    p.sendMessage(ChatColor.RED + "[*] You died & were sent to spectator. Better luck next time.");
+                } else {
+                    SpawnUtil.spawnTeleport(p);
+                    p.sendTitle("You died!", "");
+                    p.sendMessage(ChatColor.RED + "[*] You died & were sent to spawn. Better luck next time.");
                 }
             }
         }.runTaskLater(UhCore.getPlugin(), 2);

@@ -113,34 +113,33 @@ public class DropsListener implements Listener {
         ItemStack iAxe = new ItemStack(Material.IRON_AXE);
         ItemStack iShovel = new ItemStack(Material.IRON_SPADE);
 
-        if (isCutClean()) {
-            if (player.getInventory().getItemInHand().equals(wPickaxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(wAxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(wShovel)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(sPickaxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(sAxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(sShovel)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(iPickaxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(iAxe)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
-            if (player.getInventory().getItemInHand().equals(iShovel)) {
-                player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
-            }
+        if (!(isCutClean())) return;
+        if (player.getInventory().getItemInHand().equals(wPickaxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(wAxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(wShovel)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(sPickaxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(sAxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(sShovel)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(iPickaxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(iAxe)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
+        }
+        if (player.getInventory().getItemInHand().equals(iShovel)) {
+            player.getInventory().getItemInHand().addEnchantment(Enchantment.DIG_SPEED, 3);
         }
     }
 }

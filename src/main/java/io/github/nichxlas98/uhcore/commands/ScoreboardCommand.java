@@ -30,26 +30,25 @@ public class ScoreboardCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equalsIgnoreCase("toggle")) {
-            if (ServerManagerUtil.checkScoreboard()) {
-                player.sendMessage(ChatColor.RED + "[*] UhCoreMC Scoreboard has been disabled.");
-                ServerManagerUtil.scoreboardDisable();
-                ScoreHelper.removeScore(player);
-                for (Player players : Bukkit.getOnlinePlayers()) {
-                    ScoreHelper.removeScore(players);
-                }
-            } else {
-                player.sendMessage(ChatColor.AQUA + "[*] UhCoreMC Scoreboard has been enabled.");
-                ServerManagerUtil.scoreboardEnable();
-                for (Player players : Bukkit.getOnlinePlayers()) {
-                    ScoreHelper helper = ScoreHelper.createScore(players);
-                    helper.setTitle("    &6UhCore&cMC    ");
-                    helper.setSlot(5, "&7&m--------------");
-                    helper.setSlot(4, "&c» &fState: &6Waiting");
-                    helper.setSlot(3, "&c» &fGrace: &bNone");
-                    helper.setSlot(2, "");
-                    helper.setSlot(1, "&7&m--------------");
-                }
+        if (!(args[0].equalsIgnoreCase("toggle"))) return true;
+        if (ServerManagerUtil.checkScoreboard()) {
+            player.sendMessage(ChatColor.RED + "[*] SERVER Scoreboard has been disabled.");
+            ServerManagerUtil.scoreboardDisable();
+            ScoreHelper.removeScore(player);
+            for (Player players : Bukkit.getOnlinePlayers()) {
+                ScoreHelper.removeScore(players);
+            }
+        } else {
+            player.sendMessage(ChatColor.AQUA + "[*] SERVER Scoreboard has been enabled.");
+            ServerManagerUtil.scoreboardEnable();
+            for (Player players : Bukkit.getOnlinePlayers()) {
+                ScoreHelper helper = ScoreHelper.createScore(players);
+                helper.setTitle("    &6UhCore&cMC    ");
+                helper.setSlot(5, "&7&m--------------");
+                helper.setSlot(4, "&c» &fState: &6Waiting");
+                helper.setSlot(3, "&c» &fGrace: &bNone");
+                helper.setSlot(2, "");
+                helper.setSlot(1, "&7&m--------------");
             }
         }
         return true;

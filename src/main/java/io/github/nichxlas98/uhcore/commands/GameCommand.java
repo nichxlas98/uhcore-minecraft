@@ -37,10 +37,11 @@ public class GameCommand implements CommandExecutor {
         switch (args[0].toLowerCase()) {
             case "start":
                 if (!isGameEnabled()) {
+                    Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
+
                     setGameEnabled(true);
                     setGracePeriod(true);
                     resetGraceTime();
-                    Bukkit.dispatchCommand(console, "spreadplayers 0 0 150 1000 false @a");
                     GameManagerUtil.gameScoreboard();
                     GameManagerUtil.gameTasks(player);
                     GameManagerUtil.gameKits();
@@ -54,18 +55,20 @@ public class GameCommand implements CommandExecutor {
                     setGameEnabled(false);
                     setGracePeriod(false);
                     setGameMeetup(false);
+
                     WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
                     wb.setCenter(0, 0);
                     wb.setSize(5000);
 
                     player.sendMessage(ChatColor.RED + "[*] You've forcefully ended the game.");
                     for (Player players : getServer().getOnlinePlayers()) {
-                        players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
-                        players.setGameMode(GameMode.SURVIVAL);
-                        players.getInventory().clear();
                         for (PotionEffect effect : player.getActivePotionEffects()) {
                             player.removePotionEffect(effect.getType());
                         }
+
+                        players.sendMessage(ChatColor.RED + "[*] " + ChatColor.AQUA + player.getDisplayName() + ChatColor.RED + " has forcefully ended the game.");
+                        players.setGameMode(GameMode.SURVIVAL);
+                        players.getInventory().clear();
 
                         SpawnUtil.spawnTeleport(players);
                         return true;
