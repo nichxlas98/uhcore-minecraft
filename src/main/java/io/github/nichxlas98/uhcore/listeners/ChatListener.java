@@ -33,8 +33,8 @@ public class ChatListener implements Listener {
             }
 
             console.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage());
-            for (Player achat : adminChat) {
-                achat.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage().replace("#", ""));
+            for (Player aChat : adminChat) {
+                aChat.sendMessage(ChatColor.AQUA + "[*] " + player.getName() + " says: " + e.getMessage().replace("#", ""));
             }
             return;
         }

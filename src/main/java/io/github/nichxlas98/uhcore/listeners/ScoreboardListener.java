@@ -25,8 +25,8 @@ public class ScoreboardListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
         if (!(ServerManagerUtil.checkScoreboard())) return;
+        Player player = e.getPlayer();
         if (!(ScoreHelper.hasScore(player))) return;
         ScoreHelper.removeScore(player);
     }

@@ -31,8 +31,8 @@ public final class UhCore extends JavaPlugin {
         DatabaseUtil.saveCustomData(config, yml);
 
         ItemManager.init();
-        RegistrationUtil.registerCommands();
-        RegistrationUtil.registerEvents();
+        RegistrationUtil.initializeCommands();
+        RegistrationUtil.initializeEvents();
 
         //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
         //TODO: Leaderboards System using config files.

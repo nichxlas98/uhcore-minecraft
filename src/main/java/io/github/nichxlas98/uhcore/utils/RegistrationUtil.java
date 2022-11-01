@@ -13,11 +13,11 @@ import static org.bukkit.Bukkit.getServer;
 
 public class RegistrationUtil {
 
-    static UhCore plugin() {
+    private static UhCore plugin() {
         return UhCore.getPlugin();
     }
 
-    public static void registerCommands() {
+    public static void initializeCommands() {
         plugin().getCommand("blockpm").setExecutor(new BlockMsgCommand());
         plugin().getCommand("gethere").setExecutor(new GetHereCommand());
         plugin().getCommand("goto").setExecutor(new GoToCommand());
@@ -39,7 +39,7 @@ public class RegistrationUtil {
         plugin().getCommand("motd").setExecutor(new MotdCommand());
     }
 
-    public static void registerEvents() {
+    public static void initializeEvents() {
         PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new LifeStealModifier(), plugin());
         manager.registerEvents(new NoCleanModifier(), plugin());

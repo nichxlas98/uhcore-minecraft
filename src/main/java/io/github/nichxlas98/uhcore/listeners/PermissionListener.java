@@ -34,13 +34,9 @@ public class PermissionListener implements Listener {
         }
 
         int playerAdminLevel = AdminlevelUtil.getAdminLevel(playerUUID);
-        if (!(adminChat.contains(player)) && playerAdminLevel >= MIN_ADMIN_LEVEL) {
-            adminChat.add(player);
-        }
+        if (!(adminChat.contains(player)) && playerAdminLevel >= MIN_ADMIN_LEVEL) adminChat.add(player);
+        if (playerAdminLevel < MIN_ADMIN_LEVEL) adminChat.remove(player);
 
-        if (playerAdminLevel < MIN_ADMIN_LEVEL) {
-            adminChat.remove(player);
-        }
 
         if (playerAdminLevel >= MIN_ADMIN_LEVEL) {
             player.sendMessage(ChatColor.YELLOW + "[*] Logged in with an admin level of " + ChatColor.GOLD + playerAdminLevel + ".");
@@ -64,11 +60,10 @@ public class PermissionListener implements Listener {
                 if (PlayerManagerUtil.isSupporter(playerUUID)) {
                     player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.LIGHT_PURPLE + "S" + ChatColor.GRAY + ") " + playerName);
                     player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
-                    break;
+                    return;
                 }
                 player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.YELLOW + "C" + ChatColor.GRAY + ") " + playerName);
                 player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
-                break;
         }
     }
 }

@@ -19,8 +19,8 @@ public class ServerGraceListener implements Listener {
         if (!(isGracePeriod())) return;
 
         Player attacker = (Player) e.getDamager();
-        e.setCancelled(true);
         attacker.sendMessage(ChatColor.RED + "[*] You cannot damage this player while grace period is active!");
+        e.setCancelled(true);
     }
 
     @EventHandler
