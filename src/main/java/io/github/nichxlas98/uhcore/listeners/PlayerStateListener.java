@@ -135,10 +135,8 @@ public class PlayerStateListener implements Listener {
         if (e.getItem().getDurability() != 1) return;
 
         Player player = e.getPlayer();
-        e.setCancelled(true);
         player.sendMessage(ChatColor.RED + "[*] You cannot use this item, sorry!");
-
-
+        e.setCancelled(true);
     }
 
 

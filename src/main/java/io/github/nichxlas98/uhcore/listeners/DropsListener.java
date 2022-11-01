@@ -77,10 +77,9 @@ public class DropsListener implements Listener {
                     b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT, chance));
                     return;
                 }
-
-                e.setCancelled(true);
                 b.setType(Material.AIR);
                 b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.IRON_INGOT));
+                e.setCancelled(true);
                 break;
             case GOLD_ORE:
                 if (enchantmentMap.containsKey(Enchantment.LOOT_BONUS_BLOCKS)) {
@@ -89,9 +88,9 @@ public class DropsListener implements Listener {
                     b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT, chance));
                     return;
                 }
-                e.setCancelled(true);
                 b.setType(Material.AIR);
                 b.getWorld().dropItem(b.getLocation(), new ItemStack(Material.GOLD_INGOT));
+                e.setCancelled(true);
                 break;
             default:
                 //
