@@ -10,11 +10,15 @@ import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 
 public class GUIListener implements Listener {
-    
+
     @EventHandler
     public void clickEvent(InventoryClickEvent e) {
-        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Modifiers")) {
-            Player player = (Player) e.getWhoClicked();
+        if (e.getClickedInventory() == null) return;
+        String inv = e.getClickedInventory().getTitle();
+        Player player = (Player) e.getWhoClicked();
+
+        if (inv.equalsIgnoreCase(ChatColor.RED + "Modifiers")) {
+            e.setCancelled(true);
 
             switch (e.getCurrentItem().getType()) {
                 case GOLDEN_APPLE:
@@ -129,12 +133,9 @@ public class GUIListener implements Listener {
                 default:
                     //
             }
-            e.setCancelled(true);
         }
 
-        if (e.getClickedInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "Kits")) {
-            Player player = (Player) e.getWhoClicked();
-
+        if (inv.equalsIgnoreCase(ChatColor.RED + "Kits")) {
             if (kitSelected.containsKey(player.getUniqueId())) {
                 kitSelected.replace(player.getUniqueId(), NONE_SELECTED);
                 player.sendMessage(ChatColor.RED + "[*] Unequipped all kits. Use /kits to select a new kit.");
@@ -142,7 +143,9 @@ public class GUIListener implements Listener {
                 return;
             }
 
-            switch (e.getCurrentItem().getType()) {
+            switch (e.getCurrentItem().
+
+                    getType()) {
                 case GOLD_PICKAXE:
                     player.sendMessage(ChatColor.GREEN + "[*] Equipped the Worker Kit.");
                     kitSelected.replace(player.getUniqueId(), WORKER_KIT);
@@ -170,7 +173,6 @@ public class GUIListener implements Listener {
                 default:
                     //
             }
-            e.setCancelled(true);
         }
     }
 }
