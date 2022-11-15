@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.ServerManagerUtil.scoreboardName;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 
 public class GameManagerUtil {
@@ -162,7 +163,7 @@ public class GameManagerUtil {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (!(isGameEnabled())) {
                         ScoreHelper helper = ScoreHelper.getByPlayer(players);
-                        helper.setTitle("    &6UhCore&cMC    ");
+                        helper.setTitle("    " + scoreboardName + "    ");
                         helper.setSlot(5, "&7&m--------------");
                         helper.setSlot(4, "&c» &fState: &6Waiting");
                         helper.setSlot(3, "&c» &fGrace: &bNone");
@@ -175,7 +176,7 @@ public class GameManagerUtil {
                     updateGraceTime();
                     if (ScoreHelper.hasScore(players)) {
                         ScoreHelper helper = ScoreHelper.getByPlayer(players);
-                        helper.setTitle("    &6UhCore&cMC    ");
+                        helper.setTitle("    " + scoreboardName + "    ");
                         helper.setSlot(5, "&7&m--------------");
                         helper.setSlot(4, "&c» &fState: &6Running");
                         helper.setSlot(3, "&c» &fGrace: &b" + getGraceTime() + " mins");
@@ -186,7 +187,7 @@ public class GameManagerUtil {
                     if (getGraceTime() == 0) {
                         if (ScoreHelper.hasScore(players)) {
                             ScoreHelper helper = ScoreHelper.getByPlayer(players);
-                            helper.setTitle("    &6UhCore&cMC    ");
+                            helper.setTitle("    " + scoreboardName + "    ");
                             helper.setSlot(5, "&7&m--------------");
                             helper.setSlot(4, "&c» &fState: &6Running");
                             helper.setSlot(3, "&c» &fGrace: &bEnded");
