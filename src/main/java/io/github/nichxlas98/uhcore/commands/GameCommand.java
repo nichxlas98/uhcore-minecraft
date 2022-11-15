@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.BorderUtil.resetBorder;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 import static org.bukkit.Bukkit.getServer;
 
@@ -55,10 +56,7 @@ public class GameCommand implements CommandExecutor {
                     setGameEnabled(false);
                     setGracePeriod(false);
                     setGameMeetup(false);
-
-                    WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
-                    wb.setCenter(0, 0);
-                    wb.setSize(5000);
+                    resetBorder();
 
                     player.sendMessage(ChatColor.RED + "[*] You've forcefully ended the game.");
                     for (Player players : getServer().getOnlinePlayers()) {

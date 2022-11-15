@@ -38,7 +38,7 @@ public class RegistrationUtil {
         plugin().getCommand("createspawn").setExecutor(new SpawnCommand());
         plugin().getCommand("scoreboard").setExecutor(new ScoreboardCommand());
         plugin().getCommand("motd").setExecutor(new MotdCommand());
-        plugin().getCommand("setscoreboard").setExecutor(new ScNameCommand());
+        plugin().getCommand("setscoreboardname").setExecutor(new ScNameCommand());
     }
 
     public static void initializeEvents() {
@@ -46,6 +46,7 @@ public class RegistrationUtil {
         manager.registerEvents(new LifeStealModifier(), plugin());
         manager.registerEvents(new NoCleanModifier(), plugin());
         manager.registerEvents(new NoSwordsModifier(), plugin());
+        manager.registerEvents(new PotModifier(), plugin());
 
         manager.registerEvents(new ChatListener(), plugin());
         manager.registerEvents(new DropsListener(), plugin());
@@ -58,6 +59,5 @@ public class RegistrationUtil {
         manager.registerEvents(new ServerGraceListener(), plugin());
         manager.registerEvents(new ServerMeetupListener(), plugin());
         manager.registerEvents(new ServerStateListener(), plugin());
-        manager.registerEvents(new PotModifier(), plugin());
     }
 }
