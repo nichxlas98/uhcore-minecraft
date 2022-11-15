@@ -17,6 +17,4 @@ public class ServerMeetupListener implements Listener {
         player.sendMessage(ChatColor.RED + "[*] You cannot do this while UHC Meetup is ongoing.");
         e.setCancelled(true);
     }
-
-
 }

@@ -5,15 +5,30 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ServerManagerUtil {
 
+    private static final FileConfiguration config = UhCore.getPlugin().getConfig();
+    public static final String scoreboardName = getScoreboardName();
+
+    public static void setScoreboardName(String scoreboardName) {
+        config.options().copyDefaults(true);
+        config.set("scoreboard-name", scoreboardName);
+        UhCore.getPlugin().saveConfig();
+    }
+
+    public static boolean checkScoreboardName() {
+        return UhCore.getPlugin().getConfig().getString("scoreboard-name") != null;
+    }
+
+    public static String getScoreboardName() {
+        return UhCore.getPlugin().getConfig().getString("scoreboard-name");
+    }
+
     public static void motdEnable() {
-        FileConfiguration config = UhCore.getPlugin().getConfig();
         config.options().copyDefaults(true);
         config.set("motd", "enabled");
         UhCore.getPlugin().saveConfig();
     }
 
     public static void motdDisable() {
-        FileConfiguration config = UhCore.getPlugin().getConfig();
         config.options().copyDefaults(true);
         config.set("motd", null);
         UhCore.getPlugin().saveConfig();

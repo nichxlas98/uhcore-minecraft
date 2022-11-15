@@ -16,6 +16,7 @@ public class ServerUtils {
     private static boolean UHC_KITS = false;
     private static boolean LIFE_STEAL = false;
     private static boolean NO_CLEAN = false;
+    private static boolean POT_UHC = false;
 
     private static int graceTime = 10;
 
@@ -150,5 +151,13 @@ public class ServerUtils {
 
     public static void setNoClean(boolean noClean) {
         NO_CLEAN = noClean;
+    }
+
+    public static void setPotUHC(boolean potUhc) {
+        POT_UHC = potUhc;
+    }
+
+    public static boolean isPotUhc() {
+        return POT_UHC;
     }
 }
