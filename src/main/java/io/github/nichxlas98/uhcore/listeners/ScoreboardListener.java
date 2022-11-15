@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import static io.github.nichxlas98.uhcore.utils.ServerManagerUtil.scoreboardName;
+
 public class ScoreboardListener implements Listener {
 
     @EventHandler
@@ -15,7 +17,7 @@ public class ScoreboardListener implements Listener {
         Player player = e.getPlayer();
         if (!(ServerManagerUtil.checkScoreboard())) return;
         ScoreHelper helper = ScoreHelper.createScore(player);
-        helper.setTitle("    &6UhCore&cMC    ");
+        helper.setTitle("    " + scoreboardName + "    ");
         helper.setSlot(5, "&7&m--------------");
         helper.setSlot(4, "&c» &fState: &6Waiting");
         helper.setSlot(3, "&c» &fGrace: &bNone");

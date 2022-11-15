@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -17,6 +18,7 @@ import static org.bukkit.ChatColor.*;
 public class AdminCommand implements CommandExecutor {
 
     private boolean isSpectating = false;
+    private Location playerLocation = null;
 
     private void setSpectator(boolean state) {
         isSpectating = state;
@@ -34,7 +36,7 @@ public class AdminCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
-        Location playerLocation = null;
+
 
         if (!(playerAdminLevel(player) >= MIN_ADMIN_LEVEL)) {
             player.sendMessage(PERMS_ERROR);
@@ -74,11 +76,21 @@ public class AdminCommand implements CommandExecutor {
 
                 Player target = Bukkit.getServer().getPlayer(args[1]);
                 if (target == null) return true;
+                if (target == player) {
+                    player.sendMessage(ChatColor.RED + "[*] You can't spectate yourself.");
+                    return true;
+                }
 
-                setSpectator(true);
                 playerLocation = player.getLocation();
+                setSpectator(true);
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(GOLD + "[*] You're now spectating " + RED + target.getName());
+                break;
+            case "off":
+                if (!isSpectating) return true;
+                setSpectator(false);
+                player.setGameMode(GameMode.SURVIVAL);
+                player.teleport(playerLocation);
                 break;
             case "broadcast":
                 if (!(playerAdminLevel(player) > LOW_ADMIN_LEVEL)) {
@@ -98,18 +110,12 @@ public class AdminCommand implements CommandExecutor {
                 }
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(GRAY + "[" + GOLD + "SERVER" + GRAY + "] " + RED + sm);
+                    online.sendMessage(GRAY + " [" + GOLD + "SERVER" + GRAY + "] " + RED + sm);
                 }
                 break;
             default:
                 sendArgsError(player);
         }
-
-        if (!(args[0].equalsIgnoreCase("off"))) return true;
-        if (!isSpectating) return true;
-        setSpectator(false);
-        player.teleport(playerLocation);
-        player.setGameMode(GameMode.SURVIVAL);
         return true;
     }
 }

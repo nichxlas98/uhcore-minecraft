@@ -3,6 +3,7 @@ package io.github.nichxlas98.uhcore;
 import io.github.nichxlas98.uhcore.items.ItemManager;
 import io.github.nichxlas98.uhcore.utils.RegistrationUtil;
 import io.github.nichxlas98.uhcore.utils.DatabaseUtil;
+import io.github.nichxlas98.uhcore.utils.ServerManagerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.config;
@@ -34,10 +35,8 @@ public final class UhCore extends JavaPlugin {
         RegistrationUtil.initializeCommands();
         RegistrationUtil.initializeEvents();
 
-        //TODO: BlockBreakEvent sends error, tools doesn't enchant if the tool is damaged;
-        //TODO: Leaderboards System using config files.
-        //TODO: Make the border shrink in the Nether.
-        //TODO: PotUHC modifier, leaves drop Health pots, gold ore drops Speed pots, on player death - give the killer 3 pearls, XXX drops pearls;
+        if (ServerManagerUtil.checkScoreboardName()) return;
+        ServerManagerUtil.setScoreboardName("UhCoreMC");
     }
 
     @Override

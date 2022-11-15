@@ -3,9 +3,12 @@ package io.github.nichxlas98.uhcore.utils;
 import io.github.nichxlas98.uhcore.UhCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.isGameEnabled;
 
@@ -14,12 +17,19 @@ public class BorderUtil {
     public static void startBorder(int size) {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         String theCommand = "worldborder add -200 60";
-        WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
-        wb.setCenter(0, 0);
-        wb.setSize(size);
-        wb.setDamageAmount(1D);
-        wb.setDamageBuffer(5D);
-        wb.setWarningDistance(100);
+
+        ArrayList<String> wbList = new ArrayList<>();
+        wbList.add("world");
+        wbList.add("world_nether");
+
+        for (String s : wbList) {
+            WorldBorder wb = Bukkit.getWorld(s).getWorldBorder();
+            wb.setCenter(0, 0);
+            wb.setSize(size);
+            wb.setDamageAmount(1D);
+            wb.setDamageBuffer(5D);
+            wb.setWarningDistance(100);
+        }
 
         new BukkitRunnable() {
             public void run() {
