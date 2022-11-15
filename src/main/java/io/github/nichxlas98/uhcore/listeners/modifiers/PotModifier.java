@@ -33,7 +33,7 @@ public class PotModifier implements Listener {
         if (!(randomPotDrop < 50)) return;
         blockBroken.getDrops().clear();
         blockWorld.dropItemNaturally(blockBroken.getLocation(), healthPot);
-        if (randomSpeed != 10) return;
+        if (!(randomSpeed < 10)) return;
         blockWorld.dropItemNaturally(blockBroken.getLocation(), speedPot);
     }
 
