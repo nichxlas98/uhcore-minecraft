@@ -13,6 +13,7 @@ import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.LOW_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.ServerManagerUtil.scoreboardName;
 import static org.bukkit.ChatColor.*;
 
 public class AdminCommand implements CommandExecutor {
@@ -110,7 +111,7 @@ public class AdminCommand implements CommandExecutor {
                 }
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(GRAY + " [" + GOLD + "SERVER" + GRAY + "] " + RED + sm);
+                    online.sendMessage(GRAY + " [" + GOLD + scoreboardName + GRAY + "] " + RED + sm);
                 }
                 break;
             default:
