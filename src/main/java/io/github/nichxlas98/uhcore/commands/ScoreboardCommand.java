@@ -13,6 +13,7 @@ import static io.github.nichxlas98.uhcore.models.MessageModels.PERMS_ERROR;
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
 import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.ServerManagerUtil.scoreboardName;
 
 public class ScoreboardCommand implements CommandExecutor {
     @Override
@@ -43,7 +44,7 @@ public class ScoreboardCommand implements CommandExecutor {
             ServerManagerUtil.scoreboardEnable();
             for (Player players : Bukkit.getOnlinePlayers()) {
                 ScoreHelper helper = ScoreHelper.createScore(players);
-                helper.setTitle("    &6UhCore&cMC    ");
+                helper.setTitle("    " + scoreboardName + "    ");
                 helper.setSlot(5, "&7&m--------------");
                 helper.setSlot(4, "&c» &fState: &6Waiting");
                 helper.setSlot(3, "&c» &fGrace: &bNone");

@@ -7,6 +7,7 @@ import io.github.nichxlas98.uhcore.listeners.*;
 import io.github.nichxlas98.uhcore.listeners.modifiers.LifeStealModifier;
 import io.github.nichxlas98.uhcore.listeners.modifiers.NoCleanModifier;
 import io.github.nichxlas98.uhcore.listeners.modifiers.NoSwordsModifier;
+import io.github.nichxlas98.uhcore.listeners.modifiers.PotModifier;
 import org.bukkit.plugin.PluginManager;
 
 import static org.bukkit.Bukkit.getServer;
@@ -37,6 +38,7 @@ public class RegistrationUtil {
         plugin().getCommand("createspawn").setExecutor(new SpawnCommand());
         plugin().getCommand("scoreboard").setExecutor(new ScoreboardCommand());
         plugin().getCommand("motd").setExecutor(new MotdCommand());
+        plugin().getCommand("setscoreboard").setExecutor(new ScNameCommand());
     }
 
     public static void initializeEvents() {
@@ -56,5 +58,6 @@ public class RegistrationUtil {
         manager.registerEvents(new ServerGraceListener(), plugin());
         manager.registerEvents(new ServerMeetupListener(), plugin());
         manager.registerEvents(new ServerStateListener(), plugin());
+        manager.registerEvents(new PotModifier(), plugin());
     }
 }

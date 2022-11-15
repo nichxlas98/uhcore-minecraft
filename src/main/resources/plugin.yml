@@ -67,6 +67,10 @@ commands:
   blockpm:
     description: Blocks the player's private messages.
     usage: /<command>
+  setscoreboardname:
+    description: Sets the server scoreboard name.
+    usage: /<command> <name>
+
 
 permissions:
   UhCore.manager:
