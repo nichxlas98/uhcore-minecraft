@@ -45,6 +45,7 @@ public class ModifiersCommand implements CommandExecutor {
         ItemStack lifeSteal = new ItemStack(Material.EYE_OF_ENDER);
         ItemStack spectatorMode = new ItemStack(Material.MAGMA_CREAM);
         ItemStack noClean = new ItemStack(Material.LEATHER);
+        ItemStack potUHC = new ItemStack(Material.POTION);
 
         ItemMeta emptyMeta = empty.getItemMeta();
         emptyMeta.setDisplayName(ChatColor.ITALIC + " ");
@@ -56,15 +57,16 @@ public class ModifiersCommand implements CommandExecutor {
         newItem(noSwords, ChatColor.YELLOW, "NoSwords", "Disallows all swords from being used.");
         newItem(uhcKits, ChatColor.BLUE, "KitsUHC", "Allows /kit usage during UHC.");
         newItem(goldRush, ChatColor.GOLD, "GoldRush", "All players are given a Golden Ingot on a player's death.");
-        newItem(pearlUHC, ChatColor.DARK_PURPLE, "PearlUHC", "Players spawn with 3 EnderPearls, all players drop an EnderPearl on death.");
+        newItem(pearlUHC, ChatColor.DARK_PURPLE, "PearlUHC", "Players spawn with three EnderPearls, all players drop an EnderPearl on death.");
         newItem(doubleHeads, ChatColor.GREEN, "Double Heads", "Doubles the Head drops of all players during UHC. ");
         newItem(cutClean, ChatColor.GOLD, "CutClean", "CutClean UHC Mode.");
         newItem(doubleHealth, ChatColor.RED, "Double Health", "Doubles the Health of all players during UHC.");
         newItem(doubleSpeed, ChatColor.AQUA, "Double Speed", "Doubles the Speed of all players during UHC.");
+        newItem(potUHC, ChatColor.DARK_BLUE, "PotUHC", "All leaves drops Speed & Healing Potions. When a player obtains a kill, that player is given three EnderPearls.");
 
         ItemStack[] menu_items = {
                 doubleHealth, pearlUHC, cutClean, uhcKits, doubleSpeed, goldRush, doubleHeads, noSwords, lifeSteal,
-                spectatorMode, noClean, empty, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
+                spectatorMode, noClean, potUHC, empty, empty, empty, empty, empty, empty}; // ROW 2 <<<
         gui.setContents(menu_items);
         player.openInventory(gui);
         return true;

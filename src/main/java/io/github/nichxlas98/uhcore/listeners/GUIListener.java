@@ -117,6 +117,15 @@ public class GUIListener implements Listener {
                         player.sendMessage(ChatColor.GREEN + "[*] NoClean has been enabled.");
                     }
                     break;
+                case POTION:
+                    if (isPotUhc()) {
+                        setPotUHC(false);
+                        player.sendMessage(ChatColor.RED + "[*] PotUHC has been disabled.");
+                    } else {
+                        setPotUHC(true);
+                        player.sendMessage(ChatColor.RED + "[*] PotUHC has been enabled.");
+                    }
+                    break;
                 default:
                     //
             }
