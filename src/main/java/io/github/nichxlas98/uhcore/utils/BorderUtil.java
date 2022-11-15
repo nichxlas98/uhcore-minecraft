@@ -44,4 +44,16 @@ public class BorderUtil {
             }
         }.runTaskTimer(UhCore.getPlugin(), 0L, 6000);
     }
+
+    public static void resetBorder() {
+        ArrayList<String> wbList = new ArrayList<>();
+        wbList.add("world");
+        wbList.add("world_nether");
+
+        for (String s : wbList) {
+            WorldBorder wb = Bukkit.getWorld(s).getWorldBorder();
+            wb.setCenter(0, 0);
+            wb.setSize(5000);
+        }
+    }
 }
