@@ -28,7 +28,7 @@ public class GrantCommand implements CommandExecutor {
         Player player = (Player) sender;
         int amount;
 
-        if (!(playerAdminLevel(player) == MAX_ADMIN_LEVEL) || !(player.hasPermission("UhCore.manager"))) {
+        if (!(playerAdminLevel(player) == MAX_ADMIN_LEVEL) || !(player.hasPermission("UhCore.manager")) || !player.isOp()) {
             player.sendMessage(PERMS_ERROR);
             return true;
         }
@@ -61,23 +61,18 @@ public class GrantCommand implements CommandExecutor {
         player.sendMessage(ChatColor.GREEN + "[*] You've granted " + target.getName() + " with an admin level of " + ChatColor.GOLD + amount + ".");
         switch (amount) {
             case 1:
-                player.performCommand("lp user " + target.getName() + " parent set junior");
                 target.sendMessage(ChatColor.GREEN + "[*] You've been granted " + ChatColor.GOLD + "Junior Admin " + ChatColor.GREEN + "by " + player.getName() + ".");
                 break;
             case 2:
-                player.performCommand("lp user " + target.getName() + " parent set admin");
                 target.sendMessage(ChatColor.GREEN + "[*] You've been granted " + ChatColor.AQUA + "Administrator " + ChatColor.GREEN + "by " + player.getName() + ".");
                 break;
             case 3:
-                player.performCommand("lp user " + target.getName() + " parent set senior");
                 target.sendMessage(ChatColor.GREEN + "[*] You've been granted " + ChatColor.DARK_AQUA + "Senior Admin " + ChatColor.GREEN + "by " + player.getName() + ".");
                 break;
             case 4:
-                player.performCommand("lp user " + target.getName() + " parent set manager");
                 target.sendMessage(ChatColor.GREEN + "[*] You've been granted " + ChatColor.GOLD + "Manager " + ChatColor.GREEN + "by " + player.getName() + ".");
                 break;
             default:
-                player.performCommand("lp user " + target.getName() + " parent set default");
                 target.sendMessage(ChatColor.GREEN + "[*] Your admin level has been set to " + ChatColor.GOLD + "0 " + ChatColor.GREEN + "by " + player.getName() + ".");
         }
         return true;
