@@ -11,7 +11,6 @@ import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleErro
 import static io.github.nichxlas98.uhcore.models.ModelsClass.pmsBlocked;
 
 public class BlockMsgCommand implements CommandExecutor {
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (senderConsoleError(sender)) return true;

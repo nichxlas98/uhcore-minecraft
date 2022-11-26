@@ -38,7 +38,6 @@ public class AdminCommand implements CommandExecutor {
         if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
-
         if (!(playerAdminLevel(player) >= MIN_ADMIN_LEVEL)) {
             player.sendMessage(PERMS_ERROR);
             return true;

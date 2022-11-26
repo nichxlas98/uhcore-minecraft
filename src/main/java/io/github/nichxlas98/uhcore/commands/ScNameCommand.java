@@ -20,8 +20,8 @@ public class ScNameCommand implements CommandExecutor {
         }
 
         player.sendMessage(ChatColor.GRAY + "[*] TIP! Remember to Color Code your Scoreboard Name! (https://htmlcolorcodes.com/minecraft-color-codes/)");
-
         player.sendMessage(ChatColor.RED + "Set Scoreboard Name to: " + args[0]);
+
         ServerManagerUtil.setScoreboardName(args[0]);
         return true;
     }
