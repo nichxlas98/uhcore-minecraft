@@ -1,33 +1,53 @@
 package io.github.nichxlas98.uhcore.utils;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.config;
-import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.yml;
+import static io.github.nichxlas98.uhcore.models.ModelsClass.staffMode;
 
-public class AdminlevelUtil {
+public class AdminUtil {
 
     public static final int MAX_ADMIN_LEVEL = 4;
     public static final int HIGH_ADMIN_LEVEL = 3;
     public static final int LOW_ADMIN_LEVEL = 2;
     public static final int MIN_ADMIN_LEVEL = 1;
 
+
+    public static boolean getStaffMode(UUID p) {
+        return DatabaseUtil.config.getString("stats." + p + ".staffMode").equals("enabled");
+    }
+
+    public static void setStaffMode(UUID p, Player player, boolean state) {
+        if (state) {
+            if (!(staffMode.contains(player))) staffMode.add(player);
+            player.setGameMode(GameMode.CREATIVE);
+            DatabaseUtil.config.set("stats." + p + ".staffMode", "enabled");
+            DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
+            return;
+        }
+
+        staffMode.remove(player);
+        player.setGameMode(GameMode.SURVIVAL);
+        DatabaseUtil.config.set("stats." + p + ".staffMode", "disabled");
+        DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
+    }
+
     public static void setAdminLevel(UUID p, int adminLevel) {
-        config.set("stats." + p + ".adminLevel", adminLevel);
-        DatabaseUtil.saveCustomData(config, yml);
+        DatabaseUtil.config.set("stats." + p + ".adminLevel", adminLevel);
+        DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
     }
 
     public static boolean hasAdminLevel(UUID p) {
-        return config.getString("stats." + p + ".adminLevel") != null;
+        return DatabaseUtil.config.getString("stats." + p + ".adminLevel") != null;
     }
 
     public static int getAdminLevel(UUID p) {
         int adminLevel = 0;
-        if (config.getString("stats." + p + ".adminLevel") != null) {
-            adminLevel = Integer.parseInt(config.getString("stats." + p + ".adminLevel"));
+        if (DatabaseUtil.config.getString("stats." + p + ".adminLevel") != null) {
+            adminLevel = Integer.parseInt(DatabaseUtil.config.getString("stats." + p + ".adminLevel"));
             return adminLevel;
         } else {
             System.out.println("[*] That player does not have an adminLevel.");
