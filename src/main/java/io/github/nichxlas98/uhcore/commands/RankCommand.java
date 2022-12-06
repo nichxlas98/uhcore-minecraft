@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import static io.github.nichxlas98.uhcore.models.MessageModels.PERMS_ERROR;
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MAX_ADMIN_LEVEL;
 
 public class RankCommand implements CommandExecutor {
     @Override
@@ -36,23 +36,23 @@ public class RankCommand implements CommandExecutor {
         }
 
         if (args[1].equalsIgnoreCase("supporter-true")) {
-            if (PlayerManagerUtil.isSupporter(player.getUniqueId())) {
+            if (PlayerManagerUtil.getSupporter(player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "[*] That player is already a Supporter.");
                 return true;
             }
             target.sendMessage(ChatColor.GREEN + "[*] You've been granted " + ChatColor.GOLD + "Supporter " + ChatColor.GREEN + "rank.");
             player.sendMessage(ChatColor.GREEN + "[*] You've granted " + target.getName() + " with the Supporter rank.");
-            PlayerManagerUtil.addSupporter(player.getUniqueId());
+            PlayerManagerUtil.setSupporter(player.getUniqueId(), true);
             return true;
         }
 
         if (args[1].equalsIgnoreCase("supporter-false")) {
-            if (!(PlayerManagerUtil.isSupporter(player.getUniqueId()))) {
+            if (!(PlayerManagerUtil.getSupporter(player.getUniqueId()))) {
                 player.sendMessage(ChatColor.RED + "[*] That player is not a Supporter.");
                 return true;
             }
             player.sendMessage(ChatColor.GREEN + "[*] You've removed " + target.getName() + " from the Supporter rank.");
-            PlayerManagerUtil.removeSupporter(player.getUniqueId());
+            PlayerManagerUtil.setSupporter(player.getUniqueId(), false);
             return true;
         }
         return true;

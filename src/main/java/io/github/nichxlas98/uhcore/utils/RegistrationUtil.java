@@ -39,6 +39,8 @@ public class RegistrationUtil {
         plugin().getCommand("scoreboard").setExecutor(new ScoreboardCommand());
         plugin().getCommand("motd").setExecutor(new MotdCommand());
         plugin().getCommand("setscoreboardname").setExecutor(new ScNameCommand());
+        plugin().getCommand("staffmode").setExecutor(new StaffModeCommand());
+        plugin().getCommand("freeze").setExecutor(new FreezeCommand());
     }
 
     public static void initializeEvents() {
@@ -59,5 +61,7 @@ public class RegistrationUtil {
         manager.registerEvents(new ServerGraceListener(), plugin());
         manager.registerEvents(new ServerMeetupListener(), plugin());
         manager.registerEvents(new ServerStateListener(), plugin());
+        manager.registerEvents(new PlayerStaffListener(), plugin());
+        manager.registerEvents(new PlayerFrozenListener(), plugin());
     }
 }

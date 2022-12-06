@@ -1,6 +1,7 @@
 package io.github.nichxlas98.uhcore.listeners;
 
 import io.github.nichxlas98.uhcore.UhCore;
+import io.github.nichxlas98.uhcore.utils.AdminUtil;
 import io.github.nichxlas98.uhcore.utils.PlayerManagerUtil;
 import io.github.nichxlas98.uhcore.utils.SpawnUtil;
 import org.bukkit.*;
@@ -18,7 +19,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.UUID;
+
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.PlayerManagerUtil.getSupporter;
+import static io.github.nichxlas98.uhcore.utils.PlayerManagerUtil.setSupporter;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 
 
@@ -28,14 +33,24 @@ public class PlayerStateListener implements Listener {
     @EventHandler
     public void playerJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        UUID playerUUID = player.getUniqueId();
         e.setJoinMessage(null);
         if (!player.hasPlayedBefore()) {
             SpawnUtil.spawnTeleport(player);
         }
 
-        if (PlayerManagerUtil.getMessageStatus(player.getUniqueId())) {
+        if (PlayerManagerUtil.getMessageStatus(playerUUID)) {
             pmsBlocked.add(player);
             player.sendMessage(ChatColor.AQUA + "[*] Your message status is: " + ChatColor.RED + "blocked.");
+        }
+
+        if (AdminUtil.getStaffMode(playerUUID)) {
+            staffMode.add(player);
+            player.sendMessage(ChatColor.GRAY + "[*] Your" + ChatColor.GOLD + " staff mode " + ChatColor.RED + "has been resumed.");
+        }
+
+        if (!(getSupporter(playerUUID))) {
+            setSupporter(playerUUID, false);
         }
     }
 

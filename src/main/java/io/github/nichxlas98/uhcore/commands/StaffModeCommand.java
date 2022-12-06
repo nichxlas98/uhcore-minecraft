@@ -49,13 +49,13 @@ public class StaffModeCommand implements CommandExecutor {
     }
 
     private static void giveStaffInventory(Player player) {
-        player.getInventory().setItem(1, STAFF_COMPASS);
-        player.getInventory().setItem(2, STAFF_BOOK);
-        player.getInventory().setItem(3, STAFF_ROD);
+        player.getInventory().setItem(0, STAFF_COMPASS);
+        player.getInventory().setItem(1, STAFF_BOOK);
+        player.getInventory().setItem(2, STAFF_ROD);
 
-        player.getInventory().setItem(7, STAFF_ICE);
-        player.getInventory().setItem(8, STAFF_PAPER);
-        player.getInventory().setItem(9, STAFF_WOOLOFF);
+        player.getInventory().setItem(6, STAFF_ICE);
+        player.getInventory().setItem(7, STAFF_PAPER);
+        player.getInventory().setItem(8, STAFF_WOOLOFF);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class StaffModeCommand implements CommandExecutor {
             manageInventory(player, "clear");
             setStaffMode(playerUUID, player, true);
             giveStaffInventory(player);
-            player.sendMessage(ChatColor.GREEN + "[*] Staff Mode Enabled.");
+            player.sendMessage(ChatColor.DARK_GREEN + "[*] Staff Mode Enabled.");
         }
 
         manageInventory(player, "clear");
