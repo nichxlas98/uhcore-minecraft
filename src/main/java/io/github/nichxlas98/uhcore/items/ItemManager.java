@@ -13,16 +13,16 @@ import java.util.ArrayList;
 
 public class ItemManager {
 
-    public static ItemStack GOLDEN_HEAD;
-    public static ItemStack STAFF_COMPASS;
-    public static ItemStack STAFF_BOOK;
-    public static ItemStack STAFF_ROD;
-    public static ItemStack STAFF_ICE;
-    public static ItemStack STAFF_PAPER;
-    public static ItemStack STAFF_WOOLON;
-    public static ItemStack STAFF_WOOLOFF;
+    private static ItemStack GOLDEN_HEAD;
 
+    private static ItemStack STAFF_COMPASS;
 
+    private static ItemStack STAFF_BOOK;
+    private static ItemStack STAFF_ROD;
+    private static ItemStack STAFF_ICE;
+    private static ItemStack STAFF_PAPER;
+    private static ItemStack STAFF_WOOLON;
+    private static ItemStack STAFF_WOOLOFF;
 
     public static void init() {
 
@@ -89,7 +89,7 @@ public class ItemManager {
         itemMeta.setLore(itemLore);
         item.setItemMeta(itemMeta);
 
-        STAFF_BOOK = item;
+        STAFF_ROD = item;
     }
 
     private static void createStaffIce() {
@@ -146,5 +146,37 @@ public class ItemManager {
         item.setItemMeta(itemMeta);
 
         STAFF_WOOLOFF = item;
+    }
+
+    public static ItemStack getGoldenHead() {
+        return GOLDEN_HEAD;
+    }
+
+    public static ItemStack getStaffCompass() {
+        return STAFF_COMPASS;
+    }
+
+    public static ItemStack getStaffBook() {
+        return STAFF_BOOK;
+    }
+
+    public static ItemStack getStaffRod() {
+        return STAFF_ROD;
+    }
+
+    public static ItemStack getStaffIce() {
+        return STAFF_ICE;
+    }
+
+    public static ItemStack getStaffPaper() {
+        return STAFF_PAPER;
+    }
+
+    public static ItemStack getStaffWoolon() {
+        return STAFF_WOOLON;
+    }
+
+    public static ItemStack getStaffWooloff() {
+        return STAFF_WOOLOFF;
     }
 }

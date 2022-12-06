@@ -18,8 +18,8 @@ import static io.github.nichxlas98.uhcore.utils.AdminUtil.*;
 
 public class StaffModeCommand implements CommandExecutor {
 
-    public static HashMap<String, ItemStack[]> saveInventory = new HashMap<>();
-    public static HashMap<String, ItemStack[]> saveArmor = new HashMap<>();
+    private static final HashMap<String, ItemStack[]> saveInventory = new HashMap<>();
+    private static final HashMap<String, ItemStack[]> saveArmor = new HashMap<>();
 
     private static void manageInventory(Player player, String system) {
         //True = Load, False = Save
@@ -49,13 +49,13 @@ public class StaffModeCommand implements CommandExecutor {
     }
 
     private static void giveStaffInventory(Player player) {
-        player.getInventory().setItem(0, STAFF_COMPASS);
-        player.getInventory().setItem(1, STAFF_BOOK);
-        player.getInventory().setItem(2, STAFF_ROD);
+        player.getInventory().setItem(0, getStaffCompass());
+        player.getInventory().setItem(1, getStaffBook());
+        player.getInventory().setItem(2, getStaffRod());
 
-        player.getInventory().setItem(6, STAFF_ICE);
-        player.getInventory().setItem(7, STAFF_PAPER);
-        player.getInventory().setItem(8, STAFF_WOOLOFF);
+        player.getInventory().setItem(6, getStaffIce());
+        player.getInventory().setItem(7, getStaffPaper());
+        player.getInventory().setItem(8, getStaffWoolon());
     }
 
     @Override

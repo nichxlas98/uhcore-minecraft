@@ -20,8 +20,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 
-import static io.github.nichxlas98.uhcore.items.ItemManager.STAFF_WOOLOFF;
-import static io.github.nichxlas98.uhcore.items.ItemManager.STAFF_WOOLON;
+import static io.github.nichxlas98.uhcore.items.ItemManager.getStaffWooloff;
+import static io.github.nichxlas98.uhcore.items.ItemManager.getStaffWoolon;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.AdminUtil.getAdminLevel;
@@ -77,7 +77,7 @@ public class PlayerStaffListener implements Listener {
             case "Teleport Rod":
                 playerList.clear();
                 playerList.addAll(Bukkit.getServer().getOnlinePlayers());
-                player.teleport(playerList.get(RANDOM.nextInt()).getLocation());
+                player.teleport(playerList.get(RANDOM.nextInt(playerList.size())).getLocation());
                 break;
             case "Online Staff":
                 Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Server Admins");
@@ -100,7 +100,7 @@ public class PlayerStaffListener implements Listener {
                     online.hidePlayer(player);
                 }
 
-                player.getInventory().setItem(8, STAFF_WOOLOFF);
+                player.getInventory().setItem(8, getStaffWooloff());
                 break;
             case "Disable Vanish":
                 playerVanished.remove(player);
@@ -108,7 +108,7 @@ public class PlayerStaffListener implements Listener {
                     if (playerAdminLevel(online) > MIN_ADMIN_LEVEL) continue;
                     online.showPlayer(player);
                 }
-                player.getInventory().setItem(8, STAFF_WOOLON);
+                player.getInventory().setItem(8, getStaffWoolon());
                 break;
             default:
                 //
