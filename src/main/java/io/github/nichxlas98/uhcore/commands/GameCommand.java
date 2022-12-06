@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.BorderUtil.resetBorder;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
 import static org.bukkit.Bukkit.getServer;

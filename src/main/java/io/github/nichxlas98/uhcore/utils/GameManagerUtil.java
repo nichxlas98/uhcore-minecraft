@@ -39,7 +39,7 @@ public class GameManagerUtil {
             if (isNoSwords()) {
                 players.sendMessage(ChatColor.ITALIC + "[*] No Swords is enabled, all players are denied from using swords!");
             }
-            if (AdminlevelUtil.getAdminLevel(players.getUniqueId()) == 0) {
+            if (AdminUtil.getAdminLevel(players.getUniqueId()) == 0) {
                 players.setGameMode(GameMode.SURVIVAL);
             }
             players.sendMessage(ChatColor.GREEN + "[*] " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has started the game.");

@@ -12,6 +12,7 @@ import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleErro
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerFrozen;
 import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.FrozenUtil.setFrozen;
 
 public class FreezeCommand implements CommandExecutor {
 
@@ -44,13 +45,13 @@ public class FreezeCommand implements CommandExecutor {
         if (playerFrozen.contains(target)) {
             player.sendMessage(ChatColor.AQUA + "[*] You've unfrozen " + target.getDisplayName());
             target.sendMessage(ChatColor.RED + "[*] You've been unfrozen!");
-            playerFrozen.remove(target);
+            setFrozen(target.getUniqueId(), target, false);
             return true;
         }
 
         player.sendMessage(ChatColor.AQUA + "[*] You've frozen " + target.getDisplayName());
         target.sendMessage(ChatColor.RED + "[*] You've been frozen!");
-        playerFrozen.add(target);
+        setFrozen(target.getUniqueId(), target, true);
         return true;
     }
 }
