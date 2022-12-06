@@ -3,7 +3,6 @@ package io.github.nichxlas98.uhcore.utils;
 import io.github.nichxlas98.uhcore.UhCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.scheduler.BukkitRunnable;

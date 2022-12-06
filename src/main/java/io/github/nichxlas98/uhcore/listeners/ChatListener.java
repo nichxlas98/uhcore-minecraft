@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.listeners;
 
-import io.github.nichxlas98.uhcore.utils.AdminlevelUtil;
+import io.github.nichxlas98.uhcore.utils.AdminUtil;
 import io.github.nichxlas98.uhcore.utils.PlayerManagerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.adminChat;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.*;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.*;
 
 public class ChatListener implements Listener {
 
@@ -20,7 +20,7 @@ public class ChatListener implements Listener {
         e.setCancelled(true);
         Player player = e.getPlayer();
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-        int playerAdminLevel = AdminlevelUtil.getAdminLevel(player.getUniqueId());
+        int playerAdminLevel = AdminUtil.getAdminLevel(player.getUniqueId());
         if (e.getMessage().contains("#")) {
             if (!(playerAdminLevel >= MIN_ADMIN_LEVEL)) {
                 adminChat.remove(player);
@@ -42,39 +42,39 @@ public class ChatListener implements Listener {
         switch (playerAdminLevel) {
             case 0:
                 if (PlayerManagerUtil.isSupporter(player.getUniqueId())) {
-                    console.sendMessage(AdminlevelUtil.isSupporter(player, e.getMessage()));
+                    console.sendMessage(AdminUtil.isSupporter(player, e.getMessage()));
                     for (Player online : Bukkit.getOnlinePlayers()) {
-                        online.sendMessage(AdminlevelUtil.isSupporter(player, e.getMessage()));
+                        online.sendMessage(AdminUtil.isSupporter(player, e.getMessage()));
                     }
                     return;
                 }
-                console.sendMessage(AdminlevelUtil.isCommunity(player, e.getMessage()));
+                console.sendMessage(AdminUtil.isCommunity(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminlevelUtil.isCommunity(player, e.getMessage()));
+                    online.sendMessage(AdminUtil.isCommunity(player, e.getMessage()));
                 }
                 break;
             case 1:
-                console.sendMessage(AdminlevelUtil.isJunior(player, e.getMessage()));
+                console.sendMessage(AdminUtil.isJunior(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminlevelUtil.isJunior(player, e.getMessage()));
+                    online.sendMessage(AdminUtil.isJunior(player, e.getMessage()));
                 }
                 break;
             case 2:
-                console.sendMessage(AdminlevelUtil.isAdmin(player, e.getMessage()));
+                console.sendMessage(AdminUtil.isAdmin(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminlevelUtil.isAdmin(player, e.getMessage()));
+                    online.sendMessage(AdminUtil.isAdmin(player, e.getMessage()));
                 }
                 break;
             case 3:
-                console.sendMessage(AdminlevelUtil.isSenior(player, e.getMessage()));
+                console.sendMessage(AdminUtil.isSenior(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminlevelUtil.isSenior(player, e.getMessage()));
+                    online.sendMessage(AdminUtil.isSenior(player, e.getMessage()));
                 }
                 break;
             case 4:
-                console.sendMessage(AdminlevelUtil.isManager(player, e.getMessage()));
+                console.sendMessage(AdminUtil.isManager(player, e.getMessage()));
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendMessage(AdminlevelUtil.isManager(player, e.getMessage()));
+                    online.sendMessage(AdminUtil.isManager(player, e.getMessage()));
                 }
                 break;
             default:
