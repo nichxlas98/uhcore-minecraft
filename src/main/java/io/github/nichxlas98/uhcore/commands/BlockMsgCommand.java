@@ -19,11 +19,11 @@ public class BlockMsgCommand implements CommandExecutor {
         if (pmsBlocked.contains(player)) {
             pmsBlocked.remove(player);
             player.sendMessage(ChatColor.GREEN + "[*] Your PMs have been enabled.");
-            PlayerManagerUtil.unblockMessages(player.getUniqueId());
+            PlayerManagerUtil.setMessageStatus(player.getUniqueId(), true);
         } else {
             pmsBlocked.add(player);
             player.sendMessage(ChatColor.RED + "[*] Your PMs have been disabled.");
-            PlayerManagerUtil.blockMessages(player.getUniqueId());
+            PlayerManagerUtil.setMessageStatus(player.getUniqueId(), false);
         }
         return true;
     }
