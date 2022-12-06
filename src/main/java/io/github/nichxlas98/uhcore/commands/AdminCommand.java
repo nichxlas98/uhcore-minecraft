@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.LOW_ADMIN_LEVEL;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.LOW_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.ServerManagerUtil.scoreboardName;
 import static org.bukkit.ChatColor.*;
 
