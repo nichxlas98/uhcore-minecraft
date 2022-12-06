@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MAX_ADMIN_LEVEL;
 
 public class SpawnCommand implements CommandExecutor {
 

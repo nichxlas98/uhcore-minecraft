@@ -70,6 +70,12 @@ commands:
   setscoreboardname:
     description: Sets the server scoreboard name.
     usage: /<command> <name>
+  staffmode:
+    description: Manage staff mode.
+    usage: /<command>
+  freeze:
+    description: Freeze a player.
+    usage: /<command> <player>
 
 
 permissions:

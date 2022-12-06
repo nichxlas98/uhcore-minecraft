@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminlevelUtil;
+import io.github.nichxlas98.uhcore.utils.AdminUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import static io.github.nichxlas98.uhcore.models.MessageModels.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MAX_ADMIN_LEVEL;
 
 public class GrantCommand implements CommandExecutor {
 
@@ -57,7 +57,7 @@ public class GrantCommand implements CommandExecutor {
             return true;
         }
 
-        AdminlevelUtil.setAdminLevel(target.getUniqueId(), amount);
+        AdminUtil.setAdminLevel(target.getUniqueId(), amount);
         player.sendMessage(ChatColor.GREEN + "[*] You've granted " + target.getName() + " with an admin level of " + ChatColor.GOLD + amount + ".");
         switch (amount) {
             case 1:
