@@ -1,6 +1,6 @@
 package io.github.nichxlas98.uhcore.commands;
 
-import io.github.nichxlas98.uhcore.utils.AdminlevelUtil;
+import io.github.nichxlas98.uhcore.utils.AdminUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static io.github.nichxlas98.uhcore.models.MessageModels.PERMS_ERROR;
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MAX_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MAX_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.setMaintenanceMode;
 
 public class MaintenanceCommand implements CommandExecutor {
@@ -52,7 +52,7 @@ public class MaintenanceCommand implements CommandExecutor {
             player.sendMessage(ChatColor.GOLD + "[*] Maintenance mode has been enabled.");
             Bukkit.getServer().setWhitelist(true);
             for (Player online : Bukkit.getOnlinePlayers()) {
-                if (!(AdminlevelUtil.getAdminLevel(online.getUniqueId()) >= 2)) {
+                if (!(AdminUtil.getAdminLevel(online.getUniqueId()) >= 2)) {
                     isNotAdmin.add(online.getName());
                 }
             }

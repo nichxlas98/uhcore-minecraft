@@ -1,7 +1,7 @@
 package io.github.nichxlas98.uhcore.models;
 
 
-import io.github.nichxlas98.uhcore.utils.AdminlevelUtil;
+import io.github.nichxlas98.uhcore.utils.AdminUtil;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -21,16 +21,16 @@ public class ModelsClass {
     public static final int FISHER_MAN_KIT = 4;
     public static final int ENCHANTER_KIT = 5;
     public static final int JEWELER_KIT = 6;
-
+    public static final ArrayList<Player> playerFrozen = new ArrayList<>();
     public static final ArrayList<Player> adminChat = new ArrayList<>();
     public static final ArrayList<Player> pmsBlocked = new ArrayList<>();
-
+    public static final ArrayList<Player> staffMode = new ArrayList<>();
 
     public static boolean getChance(int minimalChance) {
         return RANDOM.nextInt(99) + 1 >= minimalChance;
     }
 
     public static int playerAdminLevel(Player player) {
-        return AdminlevelUtil.getAdminLevel(player.getUniqueId());
+        return AdminUtil.getAdminLevel(player.getUniqueId());
     }
 }

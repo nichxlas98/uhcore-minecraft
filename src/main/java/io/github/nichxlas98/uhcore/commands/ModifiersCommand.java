@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import static io.github.nichxlas98.uhcore.models.MessageModels.PERMS_ERROR;
 import static io.github.nichxlas98.uhcore.models.MessageModels.senderConsoleError;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.playerAdminLevel;
-import static io.github.nichxlas98.uhcore.utils.AdminlevelUtil.MIN_ADMIN_LEVEL;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
 
 public class ModifiersCommand implements CommandExecutor {
     @Override
