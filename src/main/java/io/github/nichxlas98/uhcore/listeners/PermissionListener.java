@@ -57,7 +57,7 @@ public class PermissionListener implements Listener {
                 playerRank(player, ChatColor.RED, "MA", player.getName());
                 break;
             default:
-                if (PlayerManagerUtil.isSupporter(playerUUID)) {
+                if (PlayerManagerUtil.getSupporter(playerUUID)) {
                     player.setPlayerListName(ChatColor.GRAY + " (" + ChatColor.LIGHT_PURPLE + "S" + ChatColor.GRAY + ") " + playerName);
                     player.sendMessage(ChatColor.YELLOW + "[*] You're signed in as a " + ChatColor.WHITE + "Regular player.");
                     return;

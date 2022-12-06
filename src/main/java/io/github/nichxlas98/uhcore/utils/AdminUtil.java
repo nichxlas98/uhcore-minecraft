@@ -77,7 +77,7 @@ public class AdminUtil {
         return ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
     }
 
-    public static String isSupporter(Player player, String message) {
+    public static String isDonator(Player player, String message) {
         return ChatColor.GRAY + "(" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ") " + ChatColor.GRAY + player.getName() + " says: " + ChatColor.WHITE + message;
     }
 }

@@ -18,7 +18,7 @@ public class NearCommand implements CommandExecutor {
         if (senderConsoleError(sender)) return true;
         Player player = (Player) sender;
 
-        if (!(PlayerManagerUtil.isSupporter(player.getUniqueId()))) {
+        if (!(PlayerManagerUtil.getSupporter(player.getUniqueId()))) {
             player.sendMessage(ChatColor.RED + "[*] You must be a Supporter to use this command!");
             return true;
         }

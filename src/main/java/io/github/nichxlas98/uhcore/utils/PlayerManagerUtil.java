@@ -3,35 +3,37 @@ package io.github.nichxlas98.uhcore.utils;
 import java.util.UUID;
 
 import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.config;
-import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.yml;
 
 public class PlayerManagerUtil {
 
-    public static void addSupporter(UUID p) {
-        config.set("stats." + p + ".supporter", "true");
-        DatabaseUtil.saveCustomData(config, yml);
+    public static void setSupporter(UUID p, boolean isSupporter) {
+        if (isSupporter) {
+            config.set("stats." + p + ".supporter", "true");
+            DatabaseUtil.saveCustomData(config, DatabaseUtil.yml);
+            return;
+        }
+
+        config.set("stats." + p + ".supporter", "false");
+        DatabaseUtil.saveCustomData(config, DatabaseUtil.yml);
     }
 
-    public static void removeSupporter(UUID p) {
-        config.set("stats." + p + ".supporter", null);
-        DatabaseUtil.saveCustomData(config, yml);
+    public static boolean getSupporter(UUID p) {
+        return config.getString("stats." + p + ".supporter") != null || config.getString("stats." + p + ".supporter").equalsIgnoreCase("true");
     }
 
-    public static boolean isSupporter(UUID p) {
-        return config.getString("stats." + p + ".supporter") != null;
-    }
 
-    public static void blockMessages(UUID p) {
-        config.set("stats." + p + ".messageStatus", "blocked");
-        DatabaseUtil.saveCustomData(config, yml);
-    }
+    public static void setMessageStatus(UUID p, boolean status) {
+        if (status) {
+            config.set("stats." + p + ".messageStatus", "enabled");
+            DatabaseUtil.saveCustomData(config, DatabaseUtil.yml);
+            return;
+        }
 
-    public static void unblockMessages(UUID p) {
-        config.set("stats." + p + ".messageStatus", null);
-        DatabaseUtil.saveCustomData(config, yml);
+        config.set("stats." + p + ".messageStatus", "disabled");
+        DatabaseUtil.saveCustomData(config, DatabaseUtil.yml);
     }
 
     public static boolean getMessageStatus(UUID p) {
-        return config.getString("stats." + p + ".disabledPMs") != null;
+        return config.getString("stats." + p + ".messageStatus").equals("enabled");
     }
 }

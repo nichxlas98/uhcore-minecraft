@@ -41,10 +41,10 @@ public class ChatListener implements Listener {
 
         switch (playerAdminLevel) {
             case 0:
-                if (PlayerManagerUtil.isSupporter(player.getUniqueId())) {
-                    console.sendMessage(AdminUtil.isSupporter(player, e.getMessage()));
+                if (PlayerManagerUtil.getSupporter(player.getUniqueId())) {
+                    console.sendMessage(AdminUtil.isDonator(player, e.getMessage()));
                     for (Player online : Bukkit.getOnlinePlayers()) {
-                        online.sendMessage(AdminUtil.isSupporter(player, e.getMessage()));
+                        online.sendMessage(AdminUtil.isDonator(player, e.getMessage()));
                     }
                     return;
                 }
