@@ -23,7 +23,8 @@ public class AdminUtil {
     public static void setStaffMode(UUID p, Player player, boolean state) {
         if (state) {
             if (!(staffMode.contains(player))) staffMode.add(player);
-            player.setGameMode(GameMode.CREATIVE);
+            player.setGameMode(GameMode.SURVIVAL);
+            player.setAllowFlight(true);
             DatabaseUtil.config.set("stats." + p + ".staffMode", "enabled");
             DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
             return;
@@ -31,6 +32,7 @@ public class AdminUtil {
 
         staffMode.remove(player);
         player.setGameMode(GameMode.SURVIVAL);
+        player.setAllowFlight(true);
         DatabaseUtil.config.set("stats." + p + ".staffMode", "disabled");
         DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
     }
