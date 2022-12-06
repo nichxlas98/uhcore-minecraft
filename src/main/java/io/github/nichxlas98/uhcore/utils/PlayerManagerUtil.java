@@ -18,7 +18,8 @@ public class PlayerManagerUtil {
     }
 
     public static boolean getSupporter(UUID p) {
-        return config.getString("stats." + p + ".supporter") != null || config.getString("stats." + p + ".supporter").equalsIgnoreCase("true");
+        if (config.getString("stats." + p + ".supporter") == null) return false;
+        return config.getString("stats." + p + ".supporter").equalsIgnoreCase("true");
     }
 
 
@@ -34,6 +35,7 @@ public class PlayerManagerUtil {
     }
 
     public static boolean getMessageStatus(UUID p) {
+        if (config.getString("stats." + p + ".messageStatus") == null) return false;
         return config.getString("stats." + p + ".messageStatus").equals("enabled");
     }
 }

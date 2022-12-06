@@ -17,6 +17,7 @@ public class AdminUtil {
 
 
     public static boolean getStaffMode(UUID p) {
+        if (DatabaseUtil.config.getString("stats." + p + ".staffMode") == null) return false;
         return DatabaseUtil.config.getString("stats." + p + ".staffMode").equals("enabled");
     }
 
