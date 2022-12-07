@@ -99,6 +99,14 @@ public class PlayerStaffListener implements Listener {
         event.setCancelled(true);
     }
 
+    private static ItemStack currentFly(Player player) {
+        ItemStack fly = new ItemStack(Material.FEATHER);
+        ItemMeta flyMeta = fly.getItemMeta();
+        flyMeta.setDisplayName(ChatColor.RED + "Player Speed: " + player.getFlySpeed());
+        fly.setItemMeta(flyMeta);
+        return fly;
+    }
+
     private static ItemStack flyDecrease() {
         ItemStack flyDecrease = new ItemStack(Material.CARROT_ITEM);
         ItemMeta flyDecreaseMeta = flyDecrease.getItemMeta();
@@ -143,6 +151,7 @@ public class PlayerStaffListener implements Listener {
             Inventory gui = Bukkit.createInventory(player, 9, ChatColor.RED + "Fly Boost");
 
             gui.setItem(3, flyDecrease());
+            gui.setItem(5, currentFly(player));
             gui.setItem(6, flyBoost());
             player.openInventory(gui);
         } else if (getStaffRod().isSimilar(player.getItemInHand())) {
