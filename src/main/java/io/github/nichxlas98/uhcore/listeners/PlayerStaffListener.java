@@ -12,11 +12,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ import static io.github.nichxlas98.uhcore.items.ItemManager.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
 import static io.github.nichxlas98.uhcore.utils.AdminUtil.getAdminLevel;
+import static io.github.nichxlas98.uhcore.utils.FrozenUtil.setFrozen;
 
 public class PlayerStaffListener implements Listener {
 
@@ -47,6 +48,21 @@ public class PlayerStaffListener implements Listener {
         if (staffMode.contains(p)) {
             e.setCancelled(true);
             e.setTarget(null);
+        }
+    }
+
+    @EventHandler
+    public void pickupEvent(PlayerPickupItemEvent event) {
+        if (staffMode.contains(event.getPlayer())) {
+            event.setCancelled(true);
+            event.getPlayer().setCanPickupItems(false);
+        }
+    }
+
+    @EventHandler
+    public void dropEvent(PlayerDropItemEvent event) {
+        if (staffMode.contains(event.getPlayer())) {
+            event.setCancelled(true);
         }
     }
 
@@ -83,6 +99,38 @@ public class PlayerStaffListener implements Listener {
         event.setCancelled(true);
     }
 
+    private static ItemStack flyDecrease() {
+        ItemStack flyDecrease = new ItemStack(Material.CARROT);
+        ItemMeta flyDecreaseMeta = flyDecrease.getItemMeta();
+        flyDecreaseMeta.setDisplayName(ChatColor.RED + "FlySpeed-");
+        flyDecrease.setItemMeta(flyDecreaseMeta);
+        return flyDecrease;
+    }
+
+    private static ItemStack flyBoost() {
+        ItemStack flyBoost = new ItemStack(Material.GOLDEN_CARROT);
+        ItemMeta flyBoostMeta = flyBoost.getItemMeta();
+        flyBoostMeta.setDisplayName(ChatColor.AQUA + "FlySpeed+");
+        flyBoost.setItemMeta(flyBoostMeta);
+        return flyBoost;
+    }
+
+    private static void adminLoop(Inventory gui) {
+        for (Player admins : Bukkit.getServer().getOnlinePlayers()) {
+            if (getAdminLevel(admins.getUniqueId()) < MIN_ADMIN_LEVEL) continue;
+            String name = ChatColor.GOLD + admins.getPlayer().getName();
+            ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            SkullMeta meta = (SkullMeta) item.getItemMeta();
+            meta.setDisplayName(name);
+            meta.setOwner(admins.getName());
+            ArrayList<String> itemLore = new ArrayList<>();
+            itemLore.add(ChatColor.GRAY + "Admin Level: " + ChatColor.AQUA + getAdminLevel(admins.getUniqueId()));
+            meta.setLore(itemLore);
+            item.setItemMeta(meta);
+            gui.addItem(item);
+        }
+    }
+
     @EventHandler
     public void playerRightClick(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -92,26 +140,18 @@ public class PlayerStaffListener implements Listener {
         if (!(playerAdminLevel(player) >= MIN_ADMIN_LEVEL)) return;
 
         if (getStaffCompass().isSimilar(player.getItemInHand())) {
-            System.out.println("DEBUGGER!!! - Staff Compass right clicked!");
+            Inventory gui = Bukkit.createInventory(player, 9, ChatColor.RED + "Fly Boost");
+
+            gui.setItem(3, flyDecrease());
+            gui.setItem(6, flyBoost());
+            player.openInventory(gui);
         } else if (getStaffRod().isSimilar(player.getItemInHand())) {
             playerList.clear();
             playerList.addAll(Bukkit.getServer().getOnlinePlayers());
             player.teleport(playerList.get(RANDOM.nextInt(playerList.size())).getLocation());
         } else if (getStaffPaper().isSimilar(player.getItemInHand())) {
             Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Server Admins");
-            for (Player admins : Bukkit.getServer().getOnlinePlayers()) {
-                if (getAdminLevel(admins.getUniqueId()) < MIN_ADMIN_LEVEL) continue;
-                String name = ChatColor.GOLD + admins.getPlayer().getName();
-                ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-                SkullMeta meta = (SkullMeta) item.getItemMeta();
-                meta.setDisplayName(name);
-                meta.setOwner(admins.getName());
-                ArrayList<String> itemLore = new ArrayList<>();
-                itemLore.add(ChatColor.GRAY + "Admin Level: " + ChatColor.AQUA + getAdminLevel(player.getUniqueId()));
-                meta.setLore(itemLore);
-                item.setItemMeta(meta);
-                gui.addItem(item);
-            }
+            adminLoop(gui);
             player.openInventory(gui);
         } else if (getStaffWoolon().isSimilar(player.getItemInHand())) {
             playerVanished.add(player);
@@ -140,28 +180,29 @@ public class PlayerStaffListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.getItemInHand() == null || player.getItemInHand().getItemMeta() == null) return;
-        ItemStack itemInHand = event.getPlayer().getItemInHand();
         if (!(playerAdminLevel(player) >= MIN_ADMIN_LEVEL)) return;
+
+        ItemStack itemInHand = event.getPlayer().getItemInHand();
         if (getStaffIce().isSimilar(itemInHand)) {
 
             if (playerFrozen.contains(playerClicked)) {
-                playerFrozen.remove(playerClicked);
-                playerClicked.sendMessage(ChatColor.GREEN + "[*] You're no longer frozen.");
-                player.sendMessage(ChatColor.AQUA + "[*] You've unfrozen " + playerClicked.getDisplayName());
+                setFrozen(player, false);
                 return;
             }
 
-            playerFrozen.add(playerClicked);
-            playerClicked.sendMessage(ChatColor.RED + "[*] You've been frozen.");
-            player.sendMessage(ChatColor.AQUA + "[*] You've frozen " + playerClicked.getDisplayName());
+            setFrozen(player, true);
             return;
         }
 
-        if (getStaffBook().isSimilar(itemInHand)) {
-            Inventory gui = Bukkit.createInventory(player, 36, ChatColor.RED + "Player Inventory");
-            gui.setContents(playerClicked.getInventory().getContents());
-            player.openInventory(gui);
-            //TODO: Organize ^
-        }
+        if (!(getStaffBook().isSimilar(itemInHand))) return;
+        Inventory gui = Bukkit.createInventory(player, 45, ChatColor.RED + "Player Inventory");
+        PlayerInventory playerInventory = playerClicked.getInventory();
+        ItemStack[] menu_items = playerInventory.getContents();
+        if (playerInventory.getHelmet() != null) menu_items[37] = playerInventory.getHelmet();
+        if (playerInventory.getChestplate() != null) menu_items[38] = playerInventory.getChestplate();
+        if (playerInventory.getLeggings() != null) menu_items[39] = playerInventory.getLeggings();
+        if (playerInventory.getBoots() != null) menu_items[40] = playerInventory.getBoots();
+        gui.setContents(menu_items);
+        player.openInventory(gui);
     }
 }

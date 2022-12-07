@@ -68,6 +68,7 @@ public class PlayerStateListener implements Listener {
     @EventHandler
     @SuppressWarnings("deprecation")
     public void onDeathEvent(PlayerRespawnEvent event) {
+        //GameMode Death
         new BukkitRunnable() {
             @Override
             public void run() {

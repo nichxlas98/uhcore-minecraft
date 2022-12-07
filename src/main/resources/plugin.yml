@@ -88,6 +88,16 @@ commands:
     usage: /<command>
     aliases:
       - invsee
+  checkstats:
+    description: Check a player's server stats.
+    usage: /<command>
+    aliases:
+      - cs
+  revive:
+    description: Revive a player.
+    usage: /<command>
+    aliases:
+      - rollback
 
 
 permissions:
