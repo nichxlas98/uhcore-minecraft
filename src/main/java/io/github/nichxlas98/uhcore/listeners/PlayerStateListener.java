@@ -21,7 +21,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
+import static io.github.nichxlas98.uhcore.commands.StaffModeCommand.giveStaffInventory;
+import static io.github.nichxlas98.uhcore.commands.StaffModeCommand.manageInventory;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.setStaffMode;
 import static io.github.nichxlas98.uhcore.utils.PlayerManagerUtil.getSupporter;
 import static io.github.nichxlas98.uhcore.utils.PlayerManagerUtil.setSupporter;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
@@ -45,8 +48,11 @@ public class PlayerStateListener implements Listener {
         }
 
         if (AdminUtil.getStaffMode(playerUUID)) {
-            staffMode.add(player);
+            setStaffMode(playerUUID, player, true);
             player.sendMessage(ChatColor.GRAY + "[*] Your" + ChatColor.GOLD + " staff mode " + ChatColor.RED + "has been resumed.");
+            setStaffMode(playerUUID, player, true);
+            manageInventory(player, "clear");
+            giveStaffInventory(player);
         }
 
         if (!(getSupporter(playerUUID))) {

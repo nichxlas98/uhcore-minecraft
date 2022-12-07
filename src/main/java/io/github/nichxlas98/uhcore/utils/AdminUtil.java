@@ -3,6 +3,8 @@ package io.github.nichxlas98.uhcore.utils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.UUID;
 
@@ -25,6 +27,7 @@ public class AdminUtil {
         if (state) {
             if (!(staffMode.contains(player))) staffMode.add(player);
             player.setGameMode(GameMode.SURVIVAL);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 20));
             player.setAllowFlight(true);
             DatabaseUtil.config.set("stats." + p + ".staffMode", "enabled");
             DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
@@ -33,7 +36,8 @@ public class AdminUtil {
 
         staffMode.remove(player);
         player.setGameMode(GameMode.SURVIVAL);
-        player.setAllowFlight(true);
+        player.removePotionEffect(PotionEffectType.SATURATION);
+        player.setAllowFlight(false);
         DatabaseUtil.config.set("stats." + p + ".staffMode", "disabled");
         DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
     }

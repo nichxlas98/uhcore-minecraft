@@ -21,12 +21,13 @@ public class StaffModeCommand implements CommandExecutor {
     private static final HashMap<String, ItemStack[]> saveInventory = new HashMap<>();
     private static final HashMap<String, ItemStack[]> saveArmor = new HashMap<>();
 
-    private static void manageInventory(Player player, String system) {
+    public static void manageInventory(Player player, String system) {
         //True = Load, False = Save
         switch(system.toLowerCase()) {
             case "load":
-                player.getInventory().setContents((ItemStack[])saveInventory.get(player.getName()));
-                player.getInventory().setArmorContents((ItemStack[])saveArmor.get(player.getName()));
+                if (!saveInventory.containsKey(player.getName()) || !saveArmor.containsKey(player.getName())) return;
+                player.getInventory().setContents(saveInventory.get(player.getName()));
+                player.getInventory().setArmorContents((saveArmor.get(player.getName())));
                 return;
             case "save":
                 //Overwrite method if inventory is updated
@@ -48,7 +49,7 @@ public class StaffModeCommand implements CommandExecutor {
         }
     }
 
-    private static void giveStaffInventory(Player player) {
+    public static void giveStaffInventory(Player player) {
         player.getInventory().setItem(0, getStaffCompass());
         player.getInventory().setItem(1, getStaffBook());
         player.getInventory().setItem(2, getStaffRod());
@@ -74,7 +75,8 @@ public class StaffModeCommand implements CommandExecutor {
             manageInventory(player, "clear");
             setStaffMode(playerUUID, player, true);
             giveStaffInventory(player);
-            player.sendMessage(ChatColor.DARK_GREEN + "[*] Staff Mode Enabled.");
+            player.sendMessage(ChatColor.GREEN + "[*] Staff Mode Enabled.");
+            return true;
         }
 
         manageInventory(player, "clear");
