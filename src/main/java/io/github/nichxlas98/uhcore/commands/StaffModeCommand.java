@@ -21,9 +21,11 @@ public class StaffModeCommand implements CommandExecutor {
         //True = Load, False = Save
         switch(system.toLowerCase()) {
             case "save":
+                InventoryUtil.saveInventoryEC(player);
                 InventoryUtil.saveInventory(player);
                 return;
             case "load":
+                InventoryUtil.loadInventoryEC(player);
                 InventoryUtil.loadInventory(player);
                 return;
             case "clear":
