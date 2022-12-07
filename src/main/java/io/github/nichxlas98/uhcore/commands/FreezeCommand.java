@@ -45,13 +45,13 @@ public class FreezeCommand implements CommandExecutor {
         if (playerFrozen.contains(target)) {
             player.sendMessage(ChatColor.AQUA + "[*] You've unfrozen " + target.getDisplayName());
             target.sendMessage(ChatColor.RED + "[*] You've been unfrozen!");
-            setFrozen(target.getUniqueId(), target, false);
+            setFrozen(target, false);
             return true;
         }
 
         player.sendMessage(ChatColor.AQUA + "[*] You've frozen " + target.getDisplayName());
         target.sendMessage(ChatColor.RED + "[*] You've been frozen!");
-        setFrozen(target.getUniqueId(), target, true);
+        setFrozen(target, true);
         return true;
     }
 }
