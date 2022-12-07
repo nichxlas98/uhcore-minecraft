@@ -6,8 +6,7 @@ import io.github.nichxlas98.uhcore.utils.DatabaseUtil;
 import io.github.nichxlas98.uhcore.utils.ServerManagerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.config;
-import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.yml;
+import static io.github.nichxlas98.uhcore.utils.DatabaseUtil.*;
 
 
 public final class UhCore extends JavaPlugin {
@@ -30,6 +29,7 @@ public final class UhCore extends JavaPlugin {
         saveDefaultConfig();
 
         DatabaseUtil.saveCustomData(config, yml);
+        DatabaseUtil.saveCustomData(configBackup, ymlBackup);
 
         ItemManager.init();
         RegistrationUtil.initializeCommands();
@@ -45,5 +45,6 @@ public final class UhCore extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         DatabaseUtil.saveCustomData(config, yml);
+        DatabaseUtil.saveCustomData(configBackup, ymlBackup);
     }
 }

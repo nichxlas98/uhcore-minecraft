@@ -8,9 +8,11 @@ import java.io.IOException;
 
 public class DatabaseUtil {
 
-    public static final File yml = new File(UhCore.getPlugin().getDataFolder()+"/playerData.yml");
+    public static final File yml = new File(UhCore.getPlugin().getDataFolder()+"/playerdata.yml");
     public static final FileConfiguration config = YamlConfiguration.loadConfiguration(yml);
 
+    public static final File ymlBackup = new File(UhCore.getPlugin().getDataFolder()+"/playerbackups.yml");
+    public static final FileConfiguration configBackup = YamlConfiguration.loadConfiguration(ymlBackup);
     public static void saveCustomData(FileConfiguration ymlConfig, File ymlFile) {
         try {
             ymlConfig.save(ymlFile);

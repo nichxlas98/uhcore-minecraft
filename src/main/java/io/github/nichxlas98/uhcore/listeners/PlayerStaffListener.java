@@ -68,6 +68,12 @@ public class PlayerStaffListener implements Listener {
         if (event.getDamager().getType() != EntityType.PLAYER) return;
 
         Player player = (Player) event.getDamager();
+        if (event.getEntity().getType() == EntityType.PLAYER) {
+            Player entity = (Player) event.getEntity();
+            if (!(staffMode.contains(entity))) return;
+            event.setCancelled(true);
+        }
+
         if (staffMode.contains(player)) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "[*] You cannot damage entities in staff mode.");
@@ -92,11 +98,14 @@ public class PlayerStaffListener implements Listener {
             Inventory gui = Bukkit.createInventory(player, 18, ChatColor.RED + "Server Admins");
             for (Player admins : Bukkit.getServer().getOnlinePlayers()) {
                 if (getAdminLevel(admins.getUniqueId()) < MIN_ADMIN_LEVEL) continue;
-                String name = admins.getPlayer().getName();
+                String name = ChatColor.GOLD + admins.getPlayer().getName();
                 ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
                 SkullMeta meta = (SkullMeta) item.getItemMeta();
                 meta.setDisplayName(name);
                 meta.setOwner(admins.getName());
+                ArrayList<String> itemLore = new ArrayList<>();
+                itemLore.add(ChatColor.GRAY + "Admin Level: " + ChatColor.AQUA + getAdminLevel(player.getUniqueId()));
+                meta.setLore(itemLore);
                 item.setItemMeta(meta);
                 gui.addItem(item);
             }
