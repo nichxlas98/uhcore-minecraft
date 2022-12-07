@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.UUID;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.staffMode;
+import static io.github.nichxlas98.uhcore.utils.PlayerManagerUtil.getSupporter;
 
 public class AdminUtil {
 
@@ -16,6 +17,33 @@ public class AdminUtil {
     public static final int HIGH_ADMIN_LEVEL = 3;
     public static final int LOW_ADMIN_LEVEL = 2;
     public static final int MIN_ADMIN_LEVEL = 1;
+
+
+    public static String getServerRank(Player player) {
+        String serverRank;
+        switch(getAdminLevel(player.getUniqueId())) {
+
+            case MIN_ADMIN_LEVEL:
+                serverRank = ChatColor.GRAY + "(" + ChatColor.GOLD + "Junior" + ChatColor.GRAY + ")";
+                break;
+            case LOW_ADMIN_LEVEL:
+                serverRank = ChatColor.GRAY + "(" + ChatColor.AQUA + "Administrator" + ChatColor.GRAY + ")";
+                break;
+            case HIGH_ADMIN_LEVEL:
+                serverRank = ChatColor.GRAY + "(" + ChatColor.DARK_AQUA + "Senior" + ChatColor.GRAY + ")";
+                break;
+            case MAX_ADMIN_LEVEL:
+                serverRank = ChatColor.GRAY + "(" + ChatColor.RED + "Manager" + ChatColor.GRAY + ")";
+                break;
+            default:
+                if (getSupporter(player.getUniqueId())) {
+                    serverRank = ChatColor.GRAY + "(" + ChatColor.LIGHT_PURPLE + "Supporter" + ChatColor.GRAY + ")";
+                    return serverRank;
+                }
+                serverRank = ChatColor.GRAY + "(" + ChatColor.YELLOW + "Community" + ChatColor.GRAY + ")";
+        }
+        return serverRank;
+    }
 
 
     public static boolean getStaffMode(UUID p) {
@@ -29,6 +57,7 @@ public class AdminUtil {
             player.setGameMode(GameMode.SURVIVAL);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 20));
             player.setAllowFlight(true);
+            player.setCanPickupItems(false);
             DatabaseUtil.config.set("stats." + p + ".staffMode", "enabled");
             DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
             return;
@@ -38,6 +67,7 @@ public class AdminUtil {
         player.setGameMode(GameMode.SURVIVAL);
         player.removePotionEffect(PotionEffectType.SATURATION);
         player.setAllowFlight(false);
+        player.setCanPickupItems(true);
         DatabaseUtil.config.set("stats." + p + ".staffMode", "disabled");
         DatabaseUtil.saveCustomData(DatabaseUtil.config, DatabaseUtil.yml);
     }
