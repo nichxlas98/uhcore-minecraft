@@ -34,7 +34,7 @@ public class InventoryUtil {
         item_names.add("bow");
         item_names.add("apple");
         item_names.add("item");
-
+        item_names.add("book");
         int index = 0;
         ItemStack[] items = new ItemStack[27];
         for (ItemStack i : player.getInventory().getContents()) {
@@ -78,6 +78,7 @@ public class InventoryUtil {
         item_names.add("bow");
         item_names.add("apple");
         item_names.add("item");
+        item_names.add("book");
 
         for (ItemStack i : inventoryItems) {
             if (i == null) continue;
