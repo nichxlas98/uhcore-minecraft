@@ -73,9 +73,21 @@ commands:
   staffmode:
     description: Manage staff mode.
     usage: /<command>
+    aliases:
+      - staff
   freeze:
     description: Freeze a player.
     usage: /<command> <player>
+  vanish:
+    description: Vanish as a staff member.
+    usage: /<command>
+    aliases:
+      - v
+  checkinv:
+    description: Check a player's inventory.
+    usage: /<command>
+    aliases:
+      - invsee
 
 
 permissions:

@@ -13,9 +13,10 @@ public class InventoryUtil {
 
     public static void saveInventory(Player player) {
         ItemStack[] inventoryItems = player.getInventory().getContents();
-        List<String> itemsToSave = new ArrayList<String>();
+        List<String> itemsToSave = new ArrayList<>();
 
         for (ItemStack item : inventoryItems) {
+            if (item == null) continue;
             itemsToSave.add(item.getType().name() + ";" + item.getAmount());
         }
 
@@ -25,6 +26,7 @@ public class InventoryUtil {
 
     public static void loadInventory(Player player) {
         List<String> itemsSaved = configBackup.getStringList(player.getUniqueId() + ".Items");
+        if (itemsSaved.isEmpty()) return;
 
         for (String item : itemsSaved) {
 

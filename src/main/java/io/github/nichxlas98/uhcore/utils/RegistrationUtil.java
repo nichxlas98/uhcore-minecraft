@@ -41,6 +41,8 @@ public class RegistrationUtil {
         plugin().getCommand("setscoreboardname").setExecutor(new ScNameCommand());
         plugin().getCommand("staffmode").setExecutor(new StaffModeCommand());
         plugin().getCommand("freeze").setExecutor(new FreezeCommand());
+        plugin().getCommand("vanish").setExecutor(new VanishCommand());
+        plugin().getCommand("checkinv").setExecutor(new InventoryCheckCommand());
     }
 
     public static void initializeEvents() {

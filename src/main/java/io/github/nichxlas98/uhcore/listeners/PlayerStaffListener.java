@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -28,7 +29,7 @@ import static io.github.nichxlas98.uhcore.utils.AdminUtil.getAdminLevel;
 public class PlayerStaffListener implements Listener {
 
     ArrayList<Player> playerList = new ArrayList<>();
-    ArrayList<Player> playerVanished = new ArrayList<>();
+    public static final ArrayList<Player> playerVanished = new ArrayList<>();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -66,18 +67,20 @@ public class PlayerStaffListener implements Listener {
     @EventHandler
     public void playerDamageByPlayer(EntityDamageByEntityEvent event) {
         if (event.getDamager().getType() != EntityType.PLAYER) return;
-
         Player player = (Player) event.getDamager();
-        if (event.getEntity().getType() == EntityType.PLAYER) {
-            Player entity = (Player) event.getEntity();
-            if (!(staffMode.contains(entity))) return;
-            event.setCancelled(true);
-        }
 
         if (staffMode.contains(player)) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "[*] You cannot damage entities in staff mode.");
         }
+    }
+
+    @EventHandler
+    public void playerDamageEvent(EntityDamageEvent event) {
+        if (event.getEntity().getType() != EntityType.PLAYER) return;
+        Player entity = (Player) event.getEntity();
+        if (!(staffMode.contains(entity))) return;
+        event.setCancelled(true);
     }
 
     @EventHandler
