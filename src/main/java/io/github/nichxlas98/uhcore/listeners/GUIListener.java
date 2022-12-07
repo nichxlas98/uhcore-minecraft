@@ -23,9 +23,10 @@ public class GUIListener implements Listener {
                 player.setFlySpeed(player.getFlySpeed() + 3);
             }
 
-            if (e.getCurrentItem().getType() == CARROT) {
+            if (e.getCurrentItem().getType() == CARROT_ITEM) {
                 player.setFlySpeed(player.getFlySpeed() - 3);
             }
+            e.setCancelled(true);
             return;
         }
 

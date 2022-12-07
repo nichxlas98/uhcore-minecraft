@@ -100,7 +100,7 @@ public class PlayerStaffListener implements Listener {
     }
 
     private static ItemStack flyDecrease() {
-        ItemStack flyDecrease = new ItemStack(Material.CARROT);
+        ItemStack flyDecrease = new ItemStack(Material.CARROT_ITEM);
         ItemMeta flyDecreaseMeta = flyDecrease.getItemMeta();
         flyDecreaseMeta.setDisplayName(ChatColor.RED + "FlySpeed-");
         flyDecrease.setItemMeta(flyDecreaseMeta);
