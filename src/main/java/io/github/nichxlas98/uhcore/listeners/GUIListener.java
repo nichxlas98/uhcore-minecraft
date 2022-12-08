@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
+import static org.bukkit.Material.*;
 
 public class GUIListener implements Listener {
 
@@ -17,7 +18,21 @@ public class GUIListener implements Listener {
         String inv = e.getClickedInventory().getTitle();
         Player player = (Player) e.getWhoClicked();
 
-        if (inv.equalsIgnoreCase(ChatColor.RED + "Player Inventory") || inv.equalsIgnoreCase(ChatColor.RED + "Server Admins")) {
+        if (inv.equalsIgnoreCase(ChatColor.RED + "Fly Boost")) {
+            if (e.getCurrentItem().getType() == GOLDEN_CARROT) {
+                player.setFlySpeed(player.getFlySpeed() + 3);
+            }
+
+            if (e.getCurrentItem().getType() == CARROT_ITEM) {
+                player.setFlySpeed(player.getFlySpeed() - 3);
+            }
+            e.setCancelled(true);
+            return;
+        }
+
+        if (inv.equalsIgnoreCase(ChatColor.RED + "Player Inventory") ||
+                inv.equalsIgnoreCase(ChatColor.RED + "Server Admins") ||
+                inv.equalsIgnoreCase(ChatColor.RED + "Player Stats")) {
             e.setCancelled(true);
         }
     }
@@ -36,9 +51,7 @@ public class GUIListener implements Listener {
             return;
         }
 
-        switch (e.getCurrentItem().
-
-                getType()) {
+        switch (e.getCurrentItem().getType()) {
             case GOLD_PICKAXE:
                 player.sendMessage(ChatColor.GREEN + "[*] Equipped the Worker Kit.");
                 kitSelected.replace(player.getUniqueId(), WORKER_KIT);

@@ -2,6 +2,7 @@ package io.github.nichxlas98.uhcore.listeners.modifiers;
 
 import io.github.nichxlas98.uhcore.UhCore;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,6 +35,7 @@ public class NoCleanModifier implements Listener {
 
     @EventHandler
     public void playerDamageEvent(EntityDamageByEntityEvent e) {
+        if (e.getEntity().getType() != EntityType.PLAYER || e.getDamager().getType() != EntityType.PLAYER) return;
         Player player = (Player) e.getEntity();
         Player attacker = (Player) e.getDamager();
 

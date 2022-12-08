@@ -13,16 +13,16 @@ public class FrozenUtil {
         return config.get("stats." + p + "isFrozen") != null;
     }
 
-    public static void setFrozen(UUID p, Player player, boolean isFrozen) {
+    public static void setFrozen(Player player, boolean isFrozen) {
         if (isFrozen) {
             playerFrozen.add(player);
-            config.set("stats." + p + "isFrozen", "true");
+            config.set("stats." + player.getUniqueId() + "isFrozen", "true");
             saveCustomData(config, yml);
             return;
         }
 
         playerFrozen.remove(player);
-        config.set("stats." + p + "isFrozen", null);
+        config.set("stats." + player.getUniqueId() + "isFrozen", null);
         saveCustomData(config, yml);
     }
 

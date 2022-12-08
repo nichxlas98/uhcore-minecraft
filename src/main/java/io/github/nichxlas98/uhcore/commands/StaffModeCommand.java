@@ -1,13 +1,12 @@
 package io.github.nichxlas98.uhcore.commands;
 
+import io.github.nichxlas98.uhcore.utils.InventoryUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import static io.github.nichxlas98.uhcore.items.ItemManager.*;
@@ -18,26 +17,16 @@ import static io.github.nichxlas98.uhcore.utils.AdminUtil.*;
 
 public class StaffModeCommand implements CommandExecutor {
 
-    private static final HashMap<String, ItemStack[]> saveInventory = new HashMap<>();
-    private static final HashMap<String, ItemStack[]> saveArmor = new HashMap<>();
-
-    private static void manageInventory(Player player, String system) {
+    public static void manageInventory(Player player, String system) {
         //True = Load, False = Save
         switch(system.toLowerCase()) {
-            case "load":
-                player.getInventory().setContents((ItemStack[])saveInventory.get(player.getName()));
-                player.getInventory().setArmorContents((ItemStack[])saveArmor.get(player.getName()));
-                return;
             case "save":
-                //Overwrite method if inventory is updated
-                if (saveInventory.containsKey(player.getName())) {
-                    saveInventory.replace(player.getName(), player.getInventory().getContents());
-                    saveInventory.replace(player.getName(), player.getInventory().getArmorContents());
-                    return;
-                }
-
-                saveInventory.put(player.getName(), player.getInventory().getContents());
-                saveArmor.put(player.getName(), player.getInventory().getArmorContents());
+                InventoryUtil.saveInventoryEC(player);
+                InventoryUtil.saveInventory(player);
+                return;
+            case "load":
+                InventoryUtil.loadInventoryEC(player);
+                InventoryUtil.loadInventory(player);
                 return;
             case "clear":
                 player.getInventory().clear();
@@ -48,7 +37,7 @@ public class StaffModeCommand implements CommandExecutor {
         }
     }
 
-    private static void giveStaffInventory(Player player) {
+    public static void giveStaffInventory(Player player) {
         player.getInventory().setItem(0, getStaffCompass());
         player.getInventory().setItem(1, getStaffBook());
         player.getInventory().setItem(2, getStaffRod());
@@ -72,9 +61,11 @@ public class StaffModeCommand implements CommandExecutor {
         if (!(getStaffMode(playerUUID))) {
             manageInventory(player, "save");
             manageInventory(player, "clear");
-            setStaffMode(playerUUID, player, true);
             giveStaffInventory(player);
-            player.sendMessage(ChatColor.DARK_GREEN + "[*] Staff Mode Enabled.");
+            setStaffMode(playerUUID, player, true);
+            player.setHealth(20);
+            player.sendMessage(ChatColor.GREEN + "[*] Staff Mode Enabled.");
+            return true;
         }
 
         manageInventory(player, "clear");
