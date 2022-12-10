@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
 import static io.github.nichxlas98.uhcore.utils.ServerUtils.*;
+import static io.github.nichxlas98.uhcore.utils.SpawnUtil.spawnTeleport;
 import static org.bukkit.Material.*;
 
 public class GUIListener implements Listener {
@@ -18,15 +19,15 @@ public class GUIListener implements Listener {
         String inv = e.getClickedInventory().getTitle();
         Player player = (Player) e.getWhoClicked();
 
-        if (inv.equalsIgnoreCase(ChatColor.RED + "Fly Boost")) {
+        if (inv.equalsIgnoreCase(ChatColor.RED + "Staff Hub")) {
+            e.setCancelled(true);
             if (e.getCurrentItem().getType() == GOLDEN_CARROT) {
-                player.setFlySpeed(player.getFlySpeed() + 3);
+                spawnTeleport(player);
             }
 
             if (e.getCurrentItem().getType() == CARROT_ITEM) {
-                player.setFlySpeed(player.getFlySpeed() - 3);
+                //
             }
-            e.setCancelled(true);
             return;
         }
 
