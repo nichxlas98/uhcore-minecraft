@@ -23,8 +23,7 @@ import java.util.ArrayList;
 
 import static io.github.nichxlas98.uhcore.items.ItemManager.*;
 import static io.github.nichxlas98.uhcore.models.ModelsClass.*;
-import static io.github.nichxlas98.uhcore.utils.AdminUtil.MIN_ADMIN_LEVEL;
-import static io.github.nichxlas98.uhcore.utils.AdminUtil.getAdminLevel;
+import static io.github.nichxlas98.uhcore.utils.AdminUtil.*;
 import static io.github.nichxlas98.uhcore.utils.FrozenUtil.setFrozen;
 
 public class PlayerStaffListener implements Listener {
@@ -102,25 +101,25 @@ public class PlayerStaffListener implements Listener {
     private static ItemStack currentFly(Player player) {
         ItemStack fly = new ItemStack(Material.FEATHER);
         ItemMeta flyMeta = fly.getItemMeta();
-        flyMeta.setDisplayName(ChatColor.RED + "Player Speed: " + player.getFlySpeed());
+        flyMeta.setDisplayName(ChatColor.RED + "Player: " + player.getFlySpeed());
         fly.setItemMeta(flyMeta);
         return fly;
     }
 
-    private static ItemStack flyDecrease() {
-        ItemStack flyDecrease = new ItemStack(Material.CARROT_ITEM);
-        ItemMeta flyDecreaseMeta = flyDecrease.getItemMeta();
-        flyDecreaseMeta.setDisplayName(ChatColor.RED + "FlySpeed-");
-        flyDecrease.setItemMeta(flyDecreaseMeta);
-        return flyDecrease;
+    private static ItemStack toBeAdded() {
+        ItemStack tba = new ItemStack(Material.CARROT_ITEM);
+        ItemMeta tbaMeta = tba.getItemMeta();
+        tbaMeta.setDisplayName(ChatColor.RED + "TBA");
+        tba.setItemMeta(tbaMeta);
+        return tba;
     }
 
-    private static ItemStack flyBoost() {
-        ItemStack flyBoost = new ItemStack(Material.GOLDEN_CARROT);
-        ItemMeta flyBoostMeta = flyBoost.getItemMeta();
-        flyBoostMeta.setDisplayName(ChatColor.AQUA + "FlySpeed+");
-        flyBoost.setItemMeta(flyBoostMeta);
-        return flyBoost;
+    private static ItemStack spawnItem() {
+        ItemStack spawnItem = new ItemStack(Material.GOLDEN_CARROT);
+        ItemMeta spawnMeta = spawnItem.getItemMeta();
+        spawnMeta.setDisplayName(ChatColor.AQUA + "Spawn");
+        spawnItem.setItemMeta(spawnMeta);
+        return spawnItem;
     }
 
     private static void adminLoop(Inventory gui) {
@@ -132,6 +131,7 @@ public class PlayerStaffListener implements Listener {
             meta.setDisplayName(name);
             meta.setOwner(admins.getName());
             ArrayList<String> itemLore = new ArrayList<>();
+            itemLore.add(ChatColor.GRAY + "Rank: " + getServerRank(admins));
             itemLore.add(ChatColor.GRAY + "Admin Level: " + ChatColor.AQUA + getAdminLevel(admins.getUniqueId()));
             meta.setLore(itemLore);
             item.setItemMeta(meta);
@@ -148,11 +148,11 @@ public class PlayerStaffListener implements Listener {
         if (!(playerAdminLevel(player) >= MIN_ADMIN_LEVEL)) return;
 
         if (getStaffCompass().isSimilar(player.getItemInHand())) {
-            Inventory gui = Bukkit.createInventory(player, 9, ChatColor.RED + "Fly Boost");
+            Inventory gui = Bukkit.createInventory(player, 9, ChatColor.RED + "Staff Hub");
 
-            gui.setItem(3, flyDecrease());
-            gui.setItem(5, currentFly(player));
-            gui.setItem(6, flyBoost());
+            gui.setItem(2, toBeAdded());
+            gui.setItem(4, currentFly(player));
+            gui.setItem(6, spawnItem());
             player.openInventory(gui);
         } else if (getStaffRod().isSimilar(player.getItemInHand())) {
             playerList.clear();
