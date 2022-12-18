@@ -35,7 +35,7 @@ public final class UhCore extends JavaPlugin {
         RegistrationUtil.initializeCommands();
         RegistrationUtil.initializeEvents();
 
-        if (ServerManagerUtil.checkScoreboardName()) return;
+        if (!ServerManagerUtil.checkScoreboardName()) return;
         ServerManagerUtil.setScoreboardName("UhCoreMC");
 
         //TODO: Store player items in a config/database when using /staffmode, since if a server forcefully shuts down while players are in staff mode, their items will be removed.
